@@ -1,0 +1,66 @@
+# {{vault_name}} Research Vault
+
+## Purpose
+[Describe what this research vault is for - your dissertation topic, work project, personal learning, etc.]
+
+## Structure
+
+```
+├── sources/          Notes about papers, books, articles
+│   └── raw/         Original PDFs (not tracked in git)
+├── concepts/        Individual concept explanations
+├── themes/          Maps of Content - thematic overviews
+├── questions/       Open research questions
+├── _meta/           Research logs and context
+└── _templates/      Note templates
+```
+
+## How to Use
+
+### Starting a Research Session
+1. Open this vault in Obsidian
+2. Use Claude Code to conduct research: "Research [topic]"
+3. Or manually add sources to `sources/raw/` and prompt: "Process the paper I added"
+
+### Creating Notes
+- Use templates from `_templates/` folder
+- Enable Obsidian Templates plugin and set template folder to `_templates`
+- Every note should link to at least 2 other notes
+
+### Tracking Progress
+- BlogLog tracks activity: `bl win "..."`, `bl note "..."`, `bl blocker "..."`
+- View timeline: `bl timeline --since "1 week ago"`
+- Git commits track knowledge changes
+
+### Generating Reports
+Ask Claude Code: "Summarize my research progress over the last 2 weeks"
+
+## Quick Commands
+
+```bash
+# View recent activity
+bl timeline --since "1 week ago"
+
+# Log research progress
+bl note "Processed 3 sources on [topic]"
+bl win "Major insight: [discovery]"
+bl blocker "Need access to [source]"
+
+# Git workflow (usually handled by Claude Code)
+git status
+git log --oneline
+git push  # if connected to remote
+```
+
+## Research Domain
+
+**Focus Area:** [To be defined]
+
+**Key Questions:**
+- [Question 1]
+- [Question 2]
+
+**Current Status:** [Just started | Building foundations | Deep dive | Synthesis]
+
+## Notes
+[Any project-specific notes, conventions, or reminders]

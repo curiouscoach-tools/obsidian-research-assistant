@@ -1,0 +1,15 @@
+# Obsidian
+.obsidian/workspace*
+.obsidian/cache
+.trash/
+
+# Raw source files (PDFs, etc.)
+sources/raw/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*~
