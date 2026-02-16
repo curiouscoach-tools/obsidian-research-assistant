@@ -69,4 +69,4 @@ Write-Host "Let's build some knowledge! 🚀" -ForegroundColor Green
 Write-Host ""
 
 # Launch Claude Code
-claude-code
+claude

@@ -27,10 +27,10 @@ echo -e "${GREEN}╔════════════════════
 echo -e "${GREEN}║                                                        ║${NC}"
 echo -e "${GREEN}║  👋 Hi! I'm Laura - your research assistant           ║${NC}"
 echo -e "${GREEN}║                                                        ║${NC}"
-echo -e "${GREEN}║  ${BLUE}L${NC}ovable ${BLUE}A${NC}rtificially-intelligent ${BLUE}U${NC}nflappable       ${GREEN}║${NC}"
-echo -e "${GREEN}║  ${BLUE}R${NC}esearch ${BLUE}A${NC}ssistant                                ${GREEN}║${NC}"
+echo -e "${GREEN}║  ${BLUE}L${GREEN}ovable ${BLUE}A${GREEN}rtificially-intelligent ${BLUE}U${GREEN}nflappable       ║${NC}"
+echo -e "${GREEN}║  ${BLUE}R${GREEN}esearch ${BLUE}A${GREEN}ssistant                                ║${NC}"
 echo -e "${GREEN}║                                                        ║${NC}"
-echo -e "${GREEN}╔════════════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}╚════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
 # Read vault name from CLAUDE.md if possible
@@ -63,4 +63,4 @@ echo -e "${GREEN}Let's build some knowledge! 🚀${NC}"
 echo ""
 
 # Launch Claude Code with initial context
-claude-code
+claude
