@@ -5,7 +5,7 @@ tags: []
 status: # developing | established | needs_work
 ---
 
-# {{concept}}
+# [Concept Name]
 
 ## Definition
 Clear, concise definition of the concept.

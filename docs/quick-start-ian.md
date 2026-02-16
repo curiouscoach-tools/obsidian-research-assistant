@@ -10,8 +10,8 @@ The obsidian-research-assistant directory is ready with everything you need.
 
 ### 2. Install the Skill
 ```bash
-mkdir -p ~/.claude/skills
-cp skills/obsidian-research.md ~/.claude/skills/
+mkdir -p ~/.claude/skills/obsidian-research
+cp skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
 ```
 
 ### 3. Test Prerequisites
@@ -160,12 +160,13 @@ Refresh the file explorer (or restart Obsidian)
 ### Claude Code doesn't follow research methodology
 **Check:** Is skill installed?
 ```bash
-ls ~/.claude/skills/obsidian-research.md
+ls ~/.claude/skills/obsidian-research/SKILL.md
 ```
 
 If not, re-copy:
 ```bash
-cp ~/obsidian-research-assistant/skills/obsidian-research.md ~/.claude/skills/
+mkdir -p ~/.claude/skills/obsidian-research
+cp ~/obsidian-research-assistant/skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
 ```
 
 ### Notes aren't linking

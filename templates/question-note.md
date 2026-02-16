@@ -7,7 +7,7 @@ tags: []
 related_concepts: []
 ---
 
-# {{question}}
+# [Your Question Here]
 
 ## Context
 What led to this question? What were you researching when this emerged?

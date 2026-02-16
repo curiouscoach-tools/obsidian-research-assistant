@@ -52,6 +52,48 @@ git log --oneline
 git push  # if connected to remote
 ```
 
+## Quick Start Prompts for Claude Code
+
+### First Time Setup
+```
+I'm using you as a research assistant for [describe project].
+
+My main questions are:
+- [Question 1]
+- [Question 2]
+
+Please read CLAUDE.md and confirm you understand the research focus.
+```
+
+### Common Research Tasks
+
+**Research a topic:**
+```
+Research the fundamentals of [topic], creating concept notes, source notes, and a Map of Content.
+```
+
+**Process downloaded paper:**
+```
+I've added a paper to sources/raw/. Please process it - create source note and extract key concepts.
+```
+
+**Find connections:**
+```
+How does [concept A] relate to [concept B]? Create a synthesis note.
+```
+
+**Prepare for meeting:**
+```
+Summarize my research progress over the last 2 weeks for my supervisor meeting.
+```
+
+**Check vault health:**
+```
+Check for orphaned notes and suggest areas needing development.
+```
+
+**Full prompts guide:** See docs/quick-start-prompts.md in the obsidian-research-assistant repository
+
 ## Research Domain
 
 **Focus Area:** [To be defined]

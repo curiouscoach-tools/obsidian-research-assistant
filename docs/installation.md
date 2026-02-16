@@ -146,23 +146,41 @@ cd obsidian-research-assistant
 
 This makes the research methodology available to Claude Code globally:
 
+**Linux/macOS:**
 ```bash
 # Create Claude Code skills directory if it doesn't exist
-mkdir -p ~/.claude/skills
+mkdir -p ~/.claude/skills/obsidian-research
 
 # Copy the skill file
-cp skills/obsidian-research.md ~/.claude/skills/
+cp skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
+```
+
+**Windows (PowerShell):**
+```powershell
+# Create Claude Code skills directory if it doesn't exist
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\obsidian-research"
+
+# Copy the skill file
+Copy-Item -Path "skills\obsidian-research\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\obsidian-research\" -Force
 ```
 
 ### 3. Create Your First Research Vault
 
+**Linux/macOS:**
 ```bash
 # From within the obsidian-research-assistant directory
 ./setup-vault.sh ~/vaults/my-first-research "My Research Project"
+```
 
-# The script will:
-# - Create the vault structure
-# - Install templates
+**Windows (PowerShell):**
+```powershell
+# From within the obsidian-research-assistant directory
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\my-first-research" -VaultName "My Research Project"
+```
+
+The script will:
+- Create the vault structure
+- Install templates
 # - Initialize git
 # - Initialize BlogLog
 # - Create initial files
@@ -172,7 +190,9 @@ cp skills/obsidian-research.md ~/.claude/skills/
 
 1. Launch Obsidian
 2. Click "Open folder as vault"
-3. Navigate to `~/vaults/my-first-research` (or wherever you created it)
+3. Navigate to your vault:
+   - Linux/macOS: `~/vaults/my-first-research`
+   - Windows: `C:\Users\YourName\vaults\my-first-research`
 4. Click "Open"
 
 ### 5. Configure Obsidian (First Time Only)
@@ -187,9 +207,15 @@ cp skills/obsidian-research.md ~/.claude/skills/
 
 ### 6. Start Using Claude Code
 
-Open your terminal in the vault directory:
+**Linux/macOS:**
 ```bash
 cd ~/vaults/my-first-research
+claude-code
+```
+
+**Windows (PowerShell or Command Prompt):**
+```powershell
+cd $env:USERPROFILE\vaults\my-first-research
 claude-code
 ```
 

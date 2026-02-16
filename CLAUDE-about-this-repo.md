@@ -59,17 +59,23 @@ User: "I need to understand transit-oriented development"
 
 ### Processing Paywalled Sources
 
-For academic content behind institutional access:
+For academic content behind institutional access or bot protection:
 
-User downloads PDF using university credentials → User: "Process the transport planning paper I just added to /sources/raw/"
+User downloads PDF using university credentials (or copies content from browser) → User places in sources/raw/ → User: "Process the transport planning paper I just added to /sources/raw/"
 
 **Assistant processes:**
-- Extracts text from PDF
+- Extracts text from PDF (or uses provided text)
 - Creates structured source note with citation
 - Identifies key concepts (3-7)
 - Creates/updates concept notes
 - Cross-references with existing knowledge
 - Flags any contradictions with existing notes
+
+**If web_fetch fails (403 Forbidden, 401 Unauthorized):**
+- Assistant informs user of fetch failure
+- Requests manual download or content provision
+- OR creates stub source note with citation and #needs-content tag
+- Never retries failed fetches - bot protection won't allow it
 
 **Output:**
 - `/sources/author-year-title.md` (structured source note)
@@ -221,12 +227,14 @@ bl blocker "Need institutional access for Smith 2023 paper"
 bl blocker "Contradictory sources on optimal density - needs resolution"
 ```
 
+**Fallback:** If BlogLog isn't installed, Claude Code writes directly to `.bloglog/timeline.json` with the same structure, so you still get full timeline tracking.
+
 **Viewing progress:**
 ```bash
-# See recent timeline
+# See recent timeline (if BlogLog installed)
 bl timeline --since "1 week ago"
 
-# Generate progress report for supervisor meeting
+# OR ask Claude Code to generate progress report (works either way)
 # Assistant reads .bloglog/timeline.json and summarizes
 ```
 

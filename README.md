@@ -1,8 +1,10 @@
-# Obsidian Research Assistant
+# Laura - Your Obsidian Research Assistant
 
-An AI-powered research assistant that helps you build structured, connected knowledge bases in Obsidian using Claude Code.
+**L**ovable **A**rtificially-intelligent **U**nflappable **R**esearch **A**ssistant
 
-## What It Does
+Meet Laura, your AI-powered research companion that helps you build structured, connected knowledge bases in Obsidian using Claude Code.
+
+## What Laura Does
 
 Transform scattered research into a systematic knowledge base:
 - **Conducts structured research** - Finds authoritative sources, extracts key concepts, creates cross-referenced notes
@@ -49,15 +51,28 @@ cd obsidian-research-assistant
 ### 3. Install the Research Skill
 
 ```bash
-mkdir -p ~/.claude/skills
-cp skills/obsidian-research.md ~/.claude/skills/
+mkdir -p ~/.claude/skills/obsidian-research
+cp skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
 ```
 
 ### 4. Create a Research Vault
 
+**Linux/macOS/WSL:**
 ```bash
 ./setup-vault.sh ~/vaults/my-research "My Research Project"
 ```
+
+**Windows (PowerShell):**
+```powershell
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\my-research" -VaultName "My Research Project"
+```
+
+The script will:
+- Create the vault structure
+- Install templates
+- Initialize git
+- Initialize BlogLog
+- Create initial files
 
 ### 5. Open in Obsidian
 
@@ -65,12 +80,21 @@ File → Open folder as vault → Navigate to your vault → Open
 
 ### 6. Start Researching
 
+**Meet Laura (optional but recommended):**
+```bash
+cd ~/vaults/my-research
+laura  # Friendly launch with context
+```
+
+**Or launch directly:**
 ```bash
 cd ~/vaults/my-research
 claude-code
 ```
 
 Then prompt: `"Research the fundamentals of [your topic]"`
+
+**Install Laura:** See [Installing Laura](docs/installing-laura.md) for the friendly launcher.
 
 ## How It Works
 
@@ -80,9 +104,13 @@ This repository contains the **tooling to create research vaults**:
 
 ```
 obsidian-research-assistant/
-├── setup-vault.sh           # Creates new research vaults
+├── laura                    # Friendly launcher (Linux/macOS/WSL)
+├── laura.ps1                # Friendly launcher (Windows)
+├── setup-vault.sh           # Creates vaults (Linux/macOS/WSL)
+├── setup-vault.ps1          # Creates vaults (Windows PowerShell)
 ├── skills/
-│   └── obsidian-research.md # Research methodology (install globally)
+│   └── obsidian-research/
+│       └── SKILL.md        # Research methodology (install globally)
 ├── templates/               # Note templates for vaults
 │   ├── source-note.md
 │   ├── concept-note.md
@@ -155,6 +183,8 @@ Claude Code:
 6. Logs: bl win "Key insight on X from Y paper"
 ```
 
+**Note:** Web fetching often fails for academic publishers (403 errors due to bot protection). The manual download workflow is more reliable and respects paywalls/access controls.
+
 ### Progress Reporting
 
 ```
@@ -205,11 +235,34 @@ This system has been tested for:
 
 The same methodology works across domains.
 
+## Getting Started Quickly
+
+**First prompt in your new vault:**
+```
+I'm researching [topic] for my [dissertation/project/learning].
+
+My main questions are:
+- [Question 1]
+- [Question 2]
+
+Please read CLAUDE.md and help me start building systematic knowledge.
+```
+
+**Then try:**
+- `"Research the fundamentals of [topic]"` - Creates initial concept notes and sources
+- `"Process the paper I added to sources/raw/"` - Structures a downloaded PDF
+- `"Summarize my progress this week"` - Generates progress report
+
+See [Quick Start Prompts](docs/quick-start-prompts.md) for comprehensive prompt library.
+
 ## Documentation
 
+- [Installing Laura](docs/installing-laura.md) - Set up the friendly launcher command
 - [Installation Guide](docs/installation.md) - Detailed setup instructions
+- [Windows Quick Start](docs/windows-quick-start.md) - Windows-specific setup guide
+- [Quick Start Prompts](docs/quick-start-prompts.md) - Copy-paste prompts to get started quickly
 - [About This Project](CLAUDE-about-this-repo.md) - Project vision and philosophy
-- [Research Skill](skills/obsidian-research.md) - The methodology Claude Code uses
+- [Research Skill](skills/obsidian-research/SKILL.md) - The methodology Claude Code uses
 
 ## CuriousCoach Tools
 
