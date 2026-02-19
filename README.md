@@ -349,8 +349,7 @@ Laura is ready for academic and professional research. Multi-persona support (Al
 ## CuriousCoach Tools
 
 This is part of the [CuriousCoach](https://curiouscoach.tools) suite of AI coaching tools:
-- **Laura** - Coaches systematic research
-- **Alex** - Coaches architecture thinking
+- **Obsidian Research Assistant** - Enables deeper thinking through structured knowledge
 - **Jironaut** - Coaches better ticket writing
 - **Worthsmith** - Coaches value-focused thinking
 - **STAR Coach** - Coaches interview preparation
