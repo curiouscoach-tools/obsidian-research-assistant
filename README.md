@@ -91,6 +91,7 @@ Then type `/laura` to activate Laura, and prompt: `"Research the fundamentals of
 
 **Other personas:**
 - `/alex` - Solution architect for technology decisions and ADRs
+- `/riley` - Product owner for user stories and prioritisation
 
 **Optional:** See [Installing Laura](docs/installing-laura.md) for a friendly launcher script with welcome messages.
 
@@ -129,13 +130,17 @@ obsidian-research-assistant/
 ├── laura.ps1                # Friendly launcher (Windows)
 ├── alex                     # Solution architect launcher (Linux/macOS/WSL)
 ├── alex.ps1                 # Solution architect launcher (Windows)
+├── riley                    # Product owner launcher (Linux/macOS/WSL)
+├── riley.ps1                # Product owner launcher (Windows)
 ├── setup-vault.sh           # Creates vaults (Linux/macOS/WSL)
 ├── setup-vault.ps1          # Creates vaults (Windows PowerShell)
 ├── vault-skills/            # Personas installed into each vault
 │   ├── laura/
 │   │   └── SKILL.md        # Research methodology
-│   └── alex/
-│       └── SKILL.md        # Architecture expertise
+│   ├── alex/
+│   │   └── SKILL.md        # Architecture expertise
+│   └── riley/
+│       └── SKILL.md        # Product ownership
 ├── templates/               # Note templates for vaults
 │   ├── source-note.md
 │   ├── concept-note.md
@@ -160,7 +165,9 @@ my-research/                 # Independent git repository
 │   └── skills/            # Personas (auto-discovered by Claude Code)
 │       ├── laura/
 │       │   └── SKILL.md
-│       └── alex/
+│       ├── alex/
+│       │   └── SKILL.md
+│       └── riley/
 │           └── SKILL.md
 ├── sources/
 │   ├── raw/               # Your PDFs (gitignored)
@@ -237,7 +244,7 @@ Laura is a research assistant. But sometimes you need different perspectives:
 
 **Alex** (Solution Architect) - Architecture decisions, technology evaluation, risk assessment
 
-**Riley** (Product Owner) - User value, prioritization, product thinking *(coming soon)*
+**Riley** (Product Owner) - User stories, value propositions, prioritisation
 
 **More personas in development** - Or create your own expert perspectives
 
@@ -317,6 +324,7 @@ See [Quick Start Prompts](docs/quick-start-prompts.md) for comprehensive prompt 
 - [About This Project](CLAUDE-about-this-repo.md) - Project vision and philosophy
 - [Laura Skill](vault-skills/laura/SKILL.md) - Research methodology
 - [Alex Skill](vault-skills/alex/SKILL.md) - Architecture expertise
+- [Riley Skill](vault-skills/riley/SKILL.md) - Product ownership
 - [Demo Video Scripts](docs/) - Scripts for creating demo videos
 
 ## Real-World Use

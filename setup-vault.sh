@@ -76,7 +76,7 @@ echo "Installing templates..."
 cp -r "$SCRIPT_DIR/templates/"* "$VAULT_PATH/_templates/"
 
 # Install Claude Code skills (personas)
-echo "Installing personas (Laura, Alex)..."
+echo "Installing personas (Laura, Alex, Riley)..."
 mkdir -p "$VAULT_PATH/.claude/skills"
 cp -r "$SCRIPT_DIR/vault-skills/"* "$VAULT_PATH/.claude/skills/"
 
@@ -204,7 +204,7 @@ echo "Next steps:"
 echo "1. Open vault in Obsidian: File → Open folder as vault → $VAULT_PATH"
 echo "2. Edit CLAUDE.md to describe your research focus"
 echo "3. Run 'claude' in the vault directory"
-echo "4. Type '/laura' to start researching (or '/alex' for architecture)"
+echo "4. Type '/laura' for research, '/alex' for architecture, '/riley' for product"
 echo ""
 echo "Optional:"
 echo "- Connect to GitHub for backup:"

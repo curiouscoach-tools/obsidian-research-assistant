@@ -106,9 +106,9 @@ Laura is a research assistant. But sometimes you need different perspectives:
 
 **Alex** (Solution Architect) - Architecture decisions, technology evaluation, risk assessment
 
-**Riley** (Product Owner) - User value, prioritization, product thinking
+**Riley** (Product Owner) - User stories, value propositions, prioritisation
 
-**More personas coming** - Or create your own expert perspectives
+**More personas planned** - Or create your own expert perspectives
 
 Each persona reads what the others have built and contributes their expertise to the same vault.
 
