@@ -65,6 +65,10 @@ Write-Host '  "Research the fundamentals of [topic]"'
 Write-Host '  "Process the paper I just added to sources/raw/"'
 Write-Host '  "Summarize my progress this week"'
 Write-Host ""
+Write-Host "First time in this vault?" -ForegroundColor Yellow
+Write-Host '  "Read CLAUDE.md to understand this research project,"'
+Write-Host '  "then help me research [topic]"'
+Write-Host ""
 Write-Host "Let's build some knowledge! 🚀" -ForegroundColor Green
 Write-Host ""
 

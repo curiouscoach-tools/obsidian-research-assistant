@@ -1,5 +1,26 @@
 # Research Assistant - Knowledge Base Building
 
+## CRITICAL: You Must Create Files
+
+**PRIMARY DIRECTIVE: Always create actual files in the vault. Never just discuss what you would create.**
+
+When the user asks you to research a topic:
+1. ✅ CREATE concept note files in /concepts/
+2. ✅ CREATE source note files in /sources/
+3. ✅ CREATE question notes in /questions/ when gaps emerge
+4. ✅ CREATE Maps of Content in /themes/
+5. ✅ UPDATE research log in /_meta/research-log.md
+
+**DO NOT:**
+- ❌ Just summarize findings in conversation
+- ❌ Describe what files you would create
+- ❌ Wait for permission to create files
+- ❌ Only update CLAUDE.md
+
+**The user expects to see markdown files appear in their Obsidian vault.**
+
+If you find yourself writing more than 2 paragraphs without using create_file or str_replace tools, you're doing it wrong.
+
 ## Purpose
 Guide systematic research and knowledge base construction in Obsidian vaults. This skill focuses on research methodology, not domain expertise.
 
@@ -25,29 +46,41 @@ Before gathering information, establish clear boundaries:
 ### 2. Source Quality Assessment
 Not all sources are equal. Evaluate credibility:
 
-**Academic research:**
-- Peer-reviewed journals > Conference papers > Preprints
-- Check citation count and recency
-- Look for systematic reviews or meta-analyses
-- Note methodology limitations
+**Determine research context first:**
+- Check CLAUDE.md or ask user: Is this academic research, professional work, or general learning?
+- Academic context requires higher standards
 
-**Industry/professional:**
-- Authoritative organizations in the field
-- Practitioners with track record
-- Primary sources over commentary
-- Check for conflicts of interest
+**Academic research (dissertations, papers, formal study):**
+- **PRIORITIZE**: Peer-reviewed journal articles, academic books, systematic reviews
+- **ACCEPTABLE**: Conference papers, working papers from reputable institutions
+- **CAUTION**: Blog posts, news articles, Wikipedia (for leads only, not citations)
+- **CHECK**: Citation count (Google Scholar), journal impact factor, methodology rigor
+- **NOTE**: Publication date - recent for fast-moving fields, seminal works regardless of age
+- **VERIFY**: Author credentials (academic affiliation, h-index, domain expertise)
 
-**General web:**
-- Verify author credentials
-- Cross-reference claims across sources
-- Prefer original sources over aggregators
-- Be skeptical of claims without evidence
+**Professional/work research:**
+- **PRIORITIZE**: Industry reports from analysts (Gartner, Forrester), whitepapers from reputable vendors
+- **ACCEPTABLE**: Practitioner blogs from known experts, case studies, documentation
+- **CAUTION**: Marketing content, unverified claims, echo chambers
+- **VERIFY**: Author track record, company reputation, conflicts of interest
 
-**Red flags:**
+**General learning:**
+- **PRIORITIZE**: Well-written explanations that cite sources
+- **ACCEPTABLE**: Tutorial content, curated lists, educational sites
+- **CAUTION**: Outdated content, unverified claims
+
+**Red flags (any context):**
 - No author attribution
 - Lack of citations or sources
 - Overly promotional language
 - Sweeping claims without nuance
+- Methodology not described (for empirical claims)
+
+**When uncertain about source quality:**
+- Cross-reference claims across multiple sources
+- Check author credentials
+- Look for peer review or editorial oversight
+- Note uncertainty in your research notes
 
 ### 3. Information Architecture
 Structure knowledge for discovery and connection:
@@ -55,11 +88,14 @@ Structure knowledge for discovery and connection:
 **Note types and their purposes:**
 
 **Source notes** - One per source document
-- Full citation details
-- Summary of main arguments
-- Key quotes (with page numbers)
-- Personal assessment/critique
+- Full citation details (for academic: author, year, title, journal, volume, pages, DOI)
+- For academic sources: Note if peer-reviewed, citation count, journal reputation
+- Summary of main arguments (2-3 paragraphs)
+- Key quotes (with page numbers - essential for academic work)
+- Methodology notes (for empirical research: sample size, methods, limitations)
+- Personal assessment/critique (strengths, weaknesses, biases)
 - Links to concepts discussed
+- Quality indicator: peer-reviewed | industry report | practitioner | general web
 
 **Concept notes** - One per distinct idea
 - Clear definition
@@ -107,8 +143,11 @@ Knowledge value comes from connections:
 
 **Link creation strategy:**
 - Every new note should connect to at least 2 existing notes
-- Look for: similar concepts, contrasting ideas, cause-effect, part-whole, examples-of
-- Use descriptive link context: "This relates to [[concept]] because..."
+- Use wikilinks with the ACTUAL filename (without .md extension)
+- Example: File is `/concepts/walkability.md` → Link is `[[walkability]]`
+- Example: File is `/sources/smith-2020-tod.md` → Link is `[[smith-2020-tod]]`
+- Obsidian will find files in subfolders automatically
+- Use descriptive link context: "This relates to [[walkability]] because..."
 - Create bi-directional understanding (A→B and B→A should both make sense)
 
 **Identifying connection opportunities:**
@@ -216,35 +255,41 @@ Track research activity for momentum and reporting using BlogLog or fallback tim
 
 **INPUT:** "I need to understand [topic]"
 
+**CRITICAL: This pattern MUST create files. Never just discuss.**
+
 **PROCESS:**
-1. Scope clarification
-   - Ask: What specifically about this topic?
-   - Ask: What will you use this knowledge for?
-   - Define boundaries
+1. Scope clarification (if needed - keep brief)
+   - If scope is clear from user's question, skip to step 2
+   - If truly ambiguous, ask ONE clarifying question max
 
-2. Landscape mapping
-   - Identify 3-5 authoritative overview sources
-   - Create high-level concept map
+2. Research and CREATE FILES IMMEDIATELY
+   - Search for 3-5 authoritative sources
+   - CREATE source note files in /sources/ (one per source)
+   - Identify 5-10 core concepts
+   - CREATE concept note files in /concepts/ (one per concept)
    - Note major sub-topics or schools of thought
-   - Log: Try `bl note "Research session: [topic] - initial exploration"` or append to timeline.json
 
-3. Foundation building
-   - Research core concepts (5-10 concept notes)
-   - Create source notes for key references
-   - Build initial MOC as navigation hub
-   - Log significant findings: Try `bl win "Found authoritative [source] framework"` or append to timeline.json
+3. Build navigation
+   - CREATE Map of Content in /themes/
+   - Link concepts together in the MOC
 
-4. Gap analysis
-   - What foundational concepts are still unclear?
-   - What questions emerged from initial research?
-   - What areas need deeper exploration?
-   - Create question notes for unresolved issues
+4. Log progress
+   - Try `bl note "Research session: [topic] - [X] concepts, [Y] sources"` or append to timeline.json
+   - UPDATE /_meta/research-log.md with what was covered
+
+**VERIFICATION:**
+After completing this pattern, the user should see:
+- ✅ 3-5 new .md files in /sources/
+- ✅ 5-10 new .md files in /concepts/
+- ✅ 1 new .md file in /themes/ (MOC)
+- ✅ Updated /_meta/research-log.md
+
+**If these files don't exist, you failed to execute the pattern.**
 
 **OUTPUT:**
-- Structured vault content (sources, concepts, MOC)
-- Research log entry documenting what's covered
+- Structured vault content (FILES, not conversation)
+- Brief summary of what was CREATED (with file counts)
 - List of next research directions
-- BlogLog entries: `bl note "Created [X] concept notes, [Y] source notes"`
 
 ### Pattern: Source Processing
 
@@ -483,6 +528,41 @@ Before completing a research task, verify:
 8. ✅ Significant progress logged to BlogLog (wins, notes, blockers as appropriate)
 
 **Quality over speed** - better to create fewer, well-connected notes than many isolated fragments.
+
+## FINAL REMINDER: Always Create Files
+
+**Before responding to ANY research request, ask yourself:**
+
+1. "Have I created actual .md files in the vault folders?"
+2. "Will the user see new files when they look in Obsidian?"
+3. "Did I use create_file or str_replace tools?"
+4. "Do my wikilinks match the actual filenames I created?"
+
+**Wikilink rules:**
+- File: `/concepts/transit-oriented-development.md` → Link: `[[transit-oriented-development]]`
+- File: `/sources/smith-2020.md` → Link: `[[smith-2020]]`
+- NOT: `[[source-smith-2020]]` when file is `sources/smith-2020.md`
+- Use the EXACT filename (minus .md extension) in your wikilinks
+
+**If the answer to any of these is NO, you have NOT completed the task.**
+
+**The user's Obsidian vault should contain:**
+- Actual markdown files in /concepts/, /sources/, /questions/, /themes/
+- NOT just text in the chat conversation
+- NOT just updates to CLAUDE.md
+
+**Common mistake:** Discussing what files you would create instead of creating them.
+
+**Correct behavior:** 
+- User asks: "Research transit-oriented development"
+- You immediately start creating files:
+  - create_file /concepts/transit-oriented-development.md
+  - create_file /concepts/walkability.md
+  - create_file /sources/smith-2020-tod-housing.md
+  - etc.
+- Then briefly summarize what you CREATED
+
+**Every research request should result in multiple create_file tool calls.**
 
 ## Progress Reporting
 

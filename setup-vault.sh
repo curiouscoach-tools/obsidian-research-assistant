@@ -17,14 +17,20 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Parse arguments
 if [ -z "$1" ]; then
     echo -e "${RED}Error: Vault path required${NC}"
-    echo "Usage: ./setup-vault.sh <vault-path> [vault-name]"
+    echo "Usage: ./setup-vault.sh <vault-path> [vault-name] [type]"
     echo "Example: ./setup-vault.sh ~/vaults/my-research"
-    echo "Example: ./setup-vault.sh ~/vaults/dissertation 'Dissertation Research'"
+    echo "Example: ./setup-vault.sh ~/vaults/my-research 'My Research' research"
+    echo "Example: ./setup-vault.sh ~/vaults/odie-platform 'ODIE Platform' programme"
+    echo ""
+    echo "Types:"
+    echo "  research  - Research vault (default) - sources, concepts, themes"
+    echo "  programme - Programme vault - architecture, product, technical"
     exit 1
 fi
 
 VAULT_PATH="$1"
 VAULT_NAME="${2:-$(basename "$VAULT_PATH")}"
+VAULT_TYPE="${3:-research}"
 CURRENT_DATE=$(date +%Y-%m-%d)
 
 echo -e "${GREEN}Creating research vault: ${VAULT_NAME}${NC}"
@@ -57,7 +63,13 @@ fi
 
 # Create vault directory structure
 echo "Creating vault structure..."
-mkdir -p "$VAULT_PATH"/{sources/raw,concepts,themes,questions,_meta,_templates}
+if [ "$VAULT_TYPE" = "programme" ]; then
+    echo "Creating programme vault structure..."
+    mkdir -p "$VAULT_PATH"/{architecture/{decisions,comparisons,designs,diagrams,risks},product/{user-stories,value-hypotheses,roadmap},requirements/{functional,non-functional,stakeholders},technical/{spikes,implementation,risks},process/{sprint-plans,retrospectives,blockers},research/{sources/raw,concepts,themes},discussions,_meta,_templates}
+else
+    echo "Creating research vault structure..."
+    mkdir -p "$VAULT_PATH"/{sources/raw,concepts,themes,questions,_meta,_templates}
+fi
 
 # Copy templates
 echo "Installing templates..."

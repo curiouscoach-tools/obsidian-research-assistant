@@ -27,8 +27,8 @@ echo -e "${GREEN}╔════════════════════
 echo -e "${GREEN}║                                                        ║${NC}"
 echo -e "${GREEN}║  👋 Hi! I'm Laura - your research assistant           ║${NC}"
 echo -e "${GREEN}║                                                        ║${NC}"
-echo -e "${GREEN}║  ${BLUE}L${GREEN}ovable ${BLUE}A${GREEN}rtificially-intelligent ${BLUE}U${GREEN}nflappable       ║${NC}"
-echo -e "${GREEN}║  ${BLUE}R${GREEN}esearch ${BLUE}A${GREEN}ssistant                                ║${NC}"
+echo -e "${GREEN}║  ${BLUE}L${NC}ovable ${BLUE}A${NC}rtificially-intelligent ${BLUE}U${NC}nflappable       ${GREEN}║${NC}"
+echo -e "${GREEN}║  ${BLUE}R${NC}esearch ${BLUE}A${NC}ssistant                                ${GREEN}║${NC}"
 echo -e "${GREEN}║                                                        ║${NC}"
 echo -e "${GREEN}╚════════════════════════════════════════════════════════╝${NC}"
 echo ""
@@ -58,6 +58,10 @@ echo -e "${YELLOW}Quick start:${NC}"
 echo '  "Research the fundamentals of [topic]"'
 echo '  "Process the paper I just added to sources/raw/"'
 echo '  "Summarize my progress this week"'
+echo ""
+echo -e "${YELLOW}First time in this vault?${NC}"
+echo '  "Read CLAUDE.md to understand this research project,"'
+echo '  "then help me research [topic]"'
 echo ""
 echo -e "${GREEN}Let's build some knowledge! 🚀${NC}"
 echo ""

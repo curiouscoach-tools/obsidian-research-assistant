@@ -232,7 +232,364 @@ That's too high-level. I need deeper analysis. Please:
 - Note methodology and evidence quality
 ```
 
-## Customizing for Your Domain
+## Detailed Worked Examples
+
+These examples show complete interaction patterns from start to finish.
+
+### Example 1: Academic Dissertation Research (Caitlyn's Transport Planning)
+
+**Context:** Master's dissertation on sustainable transport planning, needs academic rigor.
+
+**Session 1: Getting Started**
+
+```
+cd ~/vaults/transport-dissertation
+laura
+
+You: Read CLAUDE.md to understand this research project. This is my 
+     master's dissertation on transit-oriented development and housing 
+     affordability, so I need peer-reviewed academic sources.
+     
+     Start by researching the fundamentals of transit-oriented development.
+
+Laura: I've read CLAUDE.md and understand this is academic research requiring 
+       peer-reviewed sources. I'll research transit-oriented development 
+       fundamentals, prioritizing academic journals and systematic reviews.
+       
+       [Creates 5 concept notes, 3 source notes from peer-reviewed journals]
+       [Logs: bl note "Research session: TOD fundamentals - 5 concepts, 3 academic sources"]
+
+You: Great! Now I'm seeing the term "density bonus" mentioned. What does 
+     that mean and how does it relate to TOD?
+
+Laura: [Creates concept note on density bonuses]
+       [Links to existing TOD notes]
+       [References academic sources that discuss the relationship]
+
+You: I found this paper on TOD implementation in Vancouver (shows PDF). 
+     Can you process it?
+
+Laura: I'll extract the key findings and create a structured source note.
+       
+       [Note: You'd place PDF in sources/raw/ first]
+       [Creates source note with full academic citation]
+       [Extracts 4 new concepts]
+       [Links to existing TOD and density bonus notes]
+```
+
+**Session 2: Deepening Understanding (Next Day)**
+
+```
+laura
+
+You: What did we cover yesterday on TOD?
+
+Laura: [Reads research log and timeline]
+       Yesterday we established foundational understanding of transit-oriented 
+       development, created 5 concept notes covering TOD principles, walkability, 
+       density bonuses, mixed-use development, and station area planning. We 
+       processed 3 peer-reviewed sources.
+
+You: Good. I'm seeing contradictory information about optimal density 
+     levels for TOD. Document this as a research question.
+
+Laura: [Creates question note in /questions/]
+       Question: "What are optimal density levels for transit-oriented development?"
+       Context: Sources disagree - some suggest 30+ units/acre, others 60+
+       [Links to conflicting sources]
+       [Notes: This needs resolution through literature review]
+       [Logs: bl note "Generated research question: TOD density levels"]
+
+You: Help me find recent systematic reviews or meta-analyses on TOD effectiveness.
+
+Laura: [Searches for academic systematic reviews]
+       [Prioritizes Cochrane-style reviews, meta-analyses]
+       [Creates source notes with methodology assessment]
+```
+
+**Session 3: Preparing for Supervisor Meeting**
+
+```
+laura
+
+You: I have my supervisor meeting tomorrow. Summarize my research progress 
+     over the last 2 weeks.
+
+Laura: [Reads .bloglog/timeline.json]
+       
+       Research Progress Summary (Last 2 Weeks):
+       
+       Topics Covered:
+       - Transit-oriented development fundamentals (10 concept notes)
+       - Housing affordability relationships (6 concept notes)
+       - Policy frameworks (4 concept notes)
+       
+       Sources Processed: 12 peer-reviewed journal articles
+       - 3 systematic reviews
+       - 7 empirical studies
+       - 2 theoretical frameworks
+       
+       Key Findings:
+       - Strong evidence for TOD reducing car dependency
+       - Mixed evidence on housing affordability impacts
+       - Context matters: implementation varies by governance model
+       
+       Open Questions:
+       - Optimal density levels (contradictory evidence)
+       - Gentrification vs. accessibility tradeoff
+       - Long-term vs. short-term affordability impacts
+       
+       Next Steps Recommended:
+       - Systematic review of affordability evidence
+       - Case study comparison across contexts
+       - Stakeholder interview preparation
+```
+
+---
+
+### Example 2: Professional Work Research (Your Brother's Industry Analysis)
+
+**Context:** Business analyst researching market entry strategy, needs speed over academic rigor.
+
+**Session 1: Fast Industry Research**
+
+```
+cd ~/vaults/market-entry-analysis
+laura
+
+You: Read CLAUDE.md. This is professional work research for a client 
+     presentation next week. Industry reports and expert blogs are fine - 
+     I need breadth and speed more than academic rigor.
+     
+     Research the European fintech regulatory landscape.
+
+Laura: Understood - professional context, industry sources acceptable.
+       I'll prioritize analyst reports (Gartner, Forrester), regulatory 
+       bodies, and reputable fintech publications.
+       
+       [Creates concept notes from McKinsey reports, EU regulatory docs]
+       [Notes source types: "industry report" vs "government document"]
+       [Focuses on recent publications - last 2 years]
+
+You: What are the key regulatory differences between UK and EU post-Brexit?
+
+Laura: [Synthesizes from multiple industry sources]
+       [Creates comparison note]
+       [Links to regulatory framework concepts]
+       [Flags: "Check official FCA and EU sources for legal accuracy"]
+
+You: I need 3-5 case studies of successful fintech market entries in Europe.
+
+Laura: [Searches for case studies in industry publications]
+       [Creates source notes for each case study]
+       [Extracts success factors as concept notes]
+       [Creates comparison matrix]
+```
+
+**Session 2: Client Presentation Prep**
+
+```
+laura
+
+You: I need to explain "open banking" to non-technical stakeholders. 
+     Create a simple explanation.
+
+Laura: [Reviews existing concept note]
+       [Simplifies technical language]
+       [Adds real-world examples]
+       [Links to case studies showing business impact]
+
+You: Build me a summary of market entry barriers - regulatory, technical, 
+     and competitive. I'll use this in my presentation.
+
+Laura: [Synthesizes across sources]
+       [Organizes by category]
+       [Includes specific examples from case studies]
+       [Notes which barriers are highest priority based on research]
+```
+
+---
+
+### Example 3: Your ODIE Platform Design (Multi-Persona Solo Work)
+
+**Context:** You're designing a streaming platform, using multiple personas to challenge your thinking.
+
+**Session 1: Research Phase**
+
+```
+cd ~/vaults/odie-platform
+laura
+
+You: Read CLAUDE.md. This is a technical programme design exercise. 
+     I need to understand event streaming platforms - Kafka, Pulsar, 
+     AWS Kinesis. Professional sources are fine but I want depth on 
+     architecture and operations.
+     
+     Research event streaming platform options.
+
+Laura: [Researches from vendor docs, architecture blogs, case studies]
+       [Creates concept notes on event streaming, pub/sub, exactly-once semantics]
+       [Source notes from Confluent, Apache, AWS documentation]
+       [Creates comparison matrix showing strengths/weaknesses]
+       [Logs: bl note "Research: Event streaming platforms - 8 concepts, 5 sources"]
+```
+
+**Session 2: Architecture Decisions**
+
+```
+alex
+
+You: Read CLAUDE.md to understand this is an enterprise streaming platform.
+     
+     Based on Laura's research, evaluate Kafka vs Pulsar for our use case.
+
+Alex: [Reads Laura's research notes]
+      I see Laura researched both platforms. Let me create a systematic evaluation.
+      
+      [Creates technology comparison matrix in /architecture/comparisons/]
+      [Scores against criteria: performance, ops complexity, ecosystem, cost]
+      [Creates ADR-001: Event Streaming Platform Selection]
+      [Links to Laura's concept notes for technical details]
+      [Identifies risks: Kafka operational complexity, team skill gaps]
+      [Logs: bl win "Decided on Kafka for event streaming platform"]
+
+You: What are the biggest risks with this Kafka decision?
+
+Alex: [Creates risk assessment in /architecture/risks/]
+      Top risks:
+      1. Operational complexity - team lacks Kafka experience
+      2. Schema evolution - need robust governance
+      3. Cost at scale - licensing and infrastructure
+      
+      Mitigations:
+      - Training plan for team
+      - Spike on schema registry
+      - Proof of concept on cost modeling
+      
+      [Flags for Morgan: Need DevOps support for K8s deployment]
+```
+
+**Session 3: Sanity Check**
+
+```
+laura
+
+You: Review Alex's architecture decision on Kafka. Are there any concerns 
+     from the research that Alex might have missed?
+
+Laura: [Reads Alex's ADR]
+       [Cross-references with research notes]
+       
+       Alex's decision looks sound and well-reasoned. A few additional 
+       considerations from the research:
+       
+       - The case study from [Source] noted governance overhead was 
+         significant - make sure that's in the risk assessment
+       - [Source] mentioned Kafka's learning curve - Alex flagged this 
+         but might want to quantify training time
+       - Consider data retention costs - not mentioned in ADR
+       
+       [Creates discussion note linking Alex's ADR and research findings]
+```
+
+This shows how **personas challenge each other** even when you're solo.
+
+---
+
+### Example 4: Processing Multiple Papers (Caitlyn's Literature Review)
+
+**Context:** Weekend literature review blitz, processing multiple papers.
+
+```
+laura
+
+You: I've downloaded 8 papers on TOD and housing affordability and put 
+     them in sources/raw/. Process them one by one, prioritizing the 
+     most recent systematic reviews first.
+
+Laura: I'll process these papers in priority order. Let me start with 
+       systematic reviews.
+       
+       [Scans sources/raw/]
+       Found:
+       - 2 systematic reviews (2023, 2021)
+       - 4 empirical studies (2020-2024)
+       - 2 theoretical papers (2019, 2022)
+       
+       Processing systematic review 1: [Author, 2023]...
+       [Creates source note with full citation]
+       [Extracts methodology: "Systematic review of 45 studies, 2010-2022"]
+       [Notes key finding: "Mixed evidence on affordability - context dependent"]
+       [Creates/updates 6 concept notes]
+       [Logs: bl note "Processed systematic review: [Author 2023] - 6 concepts"]
+       
+       Processing systematic review 2: [Author, 2021]...
+       [Similar process]
+       
+       Processing empirical study 1: [Author, 2024]...
+       [Notes methodology: "Case study, 3 cities, mixed methods"]
+       [Identifies limitation: "Small sample, UK-specific"]
+       [Cross-references findings with systematic reviews]
+       
+       ...continues for all 8 papers...
+       
+       Summary:
+       - Processed 8 academic sources
+       - Created 12 new concept notes
+       - Updated 8 existing concepts
+       - Identified 3 contradictions requiring further investigation
+       - Added 47 cross-references between notes
+       
+       [Logs: bl win "Completed literature review processing - 8 papers, 12 concepts"]
+
+You: Are there any major contradictions I need to resolve?
+
+Laura: Yes, three main contradictions emerged:
+       
+       1. Density thresholds: [Author A] suggests 60+ units/acre minimum,
+          [Author B] shows success at 30-40 units/acre
+          → See [[question-optimal-density-tod]]
+       
+       2. Affordability timeframe: [Author C] finds short-term price increases,
+          [Author D] shows long-term affordability benefits
+          → Different methodology and timeframes
+       
+       3. Governance models: [Author E] emphasizes top-down planning,
+          [Author F] shows bottom-up community-led success
+          → May be context-dependent (political systems)
+       
+       I've created question notes for each contradiction.
+```
+
+---
+
+## Why These Examples Matter
+
+**Example 1 (Academic)** shows:
+- How to establish academic context
+- Multi-session continuity
+- Progress reporting for supervisors
+- Research question management
+
+**Example 2 (Professional)** shows:
+- Speed over perfection
+- Industry sources acceptable
+- Client deliverable focus
+- Practical timeframes
+
+**Example 3 (Multi-Persona)** shows:
+- Laura researches, Alex decides
+- Cross-persona checking
+- Solo work with multiple perspectives
+- How personas build on each other
+
+**Example 4 (Batch Processing)** shows:
+- Handling multiple sources efficiently
+- Systematic review prioritization
+- Contradiction identification
+- Literature review workflow
+
+These give users **concrete patterns to copy**, not just abstract guidance.
 
 **For Academic Research:**
 Focus on: literature reviews, theoretical frameworks, methodology, evidence quality

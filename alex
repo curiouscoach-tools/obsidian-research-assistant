@@ -1,0 +1,84 @@
+#!/bin/bash
+# Alex - Solution Architect Persona
+# Architectural decisions, system design, technology evaluation
+
+# Color codes
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Check if we're in a research vault
+if [ ! -f "CLAUDE.md" ] || [ ! -d ".bloglog" ]; then
+    echo -e "${YELLOW}👋 Hi! I'm Alex, your solution architect.${NC}"
+    echo ""
+    echo "It looks like you're not in a research/project vault."
+    echo ""
+    echo "To start:"
+    echo "  1. Create a vault: ./setup-vault.sh ~/vaults/my-project"
+    echo "  2. Navigate to it: cd ~/vaults/my-project"
+    echo "  3. Launch me: alex"
+    echo ""
+    exit 1
+fi
+
+# Welcome message
+echo -e "${CYAN}╔════════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║                                                        ║${NC}"
+echo -e "${CYAN}║  🏗️  Hi! I'm Alex - your solution architect           ║${NC}"
+echo -e "${CYAN}║                                                        ║${NC}"
+echo -e "${CYAN}║  Architecture • Technology • Design Decisions         ║${NC}"
+echo -e "${CYAN}║                                                        ║${NC}"
+echo -e "${CYAN}╚════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# Read vault name from CLAUDE.md if possible
+VAULT_NAME=$(grep "^# " CLAUDE.md 2>/dev/null | head -1 | sed 's/^# //' | sed 's/ - Research Context$//')
+if [ -n "$VAULT_NAME" ]; then
+    echo -e "${BLUE}Project:${NC} $VAULT_NAME"
+else
+    echo -e "${BLUE}Project:${NC} $(basename $(pwd))"
+fi
+
+# Show recent architecture decisions if any exist
+if [ -d "architecture/decisions" ]; then
+    ADR_COUNT=$(find architecture/decisions -name "*.md" 2>/dev/null | wc -l)
+    if [ "$ADR_COUNT" -gt 0 ]; then
+        echo -e "${BLUE}Architecture decisions:${NC} $ADR_COUNT ADRs documented"
+        echo "Recent:"
+        ls -t architecture/decisions/*.md 2>/dev/null | head -3 | while read file; do
+            TITLE=$(grep "^# " "$file" | head -1 | sed 's/^# //')
+            echo "  • $TITLE"
+        done
+        echo ""
+    fi
+fi
+
+echo -e "${YELLOW}I can help with:${NC}"
+echo "  • Architectural decisions (ADRs)"
+echo "  • Technology evaluation and comparison"
+echo "  • System design and architecture"
+echo "  • Non-functional requirements"
+echo "  • Technical risk assessment"
+echo ""
+echo -e "${YELLOW}Quick start:${NC}"
+echo '  "Evaluate options for [technology area]"'
+echo '  "Create an ADR for [architectural decision]"'
+echo '  "Design the architecture for [system]"'
+echo '  "What are the risks of [approach]?"'
+echo ""
+echo -e "${YELLOW}First time in this vault?${NC}"
+echo '  "Read CLAUDE.md to understand this project,"'
+echo '  "then help me with [architecture task]"'
+echo ""
+echo -e "${YELLOW}Collaboration:${NC}"
+echo "  • I build on Laura's research"
+echo "  • I work with Riley on business context"
+echo "  • I flag implementation concerns for Morgan"
+echo ""
+echo -e "${CYAN}Let's build solid architecture! 🏗️${NC}"
+echo ""
+
+# Launch Claude Code with Alex persona
+claude
