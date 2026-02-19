@@ -87,7 +87,7 @@ cd "$env:USERPROFILE\vaults\my-research"
 Instead of:
 ```bash
 cd ~/vaults/my-research
-claude-code
+claude
 ```
 
 Just:

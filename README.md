@@ -53,7 +53,7 @@ See [Installation Guide](docs/installation.md) for detailed instructions.
 
 ```bash
 cd ~/projects
-git clone https://github.com/yourusername/obsidian-research-assistant.git
+git clone https://github.com/curiouscoach-tools/obsidian-research-assistant.git
 cd obsidian-research-assistant
 ```
 
