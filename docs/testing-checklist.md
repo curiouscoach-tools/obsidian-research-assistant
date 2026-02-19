@@ -12,7 +12,6 @@
 ### Repository Setup
 - [ ] Clone obsidian-research-assistant repo
 - [ ] Make setup-vault.sh executable (`chmod +x setup-vault.sh`)
-- [ ] Copy skill to Claude Code: `cp skills/obsidian-research.md ~/.claude/skills/`
 
 ## Phase 1: Setup Script Testing
 
@@ -32,6 +31,7 @@ cd ~/obsidian-research-assistant
 - [ ] research-log.md created
 - [ ] domain-context.md created
 - [ ] Git repository initialized
+- [ ] Personas installed (.claude/skills/laura/ and .claude/skills/alex/ exist)
 - [ ] BlogLog initialized (.bloglog directory exists)
 - [ ] Initial commit made (`git log` shows commit)
 - [ ] Script outputs helpful next steps
@@ -92,7 +92,8 @@ Settings → Templates → Template folder location: `_templates`
 ### Start Claude Code Session
 ```bash
 cd ~/vaults/test-agile
-claude-code
+claude
+# Then type /laura to activate Laura
 ```
 
 **Verify:**
@@ -106,11 +107,11 @@ Prompt: "What is this vault for?"
 - [ ] Claude Code references CLAUDE.md content
 - [ ] Understands this is an Agile Transformation research vault
 
-### Test Research Skill Recognition
+### Test Persona Recognition
 Prompt: "What research methodology should you use?"
 
 **Verify:**
-- [ ] Claude Code references obsidian-research.md skill
+- [ ] Claude Code references Laura skill
 - [ ] Describes scope-first, quality assessment, progressive building approach
 
 ## Phase 4: Research Workflow Testing

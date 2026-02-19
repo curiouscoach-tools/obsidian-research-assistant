@@ -75,6 +75,11 @@ fi
 echo "Installing templates..."
 cp -r "$SCRIPT_DIR/templates/"* "$VAULT_PATH/_templates/"
 
+# Install Claude Code skills (personas)
+echo "Installing personas (Laura, Alex)..."
+mkdir -p "$VAULT_PATH/.claude/skills"
+cp -r "$SCRIPT_DIR/vault-skills/"* "$VAULT_PATH/.claude/skills/"
+
 # Create .gitignore
 echo "Creating .gitignore..."
 cp "$SCRIPT_DIR/config/gitignore.template" "$VAULT_PATH/.gitignore"
@@ -186,8 +191,9 @@ git commit -m "Initial vault setup for $VAULT_NAME
 
 - Created directory structure
 - Installed note templates
+- Installed personas (Laura, Alex)
 - Initialized research log and domain context
-- Ready for research"
+- Ready for research with /laura or /alex"
 
 echo ""
 echo -e "${GREEN}✓ Vault created successfully!${NC}"
@@ -197,7 +203,8 @@ echo ""
 echo "Next steps:"
 echo "1. Open vault in Obsidian: File → Open folder as vault → $VAULT_PATH"
 echo "2. Edit CLAUDE.md to describe your research focus"
-echo "3. Start researching with Claude Code"
+echo "3. Run 'claude' in the vault directory"
+echo "4. Type '/laura' to start researching (or '/alex' for architecture)"
 echo ""
 echo "Optional:"
 echo "- Connect to GitHub for backup:"

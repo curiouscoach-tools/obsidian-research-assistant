@@ -138,33 +138,11 @@ Once all prerequisites are installed:
 # Choose where to put the tool (e.g., your projects folder)
 cd ~/projects  # or wherever you keep code
 
-git clone https://github.com/yourusername/obsidian-research-assistant.git
+git clone https://github.com/curiouscoach-tools/obsidian-research-assistant.git
 cd obsidian-research-assistant
 ```
 
-### 2. Install the Research Skill for Claude Code
-
-This makes the research methodology available to Claude Code globally:
-
-**Linux/macOS:**
-```bash
-# Create Claude Code skills directory if it doesn't exist
-mkdir -p ~/.claude/skills/obsidian-research
-
-# Copy the skill file
-cp skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
-```
-
-**Windows (PowerShell):**
-```powershell
-# Create Claude Code skills directory if it doesn't exist
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\obsidian-research"
-
-# Copy the skill file
-Copy-Item -Path "skills\obsidian-research\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\obsidian-research\" -Force
-```
-
-### 3. Create Your First Research Vault
+### 2. Create Your First Research Vault
 
 **Linux/macOS:**
 ```bash
@@ -181,12 +159,11 @@ Copy-Item -Path "skills\obsidian-research\SKILL.md" -Destination "$env:USERPROFI
 The script will:
 - Create the vault structure
 - Install templates
-# - Initialize git
-# - Initialize BlogLog
-# - Create initial files
-```
+- Install personas (Laura, Alex) as Claude Code skills
+- Initialize git and BlogLog
+- Create initial files
 
-### 4. Open Vault in Obsidian
+### 3. Open Vault in Obsidian
 
 1. Launch Obsidian
 2. Click "Open folder as vault"
@@ -195,7 +172,7 @@ The script will:
    - Windows: `C:\Users\YourName\vaults\my-first-research`
 4. Click "Open"
 
-### 5. Configure Obsidian (First Time Only)
+### 4. Configure Obsidian (First Time Only)
 
 #### Enable Templates Plugin
 1. Settings → Core Plugins → Enable "Templates"
@@ -205,18 +182,20 @@ The script will:
 - Settings → Files and Links → "Automatically update internal links": ON
 - Settings → Editor → "Default editing mode": Source mode (or Live Preview)
 
-### 6. Start Using Claude Code
+### 5. Start Using Claude Code
 
 **Linux/macOS:**
 ```bash
 cd ~/vaults/my-first-research
-claude-code
+claude
 ```
+
+Then type `/laura` to activate Laura.
 
 **Windows (PowerShell or Command Prompt):**
 ```powershell
 cd $env:USERPROFILE\vaults\my-first-research
-claude-code
+claude
 ```
 
 Then prompt Claude Code:
@@ -247,15 +226,16 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
-### Claude Code doesn't see the skill
-Make sure the skill file is in the right place:
+### Claude Code doesn't see the personas
+Make sure the skills are in your vault:
 ```bash
-ls ~/.claude/skills/obsidian-research.md
+ls your-vault/.claude/skills/laura/SKILL.md
+ls your-vault/.claude/skills/alex/SKILL.md
 ```
 
-If not found, re-copy:
+If not found, re-run setup or manually copy:
 ```bash
-cp skills/obsidian-research.md ~/.claude/skills/
+cp -r path/to/obsidian-research-assistant/vault-skills/* your-vault/.claude/skills/
 ```
 
 ### Obsidian can't find templates

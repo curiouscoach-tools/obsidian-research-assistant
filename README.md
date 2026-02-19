@@ -57,21 +57,7 @@ git clone https://github.com/curiouscoach-tools/obsidian-research-assistant.git
 cd obsidian-research-assistant
 ```
 
-### 3. Install the Research Skill
-
-**Linux/macOS/WSL:**
-```bash
-mkdir -p ~/.claude/skills/obsidian-research
-cp skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
-```
-
-**Windows (PowerShell):**
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\obsidian-research"
-Copy-Item -Path "skills\obsidian-research\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\obsidian-research\" -Force
-```
-
-### 4. Create a Research Vault
+### 3. Create a Research Vault
 
 **Linux/macOS/WSL:**
 ```bash
@@ -86,31 +72,27 @@ Copy-Item -Path "skills\obsidian-research\SKILL.md" -Destination "$env:USERPROFI
 The script will:
 - Create the vault structure
 - Install templates
-- Initialize git
-- Initialize BlogLog
+- Install personas (Laura, Alex) as Claude Code skills
+- Initialize git and BlogLog
 - Create initial files
 
-### 5. Open in Obsidian
+### 4. Open in Obsidian
 
 File → Open folder as vault → Navigate to your vault → Open
 
-### 6. Start Researching
+### 5. Start Researching
 
-**Meet Laura (optional but recommended):**
-```bash
-cd ~/vaults/my-research
-laura  # Friendly launch with context
-```
-
-**Or launch directly:**
 ```bash
 cd ~/vaults/my-research
 claude
 ```
 
-Then prompt: `"Research the fundamentals of [your topic]"`
+Then type `/laura` to activate Laura, and prompt: `"Research the fundamentals of [your topic]"`
 
-**Install Laura:** See [Installing Laura](docs/installing-laura.md) for the friendly launcher.
+**Other personas:**
+- `/alex` - Solution architect for technology decisions and ADRs
+
+**Optional:** See [Installing Laura](docs/installing-laura.md) for a friendly launcher script with welcome messages.
 
 ## Key Features
 
@@ -145,15 +127,15 @@ This repository contains the **tooling to create research vaults**:
 obsidian-research-assistant/
 ├── laura                    # Friendly launcher (Linux/macOS/WSL)
 ├── laura.ps1                # Friendly launcher (Windows)
-├── alex                     # Solution architect persona (Linux/macOS/WSL)
-├── alex.ps1                 # Solution architect persona (Windows)
+├── alex                     # Solution architect launcher (Linux/macOS/WSL)
+├── alex.ps1                 # Solution architect launcher (Windows)
 ├── setup-vault.sh           # Creates vaults (Linux/macOS/WSL)
 ├── setup-vault.ps1          # Creates vaults (Windows PowerShell)
-├── skills/
-│   ├── obsidian-research/
-│   │   └── SKILL.md        # Research methodology (install globally)
-│   └── alex-architecture/
-│       └── SKILL.md        # Architecture expertise (install globally)
+├── vault-skills/            # Personas installed into each vault
+│   ├── laura/
+│   │   └── SKILL.md        # Research methodology
+│   └── alex/
+│       └── SKILL.md        # Architecture expertise
 ├── templates/               # Note templates for vaults
 │   ├── source-note.md
 │   ├── concept-note.md
@@ -174,6 +156,12 @@ When you run `setup-vault.sh`, it creates a **separate research vault**:
 ```
 my-research/                 # Independent git repository
 ├── .bloglog/               # Progress tracking
+├── .claude/
+│   └── skills/            # Personas (auto-discovered by Claude Code)
+│       ├── laura/
+│       │   └── SKILL.md
+│       └── alex/
+│           └── SKILL.md
 ├── sources/
 │   ├── raw/               # Your PDFs (gitignored)
 │   └── *.md               # Structured source notes
@@ -327,7 +315,8 @@ See [Quick Start Prompts](docs/quick-start-prompts.md) for comprehensive prompt 
 - [Windows Quick Start](docs/windows-quick-start.md) - Windows-specific setup guide
 - [Quick Start Prompts](docs/quick-start-prompts.md) - Copy-paste prompts with detailed worked examples
 - [About This Project](CLAUDE-about-this-repo.md) - Project vision and philosophy
-- [Research Skill](skills/obsidian-research/SKILL.md) - The methodology Claude Code uses
+- [Laura Skill](vault-skills/laura/SKILL.md) - Research methodology
+- [Alex Skill](vault-skills/alex/SKILL.md) - Architecture expertise
 - [Demo Video Scripts](docs/) - Scripts for creating demo videos
 
 ## Real-World Use

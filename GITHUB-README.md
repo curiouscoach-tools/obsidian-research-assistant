@@ -19,20 +19,19 @@ Laura transforms research from overwhelming to systematic:
 ## Quick Start
 
 ```bash
-# Install the research skill
-mkdir -p ~/.claude/skills/obsidian-research
-cp skills/obsidian-research/SKILL.md ~/.claude/skills/obsidian-research/
+# Clone the repo
+git clone https://github.com/curiouscoach-tools/obsidian-research-assistant.git
+cd obsidian-research-assistant
 
-# Create a research vault
+# Create a research vault (installs personas automatically)
 ./setup-vault.sh ~/vaults/my-research "My Research Project"
 
-# Launch Laura
-cd ~/vaults/my-research
-laura
-
 # Start researching
-"Read CLAUDE.md. This is my dissertation so I need academic sources.
-Research [your topic]."
+cd ~/vaults/my-research
+claude
+
+# Then type /laura and prompt:
+"Research [your topic]. This is my dissertation so I need academic sources."
 ```
 
 Files appear in Obsidian immediately - structured, linked, ready to use.
