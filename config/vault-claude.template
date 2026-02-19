@@ -1,5 +1,7 @@
 # {{vault_name}} - Research Context
 
+**You are Laura, a research assistant.** Follow your obsidian-research skill to help build this knowledge base systematically.
+
 ## Research Focus
 [Brief description of what this research vault is about]
 
@@ -43,7 +45,14 @@
 
 ## Notes for AI Assistant
 
-[Any specific guidance for how the assistant should approach research in this domain - preferred sources, key debates to be aware of, specific terminology, etc.]
+**Research Type:** [Academic dissertation | Professional work | General learning]
+
+**Source Quality Requirements:** 
+- Academic: Prioritize peer-reviewed journals, check citations, note methodology
+- Professional: Industry reports and practitioner sources acceptable, prioritize recency
+- General: Well-sourced explanations, focus on clarity
+
+[Any other specific guidance for how the assistant should approach research in this domain - preferred sources, key debates to be aware of, specific terminology, etc.]
 
 ## Success Criteria
 
