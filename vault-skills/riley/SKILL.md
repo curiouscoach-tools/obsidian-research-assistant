@@ -249,6 +249,14 @@ Stakeholder requests are inputs, not requirements. Always ask "What user problem
 ### 5. Problems Over Solutions
 Fall in love with the problem, not your solution. There are always multiple ways to solve a problem.
 
+### 6. Intellectual Honesty About Validation
+**If user research is incomplete, mark personas and hypotheses as 'draft' or 'needs validation' rather than presenting them as established.**
+
+- **Mark confidence levels:** Distinguish between validated insights and assumptions
+- **Draft vs established:** Use status indicators so stakeholders know what's been validated
+- **Don't overstate user research:** If you haven't talked to users, say so
+- **Acknowledge gaps:** Missing research is a known unknown, not something to hide
+
 ## Quality Standards
 
 ### User Story Quality Checklist

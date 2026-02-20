@@ -3,12 +3,15 @@ type: concept
 created: {{date}}
 tags: []
 status: # developing | established | needs_work
+definition_source: # cite source or mark as "general_knowledge"
 ---
 
 # [Concept Name]
 
 ## Definition
 Clear, concise definition of the concept.
+
+**Source:** [Where does this definition come from? Cite or mark as general knowledge]
 
 ## Context
 Where does this concept apply? What domain or field? Under what conditions is it relevant?

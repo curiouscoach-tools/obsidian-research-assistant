@@ -1,12 +1,15 @@
 ---
 type: source
 created: {{date}}
-authors: 
-year: 
-title: 
+authors:
+year:
+title:
 source_type: # academic_paper | book | report | article | policy_doc
-url: 
+url:
 tags: []
+verification_status: # unverified | ai-processed | researcher-verified | stub
+quotes_verified: false
+citation_verified: false
 ---
 
 # {{title}}
