@@ -318,6 +318,26 @@ Please read CLAUDE.md and help me start building systematic knowledge.
 
 See [Quick Start Prompts](docs/quick-start-prompts.md) for comprehensive prompt library with detailed examples.
 
+## Keeping Skills in Sync
+
+When personas (Laura, Alex, Riley) evolve in this repo, existing vaults don't automatically update. Use the sync script to update your vaults:
+
+**Linux/macOS/WSL:**
+```bash
+./sync-skills.sh ~/vibe/vaults
+```
+
+**Windows (PowerShell):**
+```powershell
+.\sync-skills.ps1 -VaultsDir "$env:USERPROFILE\vibe\vaults"
+```
+
+The script will:
+- Find all vaults in the directory
+- Show diffs between repo and vault versions
+- Ask for confirmation before updating
+- Optionally backup old versions
+
 ## Documentation
 
 - [Installing Laura](docs/installing-laura.md) - Set up the friendly launcher command
