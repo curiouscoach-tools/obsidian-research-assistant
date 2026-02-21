@@ -601,6 +601,72 @@ While researching TOD policy frameworks, noticed that [[academic-framework-tod]]
 - Flag contradictions between sources
 - Distinguish facts from claims from opinions
 
+## Template Governance
+
+Templates and YAML frontmatter should evolve with the vault. Don't treat them as fixed - adapt them to serve the research.
+
+### On Vault Setup (First 1-2 Sessions)
+
+Before creating many notes, review templates with the user:
+
+1. **Review default templates** - Walk through source-note, concept-note, question-note templates
+2. **Identify domain-specific needs** - Does this research domain need additional YAML fields?
+   - Academic: `methodology`, `sample_size`, `peer_reviewed`
+   - Professional: `relevance_to_project`, `actionability`, `stakeholder`
+   - Technical: `technology_version`, `deprecated`, `tested`
+3. **Propose customisations** - Suggest 2-3 domain-specific fields before notes proliferate
+4. **Document decisions** - Note template customisations in `_meta/domain-context.md`
+
+**Prompt to offer:** "Before we create many notes, shall we review the templates? I can suggest domain-specific YAML fields that might be useful for [research area]."
+
+### Ongoing Evolution
+
+As notes accumulate, patterns emerge. Watch for:
+
+1. **Repeated manual additions** - If you're adding the same field to 3+ notes, propose adding it to the template
+2. **Unused template sections** - If a section is consistently left empty, consider removing it
+3. **Inconsistent metadata** - If similar information is captured differently across notes, standardise it
+4. **Missing connections** - If notes lack obvious relationship types, add them to template structure
+
+**When proposing changes:**
+- Explain what pattern you've noticed
+- Suggest the specific template change
+- Offer to update existing notes for consistency
+- Document the change in `_meta/domain-context.md`
+
+### Regular Hygiene (Monthly or Every 50 Notes)
+
+Periodically audit template usage:
+
+```
+Template Hygiene Check:
+- [ ] Notes follow current templates (spot check 5-10 notes)
+- [ ] YAML fields are consistently used (no empty fields across all notes)
+- [ ] No commonly-added manual fields that should be in template
+- [ ] Frontmatter values use consistent formats (dates, tags, statuses)
+- [ ] Template changes documented in _meta/
+```
+
+**Prompt to offer:** "We've created about [X] notes now. Want me to do a template hygiene check to see if our templates need updating?"
+
+### Template Change Process
+
+When updating templates:
+
+1. **Propose** - Explain the change and rationale
+2. **Agree** - Get user confirmation before changing
+3. **Update template** - Modify `_templates/[note-type].md`
+4. **Backfill** - Offer to update existing notes (optional but recommended)
+5. **Document** - Note the change in `_meta/domain-context.md` with date
+
+### YAML Best Practices
+
+- **Use consistent value formats** - `status: developing` not `status: "Developing"` or `status: in-progress`
+- **Prefer controlled vocabularies** - List valid values in comments: `# draft | review | final`
+- **Keep frontmatter lean** - Only include fields that enable filtering/searching
+- **Date formats** - Use ISO 8601: `2024-02-15`
+- **Tags** - Use lowercase kebab-case: `#needs-review` not `#Needs Review`
+
 ## Version Control Integration
 
 **After each research session:**
