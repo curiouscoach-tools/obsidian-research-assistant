@@ -123,12 +123,31 @@ Summarize my research progress over the last [week/2 weeks/month] for my supervi
 
 ### When Web Fetch Fails (403 Error)
 ```
-The web fetch failed for [URL]. I'll download it manually and add to sources/raw/. 
+The web fetch failed for [URL]. I'll download it manually and add to sources/raw/.
 
 For now, please create a source note stub with:
 - Citation information
 - URL for reference
 - Tag it #needs-content so I can process it later
+```
+
+### Academic Integrity: Verification Workflow
+```
+This is dissertation research. For any claims you make:
+- Mark unverified information with #verify tags
+- Use [needs citation] for claims from general knowledge
+- Only create source notes for papers I've provided or you've fetched
+- Never fabricate quotes - if you haven't seen the exact text, don't quote it
+
+If you're unsure about something, say "I don't know" rather than guess.
+```
+
+### Checking Verification Status
+```
+Review the notes created in this session:
+- Which claims are marked #verify or #needs-citation?
+- Are there any source notes for papers we haven't actually read?
+- What needs my verification before I can use it in my dissertation?
 ```
 
 ### When You Have PDFs to Process
@@ -307,12 +326,35 @@ Laura: [Searches for academic systematic reviews]
        [Creates source notes with methodology assessment]
 ```
 
-**Session 3: Preparing for Supervisor Meeting**
+**Session 3: Verification Before Supervisor Meeting**
 
 ```
 laura
 
-You: I have my supervisor meeting tomorrow. Summarize my research progress 
+You: Before my supervisor meeting, I need to check my notes are properly verified.
+     Review all notes created this week and flag anything that:
+     - Has #verify tags still unresolved
+     - Contains claims I need to check against original sources
+     - Has quotes I should verify against the actual papers
+
+Laura: [Reviews notes]
+       Verification audit for supervisor meeting:
+
+       Unresolved #verify tags: 3
+       - [[density-thresholds]] - claim about 60 units/acre needs source check
+       - [[tod-effectiveness]] - statistic needs page number
+       - [[housing-prices]] - percentage change needs verification
+
+       Quotes to verify: 2
+       - [[smith-2020-tod]] - quote on p.47 should be confirmed
+       - [[jones-2022-density]] - paraphrased, not direct quote
+
+       Source notes without full access: 1
+       - [[chen-2023-review]] - stub only, needs full paper processing
+
+       Recommendation: Verify these 6 items before citing in dissertation work.
+
+You: Good. Now I have my supervisor meeting tomorrow. Summarize my research progress
      over the last 2 weeks.
 
 Laura: [Reads .bloglog/timeline.json]

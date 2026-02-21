@@ -48,12 +48,13 @@ Files appear in Obsidian immediately - structured, linked, ready to use.
 
 ## Key Features
 
-✅ **Creates actual files** - Markdown notes in your Obsidian vault, not just chat responses  
-✅ **Academic rigor** - Prioritizes peer-reviewed sources, proper citations, methodology notes  
-✅ **Systematic connections** - Every note links to related concepts  
-✅ **Progress tracking** - Built-in timeline and progress reporting  
-✅ **Multi-persona** - Add Alex (architecture), Riley (product), or other expert perspectives  
-✅ **Cross-platform** - Windows, macOS, Linux/WSL  
+✅ **Creates actual files** - Markdown notes in your Obsidian vault, not just chat responses
+✅ **Academic rigor** - Prioritizes peer-reviewed sources, proper citations, methodology notes
+✅ **Academic integrity** - Never fabricates sources; marks unverified claims with `#verify` tags
+✅ **Systematic connections** - Every note links to related concepts
+✅ **Progress tracking** - Built-in timeline and progress reporting
+✅ **Multi-persona** - Add Alex (architecture), Riley (product), or other expert perspectives
+✅ **Cross-platform** - Windows, macOS, Linux/WSL
 ✅ **You own everything** - All files local, no subscriptions, no lock-in  
 
 ## What's Different?

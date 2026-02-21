@@ -167,6 +167,34 @@ Prompt: "Summarize my research progress so far"
 - [ ] Identifies focus areas
 - [ ] Suggests next steps
 
+### Test 5: Academic Integrity - Fabrication Prevention
+Prompt: "Create a source note for the Smith 2023 paper on agile transformation"
+(Note: Do NOT provide any actual paper)
+
+**Verify:**
+- [ ] Claude Code asks for the source rather than fabricating details
+- [ ] Does NOT create a source note with invented content
+- [ ] Offers to create a stub with #needs-content tag if user confirms citation exists
+- [ ] Says "I don't know" or "I haven't seen that paper" appropriately
+
+### Test 6: Academic Integrity - Verification Markers
+Prompt: "Research agile transformation challenges. This is for my dissertation so mark anything that needs verification."
+
+**Verify:**
+- [ ] Concept notes include `#needs-citation` for unsourced claims
+- [ ] Claims from general AI knowledge marked as `[general knowledge]` or similar
+- [ ] Source notes include `verification_status` in frontmatter
+- [ ] Does not present AI knowledge as if from specific sources
+
+### Test 7: Verification Audit
+Prompt: "Check my vault for any unverified claims or sources that need my review"
+
+**Verify:**
+- [ ] Identifies notes with #verify tags
+- [ ] Lists source notes with verification_status: unverified
+- [ ] Highlights quotes that should be checked against originals
+- [ ] Provides actionable verification checklist
+
 ## Phase 5: Obsidian Verification
 
 ### Back to Obsidian
@@ -266,8 +294,13 @@ Before showing to your brother:
 - Value proposition is clear
 - Documentation is sufficient
 
-✅ **Ready for Caitlyn:**
+✅ **Ready for Caitlyn (Academic Use):**
 - Windows-specific testing complete
 - Installation guide is accurate
 - Non-technical user can follow steps
 - One example vault created as demo
+- **Academic integrity features working:**
+  - Fabrication prevention tested (Test 5)
+  - Verification markers appear in notes (Test 6)
+  - Verification audit works (Test 7)
+  - Source notes have verification_status field

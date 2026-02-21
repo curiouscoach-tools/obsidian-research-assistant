@@ -97,12 +97,13 @@ Then type `/laura` to activate Laura, and prompt: `"Research the fundamentals of
 
 ## Key Features
 
-✅ **Creates actual files** - Markdown notes in your Obsidian vault, not just chat responses  
-✅ **Academic rigor** - Prioritizes peer-reviewed sources, proper citations, methodology notes  
-✅ **Systematic connections** - Every note links to related concepts  
-✅ **Progress tracking** - Built-in timeline and progress reporting  
-✅ **Multi-persona support** - Add Alex (architecture), Riley (product), or other expert perspectives  
-✅ **Cross-platform** - Windows, macOS, Linux/WSL  
+✅ **Creates actual files** - Markdown notes in your Obsidian vault, not just chat responses
+✅ **Academic rigor** - Prioritizes peer-reviewed sources, proper citations, methodology notes
+✅ **Academic integrity** - Never fabricates sources; marks unverified claims with `#verify` and `#needs-citation`
+✅ **Systematic connections** - Every note links to related concepts
+✅ **Progress tracking** - Built-in timeline and progress reporting
+✅ **Multi-persona support** - Add Alex (architecture), Riley (product), or other expert perspectives
+✅ **Cross-platform** - Windows, macOS, Linux/WSL
 ✅ **You own everything** - All files local, no subscriptions, no lock-in  
 
 ## What's Different?
@@ -294,6 +295,8 @@ Each persona reads what the others have built and contributes their expertise to
 - Source quality assessment
 - Methodology notes for empirical research
 - Link integrity checking
+- **Verification markers** - `#verify`, `#needs-citation`, `#ai-processed` tags for academic work
+- **No fabrication** - AI never invents sources or quotes; asks for sources rather than guessing
 
 ## Getting Started Quickly
 
