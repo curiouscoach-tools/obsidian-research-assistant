@@ -126,7 +126,7 @@ Laura just makes sure you're working from a solid foundation.
 ## Real Users
 
 Built for and tested with:
-- **Caitlyn** - Transport planning dissertation (academic rigor)
+- **Graduate student** - Transport planning dissertation (academic rigor)
 - **Professional analyst** - Market entry research (speed and breadth)
 - **Product change manager** - Technical domain onboarding (multi-perspective thinking)
 

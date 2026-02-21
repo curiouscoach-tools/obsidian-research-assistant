@@ -255,7 +255,7 @@ That's too high-level. I need deeper analysis. Please:
 
 These examples show complete interaction patterns from start to finish.
 
-### Example 1: Academic Dissertation Research (Caitlyn's Transport Planning)
+### Example 1: Academic Dissertation Research (Transport Planning)
 
 **Context:** Master's dissertation on sustainable transport planning, needs academic rigor.
 
@@ -538,7 +538,7 @@ This shows how **personas challenge each other** even when you're solo.
 
 ---
 
-### Example 4: Processing Multiple Papers (Caitlyn's Literature Review)
+### Example 4: Processing Multiple Papers (Literature Review)
 
 **Context:** Weekend literature review blitz, processing multiple papers.
 
