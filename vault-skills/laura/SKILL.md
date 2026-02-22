@@ -716,10 +716,12 @@ After completing this pattern, the user should see:
 created: 2024-02-15
 tags: [question, tod, implementation]
 status: open
-related: [[transit-oriented-development]], [[policy-frameworks]]
 ---
 
 # How does TOD implementation differ across political contexts?
+
+## Related Concepts
+[[transit-oriented-development]] | [[policy-frameworks]]
 
 ## Context
 While researching TOD policy frameworks, noticed that [[academic-framework-tod]] focuses on US/Canadian context, while [[who-sustainable-transport]] emphasizes European approaches. These seem to assume different governance structures.
