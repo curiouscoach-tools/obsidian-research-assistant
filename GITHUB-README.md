@@ -89,7 +89,6 @@ Everything lives in your Obsidian vault. Everything connects. Everything is your
 - **Obsidian** - Note-taking app (free)
 - **Claude Code** - AI coding assistant (free)
 - **Git** - Version control (free)
-- **BlogLog** - Optional, for timeline tracking
 
 See [Installation Guide](docs/installation.md) for detailed setup.
 
@@ -154,8 +153,7 @@ Created by [Ian Simon](https://github.com/IanSimon23) as part of the CuriousCoac
 
 Built on:
 - [Obsidian](https://obsidian.md/) - Knowledge base application
-- [Claude Code](https://claude.ai/code) - AI coding assistant  
-- [BlogLog](https://github.com/IanSimon23/bloglog) - Activity timeline tool
+- [Claude Code](https://claude.ai/code) - AI coding assistant
 
 ## Get Started
 

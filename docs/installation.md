@@ -14,31 +14,15 @@ You'll need to install several tools. Follow the sections below based on your op
 3. Use default settings (Git Bash is included)
 4. Verify installation: Open "Git Bash" and type `git --version`
 
-#### 2. Install Node.js (for BlogLog)
-1. Download from: https://nodejs.org/ (LTS version recommended)
-2. Run the installer with default settings
-3. Verify: Open Command Prompt and type `node --version`
-
-#### 3. Install Obsidian
+#### 2. Install Obsidian
 1. Download from: https://obsidian.md/
 2. Run the installer
 3. Launch Obsidian (you'll configure vaults later)
 
-#### 4. Install Claude Code
+#### 3. Install Claude Code
 1. Download from: https://claude.ai/code
 2. Follow installation instructions
 3. Verify: Open Command Prompt and type `claude-code --version`
-
-#### 5. Install BlogLog
-Open Git Bash or Command Prompt:
-```bash
-git clone https://github.com/IanSimon23/bloglog.git
-cd bloglog
-npm install
-cd packages/cli && npm link
-```
-
-Verify: `bl --version`
 
 ### For macOS Users
 
@@ -54,32 +38,15 @@ brew install git
 
 Verify: `git --version`
 
-#### 3. Install Node.js
-```bash
-brew install node
-```
-
-Verify: `node --version`
-
-#### 4. Install Obsidian
+#### 3. Install Obsidian
 1. Download from: https://obsidian.md/
 2. Drag to Applications folder
 3. Launch Obsidian
 
-#### 5. Install Claude Code
+#### 4. Install Claude Code
 1. Download from: https://claude.ai/code
 2. Follow installation instructions
 3. Verify: `claude-code --version`
-
-#### 6. Install BlogLog
-```bash
-git clone https://github.com/IanSimon23/bloglog.git
-cd bloglog
-npm install
-cd packages/cli && npm link
-```
-
-Verify: `bl --version`
 
 ### For Linux Users
 
@@ -95,38 +62,17 @@ sudo pacman -S git    # Arch
 
 Verify: `git --version`
 
-#### 2. Install Node.js
-```bash
-sudo apt install nodejs npm  # Debian/Ubuntu
-
-# OR use Node Version Manager (recommended):
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-nvm install --lts
-```
-
-Verify: `node --version`
-
-#### 3. Install Obsidian
+#### 2. Install Obsidian
 Download AppImage from: https://obsidian.md/
 ```bash
 chmod +x Obsidian-*.AppImage
 ./Obsidian-*.AppImage
 ```
 
-#### 4. Install Claude Code
+#### 3. Install Claude Code
 1. Download from: https://claude.ai/code
 2. Follow installation instructions
 3. Verify: `claude-code --version`
-
-#### 5. Install BlogLog
-```bash
-git clone https://github.com/IanSimon23/bloglog.git
-cd bloglog
-npm install
-cd packages/cli && npm link
-```
-
-Verify: `bl --version`
 
 ## Setup Obsidian Research Assistant
 
@@ -159,9 +105,9 @@ cd obsidian-research-assistant
 The script will:
 - Create the vault structure
 - Install templates
-- Install personas (Laura, Alex) as Claude Code skills
-- Initialize git and BlogLog
-- Create initial files
+- Install personas (Laura, Alex, Riley) as Claude Code skills
+- Initialize git
+- Create initial files including research log and backlog
 
 ### 3. Open Vault in Obsidian
 
@@ -207,17 +153,10 @@ Claude Code will:
 - Read CLAUDE.md for project context
 - Use the research methodology skill
 - Create structured notes in your vault
-- Log progress to BlogLog
+- Update research log and backlog
 - Commit changes to git
 
 ## Troubleshooting
-
-### "bl: command not found"
-BlogLog didn't install correctly. Try:
-```bash
-cd ~/bloglog
-cd packages/cli && npm link
-```
 
 ### Git asks for username/email
 Configure git:
@@ -247,13 +186,12 @@ Check Settings → Templates → Template folder location is set to `_templates`
 2. Start a research session with Claude Code
 3. Review the notes created in Obsidian
 4. Check the graph view to see connections emerging
-5. Use `bl timeline` to track your progress
+5. Check `_meta/research-log.md` to track your progress
 
 ## Getting Help
 
 - [Obsidian Documentation](https://help.obsidian.md/)
 - [Claude Code Documentation](https://claude.ai/code/docs)
-- [BlogLog Repository](https://github.com/IanSimon23/bloglog)
 
 ## Optional: Connect Vault to GitHub
 
