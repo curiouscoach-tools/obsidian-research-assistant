@@ -22,8 +22,8 @@ SKILLS_SOURCE="$SCRIPT_DIR/vault-skills"
 # Default vaults directory
 VAULTS_DIR="${1:-$HOME/vibe/vaults}"
 
-# Personas to sync
-PERSONAS=("laura" "alex" "riley")
+# Personas to sync (base names - laura variants handled specially)
+PERSONAS=("laura" "alex" "riley" "casey")
 
 echo -e "${BLUE}=== Skill Sync Tool ===${NC}"
 echo "Source: $SKILLS_SOURCE"
@@ -72,19 +72,57 @@ for vault in "${VAULTS[@]}"; do
     echo -e "${BLUE}--- $vault_name ---${NC}"
 
     for persona in "${PERSONAS[@]}"; do
-        source_file="$SKILLS_SOURCE/$persona/SKILL.md"
-        target_dir="$vault/.claude/skills/$persona"
-        target_file="$target_dir/SKILL.md"
+        # Handle laura variants
+        if [ "$persona" = "laura" ]; then
+            target_dir="$vault/.claude/skills/laura"
+            target_file="$target_dir/SKILL.md"
+
+            # Detect which variant is installed by checking content
+            if [ -f "$target_file" ]; then
+                if grep -q "Emergency Check Before Submission" "$target_file" 2>/dev/null; then
+                    source_file="$SKILLS_SOURCE/laura-academic/SKILL.md"
+                    variant="academic"
+                elif grep -q "Academic" "$target_file" 2>/dev/null; then
+                    source_file="$SKILLS_SOURCE/laura-academic/SKILL.md"
+                    variant="academic"
+                else
+                    source_file="$SKILLS_SOURCE/laura-professional/SKILL.md"
+                    variant="professional"
+                fi
+            else
+                # Default to professional for new installs
+                source_file="$SKILLS_SOURCE/laura-professional/SKILL.md"
+                variant="professional"
+            fi
+
+            # Fallback to original if variants don't exist
+            if [ ! -f "$source_file" ]; then
+                source_file="$SKILLS_SOURCE/laura/SKILL.md"
+                variant="original"
+            fi
+        else
+            source_file="$SKILLS_SOURCE/$persona/SKILL.md"
+            target_dir="$vault/.claude/skills/$persona"
+            target_file="$target_dir/SKILL.md"
+            variant=""
+        fi
 
         # Check if source exists
         if [ ! -f "$source_file" ]; then
             continue
         fi
 
+        # Display name with variant if applicable
+        if [ -n "$variant" ]; then
+            display_name="$persona ($variant)"
+        else
+            display_name="$persona"
+        fi
+
         # If target doesn't exist, offer to create
         if [ ! -f "$target_file" ]; then
-            echo -e "  ${YELLOW}$persona:${NC} Not installed"
-            read -p "    Install $persona? [y/N] " -n 1 -r
+            echo -e "  ${YELLOW}$display_name:${NC} Not installed"
+            read -p "    Install $display_name? [y/N] " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 mkdir -p "$target_dir"
@@ -99,13 +137,13 @@ for vault in "${VAULTS[@]}"; do
 
         # Compare files
         if diff -q "$source_file" "$target_file" > /dev/null 2>&1; then
-            echo -e "  ${GREEN}$persona:${NC} Up to date"
+            echo -e "  ${GREEN}$display_name:${NC} Up to date"
             ((UNCHANGED++))
             continue
         fi
 
         # Files differ - show diff and ask
-        echo -e "  ${YELLOW}$persona:${NC} Changes available"
+        echo -e "  ${YELLOW}$display_name:${NC} Changes available"
         echo ""
         echo -e "    ${BLUE}Diff (repo → vault):${NC}"
         # Show abbreviated diff

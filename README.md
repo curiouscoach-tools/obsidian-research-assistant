@@ -59,18 +59,32 @@ cd obsidian-research-assistant
 
 **Linux/macOS/WSL:**
 ```bash
+# Professional research (default)
 ./setup-vault.sh ~/vaults/my-research "My Research Project"
+
+# Academic research (dissertation/thesis) - strict verification
+./setup-vault.sh ~/vaults/dissertation "PhD Research" research laura academic
+
+# Reflection vault for journaling
+./setup-vault.sh ~/vaults/journal "Work Journal" reflection
 ```
 
 **Windows (PowerShell):**
 ```powershell
+# Professional research (default)
 .\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\my-research" -VaultName "My Research Project"
+
+# Academic research - strict verification
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\dissertation" -VaultName "PhD Research" -Context academic
+
+# Reflection vault for journaling
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\journal" -VaultName "Work Journal" -VaultType reflection
 ```
 
 The script will:
-- Create the vault structure
+- Create the vault structure (research, reflection, or programme)
 - Install templates
-- Install personas (Laura, Alex, Riley) as Claude Code skills
+- Install personas (Laura academic/professional, Alex, Riley, Casey)
 - Initialize git
 - Create initial files including research log and backlog
 
@@ -90,6 +104,7 @@ Then type `/laura` to activate Laura, and prompt: `"Research the fundamentals of
 **Other personas:**
 - `/alex` - Solution architect for technology decisions and ADRs
 - `/riley` - Product owner for user stories and prioritisation
+- `/casey` - Reflection buddy for journaling and growth tracking
 
 **Optional:** See [Installing Laura](docs/installing-laura.md) for a friendly launcher script with welcome messages.
 
@@ -134,12 +149,12 @@ obsidian-research-assistant/
 ├── setup-vault.sh           # Creates vaults (Linux/macOS/WSL)
 ├── setup-vault.ps1          # Creates vaults (Windows PowerShell)
 ├── vault-skills/            # Personas installed into each vault
-│   ├── laura/
-│   │   └── SKILL.md        # Research methodology
-│   ├── alex/
-│   │   └── SKILL.md        # Architecture expertise
-│   └── riley/
-│       └── SKILL.md        # Product ownership
+│   ├── laura/              # Original full research methodology
+│   ├── laura-academic/     # Strict verification for dissertations/theses
+│   ├── laura-professional/ # Lighter weight for work research
+│   ├── alex/               # Architecture expertise
+│   ├── riley/              # Product ownership
+│   └── casey/              # Reflection and journaling
 ├── templates/               # Note templates for vaults
 │   ├── source-note.md
 │   ├── concept-note.md
@@ -240,11 +255,15 @@ Laura:
 
 Laura is a research assistant. But sometimes you need different perspectives:
 
+**Laura** (Research Assistant) - Two variants:
+- *Academic* - Strict verification for dissertations/theses. Never fabricates sources, marks all AI claims with `#verify`, includes submission checklist
+- *Professional* - Lighter overhead for work research. Good practices without heavy verification workflow
+
 **Alex** (Solution Architect) - Architecture decisions, technology evaluation, risk assessment
 
 **Riley** (Product Owner) - User stories, value propositions, prioritisation
 
-**More personas in development** - Or create your own expert perspectives
+**Casey** (Reflection Buddy) - Daily journaling, weekly/monthly/quarterly reviews, pattern recognition, growth tracking
 
 Each persona reads what the others have built and contributes their expertise to the same vault. See the demo video scripts for examples of Laura → Alex collaboration on technical investigations.
 
@@ -341,9 +360,11 @@ The script will:
 - [Windows Quick Start](docs/windows-quick-start.md) - Windows-specific setup guide
 - [Quick Start Prompts](docs/quick-start-prompts.md) - Copy-paste prompts with detailed worked examples
 - [About This Project](CLAUDE-about-this-repo.md) - Project vision and philosophy
-- [Laura Skill](vault-skills/laura/SKILL.md) - Research methodology
+- [Laura Academic Skill](vault-skills/laura-academic/SKILL.md) - Research methodology with strict verification
+- [Laura Professional Skill](vault-skills/laura-professional/SKILL.md) - Research methodology for work
 - [Alex Skill](vault-skills/alex/SKILL.md) - Architecture expertise
 - [Riley Skill](vault-skills/riley/SKILL.md) - Product ownership
+- [Casey Skill](vault-skills/casey/SKILL.md) - Reflection and journaling
 - [Demo Video Scripts](docs/) - Scripts for creating demo videos
 
 ## Real-World Use

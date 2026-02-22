@@ -13,7 +13,11 @@ param(
     [string]$VaultType = "research",
 
     [Parameter(Mandatory=$false)]
-    [string]$Personas
+    [string]$Personas,
+
+    [Parameter(Mandatory=$false)]
+    [ValidateSet("academic", "professional")]
+    [string]$Context = "professional"
 )
 
 # Set strict mode
@@ -42,7 +46,10 @@ $CurrentDate = Get-Date -Format "yyyy-MM-dd"
 
 Write-Host "Creating $VaultType vault: $VaultName" -ForegroundColor Green
 Write-Host "Location: $VaultPath"
-Write-Host "Personas: $($PersonaList -join ', ')"
+$displayPersonas = $PersonaList | ForEach-Object {
+    if ($_ -eq "laura") { "laura ($Context)" } else { $_ }
+}
+Write-Host "Personas: $($displayPersonas -join ', ')"
 Write-Host ""
 
 # Check prerequisites
@@ -128,12 +135,26 @@ if ($VaultType -eq "reflection") {
 Write-Host "Installing personas ($($PersonaList -join ', '))..."
 New-Item -ItemType Directory -Force -Path "$VaultPath\.claude\skills" | Out-Null
 foreach ($persona in $PersonaList) {
-    $personaPath = "$ScriptDir\vault-skills\$persona"
-    if (Test-Path $personaPath) {
-        Write-Host "  - $persona"
-        Copy-Item -Path $personaPath -Destination "$VaultPath\.claude\skills\" -Recurse -Force
+    if ($persona -eq "laura") {
+        # Handle laura variants based on context
+        $lauraVariant = "laura-$Context"
+        $variantPath = "$ScriptDir\vault-skills\$lauraVariant"
+        if (Test-Path $variantPath) {
+            Write-Host "  - laura ($Context)"
+            Copy-Item -Path $variantPath -Destination "$VaultPath\.claude\skills\laura" -Recurse -Force
+        } else {
+            Write-Host "  - laura (variant '$Context' not found, using default)" -ForegroundColor Yellow
+            $defaultPath = "$ScriptDir\vault-skills\laura"
+            Copy-Item -Path $defaultPath -Destination "$VaultPath\.claude\skills\" -Recurse -Force
+        }
     } else {
-        Write-Host "  - $persona (not found, skipping)" -ForegroundColor Yellow
+        $personaPath = "$ScriptDir\vault-skills\$persona"
+        if (Test-Path $personaPath) {
+            Write-Host "  - $persona"
+            Copy-Item -Path $personaPath -Destination "$VaultPath\.claude\skills\" -Recurse -Force
+        } else {
+            Write-Host "  - $persona (not found, skipping)" -ForegroundColor Yellow
+        }
     }
 }
 

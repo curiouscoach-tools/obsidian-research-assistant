@@ -19,14 +19,15 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ -z "$1" ]; then
     echo -e "${RED}Error: Vault path required${NC}"
     echo ""
-    echo "Usage: ./setup-vault.sh <vault-path> [vault-name] [type] [personas]"
+    echo "Usage: ./setup-vault.sh <vault-path> [vault-name] [type] [personas] [context]"
     echo ""
     echo "Examples:"
     echo "  ./setup-vault.sh ~/vaults/my-research"
     echo "  ./setup-vault.sh ~/vaults/my-research 'My Research' research"
+    echo "  ./setup-vault.sh ~/vaults/dissertation 'PhD Research' research laura academic"
+    echo "  ./setup-vault.sh ~/vaults/work-notes 'Work Notes' research laura professional"
     echo "  ./setup-vault.sh ~/vaults/work-journal 'Work Journal' reflection"
     echo "  ./setup-vault.sh ~/vaults/odie 'ODIE Platform' programme"
-    echo "  ./setup-vault.sh ~/vaults/hybrid 'Hybrid' research laura,casey"
     echo ""
     echo "Types:"
     echo "  research   - Research vault (default) - sources, concepts, themes"
@@ -34,10 +35,14 @@ if [ -z "$1" ]; then
     echo "  programme  - Programme vault - architecture, product, technical"
     echo ""
     echo "Personas (default based on type, or specify comma-separated):"
-    echo "  laura - Research assistant"
+    echo "  laura - Research assistant (academic or professional variant)"
     echo "  alex  - Solution architect"
     echo "  riley - Product owner"
     echo "  casey - Reflection buddy"
+    echo ""
+    echo "Context (for laura persona):"
+    echo "  academic     - Dissertation/thesis/papers - strict verification"
+    echo "  professional - Work research - lighter overhead (default)"
     echo ""
     echo "Default personas by type:"
     echo "  research:   laura, alex, riley"
@@ -50,6 +55,7 @@ VAULT_PATH="$1"
 VAULT_NAME="${2:-$(basename "$VAULT_PATH")}"
 VAULT_TYPE="${3:-research}"
 PERSONAS_ARG="${4:-}"
+CONTEXT="${5:-professional}"  # academic or professional (for laura)
 CURRENT_DATE=$(date +%Y-%m-%d)
 
 # Set default personas based on vault type
@@ -69,7 +75,15 @@ fi
 
 echo -e "${GREEN}Creating $VAULT_TYPE vault: ${VAULT_NAME}${NC}"
 echo "Location: $VAULT_PATH"
-echo "Personas: $PERSONAS"
+echo -n "Personas: "
+for p in $PERSONAS; do
+    if [ "$p" = "laura" ]; then
+        echo -n "laura ($CONTEXT) "
+    else
+        echo -n "$p "
+    fi
+done
+echo ""
 echo ""
 
 # Check prerequisites
@@ -115,7 +129,17 @@ fi
 echo "Installing personas ($PERSONAS)..."
 mkdir -p "$VAULT_PATH/.claude/skills"
 for persona in $PERSONAS; do
-    if [ -d "$SCRIPT_DIR/vault-skills/$persona" ]; then
+    if [ "$persona" = "laura" ]; then
+        # Handle laura variants based on context
+        LAURA_VARIANT="laura-$CONTEXT"
+        if [ -d "$SCRIPT_DIR/vault-skills/$LAURA_VARIANT" ]; then
+            echo "  - laura ($CONTEXT)"
+            cp -r "$SCRIPT_DIR/vault-skills/$LAURA_VARIANT" "$VAULT_PATH/.claude/skills/laura"
+        else
+            echo -e "${YELLOW}  - laura (variant '$CONTEXT' not found, using default)${NC}"
+            cp -r "$SCRIPT_DIR/vault-skills/laura" "$VAULT_PATH/.claude/skills/"
+        fi
+    elif [ -d "$SCRIPT_DIR/vault-skills/$persona" ]; then
         echo "  - $persona"
         cp -r "$SCRIPT_DIR/vault-skills/$persona" "$VAULT_PATH/.claude/skills/"
     else
