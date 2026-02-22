@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Obsidian Research Assistant - Vault Setup Script
-# Usage: ./setup-vault.sh <vault-path> [vault-name]
+# Obsidian Vault Setup Script
+# Usage: ./setup-vault.sh <vault-path> [vault-name] [type] [personas]
 
 set -e  # Exit on error
 
@@ -9,6 +9,7 @@ set -e  # Exit on error
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Get script directory
@@ -17,24 +18,58 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Parse arguments
 if [ -z "$1" ]; then
     echo -e "${RED}Error: Vault path required${NC}"
-    echo "Usage: ./setup-vault.sh <vault-path> [vault-name] [type]"
-    echo "Example: ./setup-vault.sh ~/vaults/my-research"
-    echo "Example: ./setup-vault.sh ~/vaults/my-research 'My Research' research"
-    echo "Example: ./setup-vault.sh ~/vaults/odie-platform 'ODIE Platform' programme"
+    echo ""
+    echo "Usage: ./setup-vault.sh <vault-path> [vault-name] [type] [personas]"
+    echo ""
+    echo "Examples:"
+    echo "  ./setup-vault.sh ~/vaults/my-research"
+    echo "  ./setup-vault.sh ~/vaults/my-research 'My Research' research"
+    echo "  ./setup-vault.sh ~/vaults/work-journal 'Work Journal' reflection"
+    echo "  ./setup-vault.sh ~/vaults/odie 'ODIE Platform' programme"
+    echo "  ./setup-vault.sh ~/vaults/hybrid 'Hybrid' research laura,casey"
     echo ""
     echo "Types:"
-    echo "  research  - Research vault (default) - sources, concepts, themes"
-    echo "  programme - Programme vault - architecture, product, technical"
+    echo "  research   - Research vault (default) - sources, concepts, themes"
+    echo "  reflection - Reflection/journal vault - daily, weekly, monthly journals"
+    echo "  programme  - Programme vault - architecture, product, technical"
+    echo ""
+    echo "Personas (default based on type, or specify comma-separated):"
+    echo "  laura - Research assistant"
+    echo "  alex  - Solution architect"
+    echo "  riley - Product owner"
+    echo "  casey - Reflection buddy"
+    echo ""
+    echo "Default personas by type:"
+    echo "  research:   laura, alex, riley"
+    echo "  reflection: casey"
+    echo "  programme:  laura, alex, riley"
     exit 1
 fi
 
 VAULT_PATH="$1"
 VAULT_NAME="${2:-$(basename "$VAULT_PATH")}"
 VAULT_TYPE="${3:-research}"
+PERSONAS_ARG="${4:-}"
 CURRENT_DATE=$(date +%Y-%m-%d)
 
-echo -e "${GREEN}Creating research vault: ${VAULT_NAME}${NC}"
+# Set default personas based on vault type
+if [ -z "$PERSONAS_ARG" ]; then
+    case "$VAULT_TYPE" in
+        reflection)
+            PERSONAS="casey"
+            ;;
+        *)
+            PERSONAS="laura alex riley"
+            ;;
+    esac
+else
+    # Convert comma-separated to space-separated
+    PERSONAS=$(echo "$PERSONAS_ARG" | tr ',' ' ')
+fi
+
+echo -e "${GREEN}Creating $VAULT_TYPE vault: ${VAULT_NAME}${NC}"
 echo "Location: $VAULT_PATH"
+echo "Personas: $PERSONAS"
 echo ""
 
 # Check prerequisites
@@ -46,41 +81,231 @@ if ! command -v git &> /dev/null; then
     exit 1
 fi
 
-# Create vault directory structure
+# Create vault directory structure based on type
 echo "Creating vault structure..."
-if [ "$VAULT_TYPE" = "programme" ]; then
-    echo "Creating programme vault structure..."
-    mkdir -p "$VAULT_PATH"/{architecture/{decisions,comparisons,designs,diagrams,risks},product/{user-stories,value-hypotheses,roadmap},requirements/{functional,non-functional,stakeholders},technical/{spikes,implementation,risks},process/{sprint-plans,retrospectives,blockers},research/{sources/raw,concepts,themes},discussions,_meta,_templates}
+case "$VAULT_TYPE" in
+    reflection)
+        echo "Creating reflection vault structure..."
+        mkdir -p "$VAULT_PATH"/{journal/{daily,weekly,monthly,quarterly},themes,_meta,_templates}
+        ;;
+    programme)
+        echo "Creating programme vault structure..."
+        mkdir -p "$VAULT_PATH"/{architecture/{decisions,comparisons,designs,diagrams,risks},product/{user-stories,value-hypotheses,roadmap},requirements/{functional,non-functional,stakeholders},technical/{spikes,implementation,risks},process/{sprint-plans,retrospectives,blockers},research/{sources/raw,concepts,themes},discussions,_meta,_templates}
+        ;;
+    *)
+        echo "Creating research vault structure..."
+        mkdir -p "$VAULT_PATH"/{sources/raw,concepts,themes,questions,_meta,_templates}
+        ;;
+esac
+
+# Copy templates based on vault type
+echo "Installing templates..."
+if [ "$VAULT_TYPE" = "reflection" ]; then
+    # Only copy reflection templates
+    cp "$SCRIPT_DIR/templates/daily-reflection.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/weekly-review.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/monthly-review.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/quarterly-review.md" "$VAULT_PATH/_templates/"
 else
-    echo "Creating research vault structure..."
-    mkdir -p "$VAULT_PATH"/{sources/raw,concepts,themes,questions,_meta,_templates}
+    # Copy all templates (research templates + reflection if casey included)
+    cp -r "$SCRIPT_DIR/templates/"* "$VAULT_PATH/_templates/"
 fi
 
-# Copy templates
-echo "Installing templates..."
-cp -r "$SCRIPT_DIR/templates/"* "$VAULT_PATH/_templates/"
-
-# Install Claude Code skills (personas)
-echo "Installing personas (Laura, Alex, Riley)..."
+# Install selected personas
+echo "Installing personas ($PERSONAS)..."
 mkdir -p "$VAULT_PATH/.claude/skills"
-cp -r "$SCRIPT_DIR/vault-skills/"* "$VAULT_PATH/.claude/skills/"
+for persona in $PERSONAS; do
+    if [ -d "$SCRIPT_DIR/vault-skills/$persona" ]; then
+        echo "  - $persona"
+        cp -r "$SCRIPT_DIR/vault-skills/$persona" "$VAULT_PATH/.claude/skills/"
+    else
+        echo -e "${YELLOW}  - $persona (not found, skipping)${NC}"
+    fi
+done
 
 # Create .gitignore
 echo "Creating .gitignore..."
 cp "$SCRIPT_DIR/config/gitignore.template" "$VAULT_PATH/.gitignore"
 
-# Create README
+# Create README based on vault type
 echo "Creating README..."
-sed "s/{{vault_name}}/$VAULT_NAME/g" "$SCRIPT_DIR/config/vault-readme.template" > "$VAULT_PATH/README.md"
+if [ "$VAULT_TYPE" = "reflection" ]; then
+    cat > "$VAULT_PATH/README.md" << EOF
+# $VAULT_NAME
 
-# Create vault-specific CLAUDE.md
+## Purpose
+[Describe what this reflection vault is for - work journal, personal growth, learning log, etc.]
+
+## Structure
+
+\`\`\`
+├── journal/
+│   ├── daily/      Daily reflections
+│   ├── weekly/     Weekly reviews
+│   ├── monthly/    Monthly reviews
+│   └── quarterly/  Quarterly reviews
+├── themes/         Recurring patterns and growth areas
+├── _meta/          Tracking files
+└── _templates/     Note templates
+\`\`\`
+
+## How to Use
+
+### Daily Reflection
+- End of day: Capture what happened, what you learned, what's tomorrow
+- Use template from \`_templates/daily-reflection.md\`
+
+### Reviews
+- Weekly: Synthesise the week, spot patterns, set intentions
+- Monthly: Check against goals, track growth trajectory
+- Quarterly: Big picture review, set new goals
+
+### Tracking Progress
+- Session summaries go in \`_meta/reflection-log.md\`
+- Things to explore go in \`_meta/reflection-backlog.md\`
+- Growth objectives in \`_meta/growth-goals.md\`
+
+## Working with Casey
+
+Signal when you're done reflecting:
+- "That's my reflection for today"
+- "Let's wrap up"
+- "Save and commit"
+
+Casey will summarise, update tracking files, and commit changes.
+EOF
+else
+    sed "s/{{vault_name}}/$VAULT_NAME/g" "$SCRIPT_DIR/config/vault-readme.template" > "$VAULT_PATH/README.md"
+fi
+
+# Create vault-specific CLAUDE.md based on type
 echo "Creating CLAUDE.md..."
-sed -e "s/{{vault_name}}/$VAULT_NAME/g" -e "s/{{date}}/$CURRENT_DATE/g" \
-    "$SCRIPT_DIR/config/vault-claude.template" > "$VAULT_PATH/CLAUDE.md"
+if [ "$VAULT_TYPE" = "reflection" ]; then
+    cat > "$VAULT_PATH/CLAUDE.md" << EOF
+# $VAULT_NAME - Reflection Context
 
-# Create research log
-echo "Creating research log..."
-cat > "$VAULT_PATH/_meta/research-log.md" << EOF
+**You are Casey, a reflection buddy.** Follow your casey skill to help with journaling and growth tracking.
+
+## Casey Configuration
+
+**Journal type:** [Work/Professional | Personal | Learning | Custom]
+
+**Daily prompts:**
+- What went well today?
+- What was challenging?
+- What did I learn?
+- What does tomorrow look like?
+
+**Weekly focus areas:**
+- Growth themes
+- Energy patterns
+- [Custom focus]
+
+**Goals:**
+- [Link to growth-goals.md or list here]
+
+**Prompting:** [Active (remind me if I miss days) | Passive (only when I ask)]
+
+## Current Focus
+
+**Phase:** [Starting out | Building habit | Established practice]
+
+**Growth Areas:**
+- [Area 1]
+- [Area 2]
+
+## Working with Casey
+
+**Starting a session:** Casey will check your reflection backlog and recent entries.
+
+**Ending a session:** Signal when you're done:
+- "That's my reflection for today"
+- "Let's wrap up"
+- "Save and commit"
+
+Casey will then summarise, update tracking files, and commit changes.
+
+## Notes
+[Any personal preferences, things Casey should know about your context]
+EOF
+else
+    sed -e "s/{{vault_name}}/$VAULT_NAME/g" -e "s/{{date}}/$CURRENT_DATE/g" \
+        "$SCRIPT_DIR/config/vault-claude.template" > "$VAULT_PATH/CLAUDE.md"
+fi
+
+# Create meta files based on vault type
+if [ "$VAULT_TYPE" = "reflection" ]; then
+    # Create reflection log
+    echo "Creating reflection log..."
+    cat > "$VAULT_PATH/_meta/reflection-log.md" << EOF
+# Reflection Log - $VAULT_NAME
+
+## Overview
+Casey's observations and session summaries.
+
+## Timeline
+
+### $CURRENT_DATE - Vault Created
+- Initial reflection vault created
+- Templates installed
+- Ready to begin journaling
+
+---
+
+## Patterns Noticed
+[Casey will add observations here over time]
+
+## Growth Markers
+[Significant progress points]
+EOF
+
+    # Create reflection backlog
+    echo "Creating reflection backlog..."
+    cat > "$VAULT_PATH/_meta/reflection-backlog.md" << EOF
+# Reflection Backlog - $VAULT_NAME
+
+## To Explore
+- [ ] Set up daily reflection habit
+- [ ] Define growth goals
+
+## To Develop
+[Skills or areas to work on]
+
+## To Revisit
+[Past reflections or decisions to check on]
+
+## Completed
+- [x] Set up vault structure
+EOF
+
+    # Create growth goals
+    echo "Creating growth goals..."
+    cat > "$VAULT_PATH/_meta/growth-goals.md" << EOF
+# Growth Goals - $VAULT_NAME
+
+## Current Goals
+
+### Goal 1: [Title]
+**Why:** [Why this matters]
+**Success looks like:** [How you'll know you've achieved it]
+**Progress:** [Notes on progress]
+
+### Goal 2: [Title]
+**Why:** [Why this matters]
+**Success looks like:** [How you'll know you've achieved it]
+**Progress:** [Notes on progress]
+
+## Completed Goals
+[Move goals here when achieved, with reflection on the journey]
+
+## Parked Goals
+[Goals you've deprioritised for now]
+EOF
+
+else
+    # Create research log
+    echo "Creating research log..."
+    cat > "$VAULT_PATH/_meta/research-log.md" << EOF
 # Research Log - $VAULT_NAME
 
 ## Overview
@@ -107,9 +332,9 @@ After significant research sessions, add an entry:
 Use this to track session-by-session progress and key insights.
 EOF
 
-# Create research backlog
-echo "Creating research backlog..."
-cat > "$VAULT_PATH/_meta/research-backlog.md" << EOF
+    # Create research backlog
+    echo "Creating research backlog..."
+    cat > "$VAULT_PATH/_meta/research-backlog.md" << EOF
 # Research Backlog - $VAULT_NAME
 
 ## High Priority
@@ -126,9 +351,9 @@ cat > "$VAULT_PATH/_meta/research-backlog.md" << EOF
 - [x] Set up vault structure
 EOF
 
-# Create domain context
-echo "Creating domain context..."
-cat > "$VAULT_PATH/_meta/domain-context.md" << EOF
+    # Create domain context
+    echo "Creating domain context..."
+    cat > "$VAULT_PATH/_meta/domain-context.md" << EOF
 # Domain Context - $VAULT_NAME
 
 ## Current Understanding
@@ -162,6 +387,7 @@ cat > "$VAULT_PATH/_meta/domain-context.md" << EOF
 
 *This document should be updated periodically to reflect current understanding and guide future research*
 EOF
+fi
 
 # Initialize git
 echo "Initializing git repository..."
@@ -184,24 +410,42 @@ fi
 # Initial git commit
 echo "Creating initial commit..."
 git add .
+
+# Build persona list for commit message
+PERSONA_LIST=$(echo $PERSONAS | tr ' ' ', ')
+
 git commit -m "Initial vault setup for $VAULT_NAME
 
-- Created directory structure
-- Installed note templates
-- Installed personas (Laura, Alex)
-- Initialized research log and domain context
-- Ready for research with /laura or /alex"
+- Created $VAULT_TYPE vault structure
+- Installed templates
+- Installed personas: $PERSONA_LIST
+- Ready to use"
 
 echo ""
 echo -e "${GREEN}✓ Vault created successfully!${NC}"
 echo ""
 echo "Location: $VAULT_PATH"
+echo "Type: $VAULT_TYPE"
+echo "Personas: $PERSONAS"
 echo ""
 echo "Next steps:"
 echo "1. Open vault in Obsidian: File → Open folder as vault → $VAULT_PATH"
-echo "2. Edit CLAUDE.md to describe your research focus"
+echo "2. Edit CLAUDE.md to customize your setup"
 echo "3. Run 'claude' in the vault directory"
-echo "4. Type '/laura' for research, '/alex' for architecture, '/riley' for product"
+
+# Show persona commands based on what was installed
+echo -n "4. Type "
+first=true
+for persona in $PERSONAS; do
+    if [ "$first" = true ]; then
+        echo -n "'/$persona'"
+        first=false
+    else
+        echo -n " or '/$persona'"
+    fi
+done
+echo " to get started"
+
 echo ""
 echo "Optional:"
 echo "- Connect to GitHub for backup:"

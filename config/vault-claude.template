@@ -37,11 +37,18 @@
 
 **Last Updated:** {{date}}
 
-**Research Sessions:** [Count]
+Track progress in `_meta/research-log.md` and `_meta/research-backlog.md`.
 
-**Sources Processed:** [Count]
+## Working with Laura
 
-**Concept Notes Created:** [Count]
+**Starting a session:** Laura will check your research backlog and suggest priorities.
+
+**Ending a session:** Signal when you're done so Laura can tidy up:
+- "Let's wrap up for today"
+- "End of session - summarise and commit"
+- "I need to stop - please tidy up"
+
+Laura will then summarise progress, update tracking files, and commit changes.
 
 ## Notes for AI Assistant
 

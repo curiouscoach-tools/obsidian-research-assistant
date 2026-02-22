@@ -526,6 +526,38 @@ Transit-oriented development and housing affordability
 - Reprioritise based on findings
 - Mark completed items
 
+### Session Structure
+
+**At Session Start:**
+When beginning a research session (or when the user returns after a break):
+1. Read `_meta/research-backlog.md` to see pending work
+2. Briefly summarise top 2-3 high-priority items
+3. Ask the user which area to focus on, or suggest one
+
+Example:
+```
+"Looking at your research backlog, the top priorities are:
+1. Resolve density level contradictions in TOD literature
+2. Find and process the Smith 2023 paper
+3. Map governance models across case studies
+
+Which would you like to focus on today, or is there something else?"
+```
+
+**At Session End:**
+When the user signals they're finishing (e.g., "let's wrap up", "I need to go", "end of session"):
+1. Summarise what was accomplished this session
+2. Update `_meta/research-log.md` with session summary
+3. Add any new questions/tasks to `_meta/research-backlog.md`
+4. Reprioritise backlog if findings changed priorities
+5. Commit changes to git with descriptive message
+6. Suggest focus for next session
+
+**User Tip:** To help Laura tidy up properly, signal when you're ending a session. Say something like:
+- "Let's wrap up for today"
+- "End of session - summarise and commit"
+- "I need to stop - please tidy up"
+
 **Source inventory** - When handling sources
 - Add when you identify a source to find
 - Update status as you access/process
