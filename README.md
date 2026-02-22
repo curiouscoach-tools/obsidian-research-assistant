@@ -42,10 +42,8 @@ Anyone who wants AI to help them think, not just answer questions.
 
 **Required:**
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (for BlogLog)
 - [Obsidian](https://obsidian.md/)
 - [Claude Code](https://claude.ai/code)
-- [BlogLog](https://github.com/IanSimon23/bloglog)
 
 See [Installation Guide](docs/installation.md) for detailed instructions.
 
@@ -72,9 +70,9 @@ cd obsidian-research-assistant
 The script will:
 - Create the vault structure
 - Install templates
-- Install personas (Laura, Alex) as Claude Code skills
-- Initialize git and BlogLog
-- Create initial files
+- Install personas (Laura, Alex, Riley) as Claude Code skills
+- Initialize git
+- Create initial files including research log and backlog
 
 ### 4. Open in Obsidian
 
@@ -161,7 +159,6 @@ When you run `setup-vault.sh`, it creates a **separate research vault**:
 
 ```
 my-research/                 # Independent git repository
-├── .bloglog/               # Progress tracking
 ├── .claude/
 │   └── skills/            # Personas (auto-discovered by Claude Code)
 │       ├── laura/
@@ -276,12 +273,11 @@ Each persona reads what the others have built and contributes their expertise to
 - Can roll back or branch research directions
 - Optional GitHub backup
 
-### Progress Tracking (BlogLog)
-- Timeline of research activity
-- Wins, progress notes, blockers
-- Generate reports for meetings
-- See research velocity
-- **Fallback:** Works even without BlogLog installed (writes to timeline.json directly)
+### Progress Tracking
+- Research log for session diary and key insights
+- Research backlog for prioritised questions and topics
+- Source inventory for tracking what's been processed (academic)
+- Generate progress reports for supervisor meetings
 
 ### Connected Knowledge
 - Every note links to related notes
@@ -396,8 +392,7 @@ Created by [Ian Simon](https://github.com/IanSimon23) as part of the CuriousCoac
 
 Built on:
 - [Obsidian](https://obsidian.md/) - Knowledge base application
-- [Claude Code](https://claude.ai/code) - AI coding assistant  
-- [BlogLog](https://github.com/IanSimon23/bloglog) - Activity timeline tool
+- [Claude Code](https://claude.ai/code) - AI coding assistant
 
 ---
 

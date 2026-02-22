@@ -422,80 +422,113 @@ If asked about using AI assistance:
 
 ## Progress Tracking
 
-Track research activity for momentum and reporting using BlogLog or fallback timeline:
+Track research activity using markdown files in `_meta/`. This keeps everything in Obsidian-native format, linkable and searchable.
 
-**Primary: Use BlogLog commands if available:**
-- Log wins (breakthroughs, significant findings)
-- Log notes (regular research activity)
-- Log blockers (obstacles needing resolution)
+### Core Tracking Files
 
-**Fallback: If `bl` command not available:**
-- Write directly to `.bloglog/timeline.json`
-- Maintain same structure for compatibility
-- User can still generate progress reports
+**`_meta/research-log.md`** - Session diary (chronological)
+- What was researched
+- Key insights and breakthroughs
+- Blockers encountered
+- Sources processed
 
-**Timeline JSON structure:**
-```json
-{
-  "entries": [
-    {
-      "type": "win",
-      "message": "Connected TOD concepts to housing affordability framework",
-      "timestamp": "2024-02-14T15:30:00Z"
-    },
-    {
-      "type": "note", 
-      "message": "Processed 3 papers on density policy",
-      "timestamp": "2024-02-14T16:00:00Z"
-    },
-    {
-      "type": "blocker",
-      "message": "Need institutional access for Smith 2023 paper",
-      "timestamp": "2024-02-14T16:15:00Z"
-    }
-  ]
-}
+**`_meta/research-backlog.md`** - Research agenda (prioritised)
+- Questions to investigate
+- Topics to explore
+- Sources to find/process
+- Prioritised by importance
+
+**`_meta/source-inventory.md`** - Source status (for academic work)
+- Sources identified but not accessed
+- Sources accessed but not processed
+- Sources fully processed
+- Helps answer: "Have I actually read this paper?"
+
+### Research Log Format
+
+```markdown
+# Research Log
+
+## 2024-02-15
+
+### Session Focus
+Transit-oriented development and housing affordability
+
+### Key Insights
+- **Breakthrough:** Connected density bonus policies to affordability outcomes
+- Found authoritative source: Smith 2023 systematic review
+
+### Work Completed
+- Processed 3 sources: [[smith-2023]], [[jones-2022]], [[chen-2021]]
+- Created 5 concept notes
+- Updated [[tod-themes-moc]]
+
+### Blockers
+- Can't access Brown 2024 paper (paywall) - added to source inventory
+- Conflicting claims about optimal density - created [[question-density-thresholds]]
+
+### Next Session
+- Investigate density threshold contradiction
+- Find more European case studies
 ```
 
-**When to log:**
+### Research Backlog Format
 
-**Wins** - Significant progress or insights
-- Found authoritative source that clarifies key concept
-- Made important connection between concepts
-- Resolved conflicting information
-- Completed foundation understanding of major topic
-- Breakthrough that unblocks further research
+```markdown
+# Research Backlog
 
-**Notes** - Regular research activity
-- Completed research session
-- Processed sources (with count)
-- Created concept/source notes (with count)
-- Updated MOCs or themes
-- Routine maintenance work
+## High Priority
+- [ ] Resolve density threshold contradiction - [[question-density-thresholds]]
+- [ ] Find European TOD case studies
+- [ ] Process Smith 2023 systematic review
 
-**Blockers** - Obstacles preventing progress
-- Can't access needed sources (paywall, institutional access)
-- Contradictory information that needs resolution
-- Missing foundational knowledge to proceed
-- Technical issues with tools or workflow
-- Awaiting external input (interviews, expert feedback)
+## Medium Priority
+- [ ] Explore governance models across contexts
+- [ ] Map stakeholder perspectives
 
-**Implementation:**
-1. Check if `bl` command exists
-2. If yes: Use `bl win "message"`, `bl note "message"`, `bl blocker "message"`
-3. If no: Append to `.bloglog/timeline.json` directly with proper JSON structure
-4. Ensure `.bloglog/metadata.json` exists (create if needed)
+## Low Priority / Later
+- [ ] Historical development of TOD concept
+- [ ] Compare US vs European approaches
 
-**Don't log:**
-- Every individual file creation (too granular)
-- Failed attempts or iterations (that's normal process)
-- Exploratory dead-ends (unless they reveal important blocker)
+## Completed
+- [x] Establish foundational TOD concepts
+- [x] Process initial literature scan
+```
 
-**Progress reporting:**
-- Read `.bloglog/timeline.json` for activity history
-- Generate activity summaries over time periods
-- Shows research velocity and patterns
-- Highlights wins and persistent blockers
+### Source Inventory Format (Academic Vaults)
+
+```markdown
+# Source Inventory
+
+## To Find
+- Brown 2024 - mentioned in Smith 2023, need to locate
+
+## To Access
+- Chen 2022 - found citation, behind paywall
+
+## To Process
+- [[sources/raw/jones-2024.pdf]] - downloaded, not yet processed
+
+## Processed
+- [[smith-2023]] - fully processed, quotes verified
+- [[chen-2021]] - processed, needs quote verification
+```
+
+### When to Update
+
+**Research log** - End of each session
+- Summarise what was covered
+- Note any breakthroughs or blockers
+- Plan next session
+
+**Research backlog** - As questions emerge
+- Add new research questions from question notes
+- Reprioritise based on findings
+- Mark completed items
+
+**Source inventory** - When handling sources
+- Add when you identify a source to find
+- Update status as you access/process
 
 ## Workflow Patterns
 
@@ -522,8 +555,8 @@ Track research activity for momentum and reporting using BlogLog or fallback tim
    - Link concepts together in the MOC
 
 4. Log progress
-   - Try `bl note "Research session: [topic] - [X] concepts, [Y] sources"` or append to timeline.json
-   - UPDATE /_meta/research-log.md with what was covered
+   - UPDATE `_meta/research-log.md` with session summary
+   - Add any new research questions to `_meta/research-backlog.md`
 
 **VERIFICATION:**
 After completing this pattern, the user should see:
@@ -565,23 +598,23 @@ After completing this pattern, the user should see:
    - For each: Does this concept already exist in vault?
    - If yes: Add to existing note, link source
    - If no: Create new concept note
-   - Log wins for significant findings: Try `bl win "Key insight on [concept] from [source]"` or append to timeline.json
 
 4. Integration
    - Link source to related sources
    - Link concepts to each other
    - Update relevant MOCs
    - Note any contradictions with existing knowledge
-   - If contradictions found: Try `bl blocker "Conflicting info on [topic] - needs resolution"` or append to timeline.json
+   - If contradictions found: Create question note and add to research backlog
 
 5. Progress logging
-   - Try `bl note "Processed [source] - [X] new concepts extracted"` or append to timeline.json
+   - Update `_meta/research-log.md` with source processed and key findings
+   - Update `_meta/source-inventory.md` to mark source as processed
 
 **OUTPUT:**
 - Source note
 - New/updated concept notes
 - Updated cross-references
-- BlogLog entry documenting processing
+- Updated research log
 
 ### Pattern: Knowledge Synthesis
 
@@ -605,7 +638,7 @@ After completing this pattern, the user should see:
    - Explain relationship with evidence
    - Show supporting sources
    - Note gaps or uncertainties
-   - If major connection: Try `bl win "Connected [A] and [B] - clarifies [insight]"` or append to timeline.json
+   - Log significant connections in `_meta/research-log.md`
 
 **OUTPUT:**
 - Synthesis note connecting concepts
@@ -641,11 +674,8 @@ After completing this pattern, the user should see:
 3. Link to broader research
    - Add to relevant MOCs
    - Link from related concept notes
-   - Note in research log
-
-4. Log the question
-   - Try `bl note "Generated research question: [brief question]"` or append to timeline.json
-   - If blocking progress: Try `bl blocker "Need to resolve: [question]"` or append to timeline.json
+   - Add to `_meta/research-backlog.md` with priority
+   - Note in `_meta/research-log.md` if blocking progress
 
 **EXAMPLE QUESTION NOTE:**
 
@@ -685,8 +715,8 @@ While researching TOD policy frameworks, noticed that [[academic-framework-tod]]
 **OUTPUT:**
 - Question note in `/questions/`
 - Links added to related notes
-- Research log updated
-- BlogLog entry documenting question
+- Research backlog updated with new question
+- Research log updated (if blocking progress)
 
 ## Quality Standards
 
@@ -839,7 +869,7 @@ Before completing a research task, verify:
 5. ✅ Gaps or uncertainties are flagged
 6. ✅ Research log is updated
 7. ✅ Changes are committed with clear message
-8. ✅ Significant progress logged to BlogLog (wins, notes, blockers as appropriate)
+8. ✅ Research log and backlog updated as appropriate
 
 **Quality over speed** - better to create fewer, well-connected notes than many isolated fragments.
 
@@ -882,15 +912,16 @@ Before completing a research task, verify:
 
 When asked to summarize research progress (e.g., for supervisor meeting):
 
-1. Read `.bloglog/timeline.json` for activity history
-2. Analyze patterns:
-   - Count of wins, notes, blockers over period
-   - Research velocity (sessions per week, sources processed)
+1. Read `_meta/research-log.md` for session history
+2. Read `_meta/research-backlog.md` for pending work
+3. Read `_meta/source-inventory.md` for source status (if academic)
+4. Analyze patterns:
+   - Key insights and breakthroughs
+   - Sources processed and concepts created
    - Focus areas and topic coverage
-   - Persistent blockers needing attention
-3. Generate narrative summary with key achievements and next steps
-4. Highlight wins as evidence of progress
-5. Frame blockers as known challenges being addressed
+   - Outstanding blockers and questions
+5. Generate narrative summary with key achievements and next steps
+6. Frame blockers as known challenges being addressed
 
 **Example prompt:** "Summarize my research progress over the last 2 weeks for my supervisor"
 

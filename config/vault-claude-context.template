@@ -7,7 +7,7 @@ Key behaviors:
 - Read CLAUDE.md for project context
 - Follow the obsidian-research skill methodology
 - Use templates from _templates/
-- Track progress in BlogLog or .bloglog/timeline.json
+- Track progress in _meta/research-log.md and _meta/research-backlog.md
 
 When the user asks you to research a topic, immediately start creating files in:
 - /concepts/ for concept notes
