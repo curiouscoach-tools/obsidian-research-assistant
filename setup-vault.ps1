@@ -37,21 +37,6 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# Check BlogLog
-$BlogLogAvailable = $false
-if (Get-Command bl -ErrorAction SilentlyContinue) {
-    $BlogLogAvailable = $true
-} else {
-    Write-Host "Warning: BlogLog (bl) not found" -ForegroundColor Yellow
-    Write-Host "BlogLog is recommended for progress tracking"
-    Write-Host "Install from: https://github.com/IanSimon23/bloglog"
-    Write-Host ""
-    $response = Read-Host "Continue without BlogLog? (y/n)"
-    if ($response -ne 'y' -and $response -ne 'Y') {
-        exit 1
-    }
-}
-
 # Create vault directory structure
 Write-Host "Creating vault structure..."
 $dirs = @(
@@ -114,9 +99,29 @@ After significant research sessions, add an entry:
 - Questions that emerged
 - Next steps
 
-This complements BlogLog's timeline by providing narrative context.
+Use this to track session-by-session progress and key insights.
 "@
 Set-Content -Path "$VaultPath\_meta\research-log.md" -Value $researchLog -Encoding UTF8
+
+# Create research backlog
+Write-Host "Creating research backlog..."
+$researchBacklog = @"
+# Research Backlog - $VaultName
+
+## High Priority
+- [ ] Define initial research questions
+- [ ] Identify key sources to find
+
+## Medium Priority
+[Add items as research progresses]
+
+## Low Priority / Later
+[Add items as research progresses]
+
+## Completed
+- [x] Set up vault structure
+"@
+Set-Content -Path "$VaultPath\_meta\research-backlog.md" -Value $researchBacklog -Encoding UTF8
 
 # Create domain context
 Write-Host "Creating domain context..."
@@ -177,13 +182,6 @@ if (-not $gitUserEmail) {
     git config user.email $userEmail
 }
 
-# Initialize BlogLog if available
-if ($BlogLogAvailable) {
-    Write-Host "Initializing BlogLog..."
-    bl init --win "Created $VaultName research vault"
-    bl note "Installed templates and structure for systematic research"
-}
-
 # Initial git commit
 Write-Host "Creating initial commit..."
 git add .
@@ -215,12 +213,3 @@ Write-Host "  cd '$VaultPath'"
 Write-Host "  git remote add origin <your-github-repo-url>"
 Write-Host "  git push -u origin main"
 Write-Host ""
-
-if ($BlogLogAvailable) {
-    Write-Host "BlogLog commands:"
-    Write-Host '  bl note "your note"'
-    Write-Host '  bl win "your win"'
-    Write-Host '  bl blocker "your blocker"'
-    Write-Host '  bl timeline --since "1 week ago"'
-    Write-Host ""
-}

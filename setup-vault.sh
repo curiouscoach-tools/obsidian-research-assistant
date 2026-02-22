@@ -46,21 +46,6 @@ if ! command -v git &> /dev/null; then
     exit 1
 fi
 
-if ! command -v bl &> /dev/null; then
-    echo -e "${YELLOW}Warning: BlogLog (bl) not found${NC}"
-    echo "BlogLog is recommended for progress tracking"
-    echo "Install from: https://github.com/IanSimon23/bloglog"
-    echo ""
-    read -p "Continue without BlogLog? (y/n) " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-    fi
-    BLOGLOG_AVAILABLE=false
-else
-    BLOGLOG_AVAILABLE=true
-fi
-
 # Create vault directory structure
 echo "Creating vault structure..."
 if [ "$VAULT_TYPE" = "programme" ]; then
@@ -119,7 +104,26 @@ After significant research sessions, add an entry:
 - Questions that emerged
 - Next steps
 
-This complements BlogLog's timeline by providing narrative context.
+Use this to track session-by-session progress and key insights.
+EOF
+
+# Create research backlog
+echo "Creating research backlog..."
+cat > "$VAULT_PATH/_meta/research-backlog.md" << EOF
+# Research Backlog - $VAULT_NAME
+
+## High Priority
+- [ ] Define initial research questions
+- [ ] Identify key sources to find
+
+## Medium Priority
+[Add items as research progresses]
+
+## Low Priority / Later
+[Add items as research progresses]
+
+## Completed
+- [x] Set up vault structure
 EOF
 
 # Create domain context
@@ -177,13 +181,6 @@ if [ -z "$(git config user.email)" ]; then
     git config user.email "$GIT_EMAIL"
 fi
 
-# Initialize BlogLog if available
-if [ "$BLOGLOG_AVAILABLE" = true ]; then
-    echo "Initializing BlogLog..."
-    bl init --win "Created $VAULT_NAME research vault"
-    bl note "Installed templates and structure for systematic research"
-fi
-
 # Initial git commit
 echo "Creating initial commit..."
 git add .
@@ -212,11 +209,3 @@ echo "  cd $VAULT_PATH"
 echo "  git remote add origin <your-github-repo-url>"
 echo "  git push -u origin main"
 echo ""
-if [ "$BLOGLOG_AVAILABLE" = true ]; then
-    echo "BlogLog commands:"
-    echo "  bl note \"your note\""
-    echo "  bl win \"your win\""
-    echo "  bl blocker \"your blocker\""
-    echo "  bl timeline --since \"1 week ago\""
-    echo ""
-fi
