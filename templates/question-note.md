@@ -4,7 +4,6 @@ created: {{date}}
 status: open # open | investigating | answered
 priority: # high | medium | low
 tags: []
-related_concepts: []
 ---
 
 # [Your Question Here]
