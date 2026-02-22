@@ -9,7 +9,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Check if we're in a research vault
-if [ ! -f "CLAUDE.md" ] || [ ! -d ".bloglog" ]; then
+if [ ! -f "CLAUDE.md" ] || [ ! -f "_meta/research-log.md" ]; then
     echo -e "${YELLOW}👋 Hi! I'm Laura, your research assistant.${NC}"
     echo ""
     echo "It looks like you're not in a research vault."
@@ -41,11 +41,9 @@ else
     echo -e "${BLUE}Research vault:${NC} $(basename $(pwd))"
 fi
 
-# Show recent activity if BlogLog is available
-if command -v bl &> /dev/null; then
-    echo -e "${BLUE}Recent activity:${NC}"
-    bl timeline --since "3 days ago" 2>/dev/null | head -5
-    echo ""
+# Show recent activity from research log
+if [ -f "_meta/research-log.md" ]; then
+    echo -e "${BLUE}Research log:${NC} _meta/research-log.md"
 fi
 
 echo -e "${YELLOW}Ready to help with:${NC}"

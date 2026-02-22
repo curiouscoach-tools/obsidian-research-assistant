@@ -6,7 +6,7 @@ Laura is a friendly command that launches Claude Code in your research vaults wi
 
 When you type `laura` in a research vault, you get:
 - 👋 Friendly welcome message
-- 📊 Recent activity summary (if BlogLog available)
+- 📊 Research log location
 - 💡 Quick start suggestions
 - 🚀 Launches Claude Code ready to help
 
@@ -152,12 +152,8 @@ The scripts are in the obsidian-research-assistant directory:
 → Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
 **Shows "not in a research vault"**
-→ Make sure you're in a directory with CLAUDE.md and .bloglog/
+→ Make sure you're in a directory with CLAUDE.md and _meta/research-log.md
 → Run `pwd` (Linux/macOS) or `Get-Location` (Windows) to check current directory
-
-**Recent activity doesn't show**
-→ BlogLog might not be installed (that's fine, everything else works)
-→ Or you haven't logged any activity yet
 
 ## Why Laura?
 

@@ -28,8 +28,8 @@
 - Every note should link to at least 2 other notes
 
 ### Tracking Progress
-- BlogLog tracks activity: `bl win "..."`, `bl note "..."`, `bl blocker "..."`
-- View timeline: `bl timeline --since "1 week ago"`
+- Session summaries go in `_meta/research-log.md`
+- Research agenda maintained in `_meta/research-backlog.md`
 - Git commits track knowledge changes
 
 ### Generating Reports
@@ -38,13 +38,9 @@ Ask Claude Code: "Summarize my research progress over the last 2 weeks"
 ## Quick Commands
 
 ```bash
-# View recent activity
-bl timeline --since "1 week ago"
-
-# Log research progress
-bl note "Processed 3 sources on [topic]"
-bl win "Major insight: [discovery]"
-bl blocker "Need access to [source]"
+# View research progress
+cat _meta/research-log.md
+cat _meta/research-backlog.md
 
 # Git workflow (usually handled by Claude Code)
 git status

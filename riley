@@ -10,7 +10,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Check if we're in a research/project vault
-if [ ! -f "CLAUDE.md" ] || [ ! -d ".bloglog" ]; then
+if [ ! -f "CLAUDE.md" ] || [ ! -f "_meta/research-log.md" ]; then
     echo -e "${YELLOW}Hi! I'm Riley, your product owner.${NC}"
     echo ""
     echo "It looks like you're not in a research/project vault."

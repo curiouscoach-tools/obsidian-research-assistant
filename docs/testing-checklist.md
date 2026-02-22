@@ -4,8 +4,6 @@
 
 ### Environment Check
 - [ ] Git installed and configured (name, email)
-- [ ] Node.js installed
-- [ ] BlogLog installed and working (`bl --version`)
 - [ ] Obsidian installed
 - [ ] Claude Code installed and working
 
@@ -32,7 +30,7 @@ cd ~/obsidian-research-assistant
 - [ ] domain-context.md created
 - [ ] Git repository initialized
 - [ ] Personas installed (.claude/skills/laura/ and .claude/skills/alex/ exist)
-- [ ] BlogLog initialized (.bloglog directory exists)
+- [ ] Research backlog created (_meta/research-backlog.md exists)
 - [ ] Initial commit made (`git log` shows commit)
 - [ ] Script outputs helpful next steps
 
@@ -48,15 +46,16 @@ git log --oneline  # Should show initial commit
 - [ ] Initial commit message is descriptive
 - [ ] .gitignore is working (no .obsidian files staged)
 
-### BlogLog Check
+### Progress Tracking Check
 ```bash
 cd ~/vaults/test-agile
-bl timeline
+cat _meta/research-log.md
+cat _meta/research-backlog.md
 ```
 
 **Verify:**
-- [ ] BlogLog shows initial win entry
-- [ ] Timeline displays correctly
+- [ ] Research log shows initial vault creation entry
+- [ ] Research backlog has initial structure
 
 ## Phase 2: Obsidian Integration
 
@@ -126,7 +125,7 @@ Prompt: "Research the fundamentals of agile transformation"
 - [ ] Notes include wikilinks [[like-this]]
 - [ ] Notes follow template structure
 - [ ] Files created in correct directories
-- [ ] BlogLog entries created (`bl timeline` to check)
+- [ ] Research log updated (`cat _meta/research-log.md` to check)
 - [ ] Git commit made (`git log` to check)
 
 **Check Note Quality:**
@@ -146,7 +145,7 @@ Prompt: "I'm seeing contradictory claims about whether agile works at scale. Doc
 - [ ] Question clearly stated
 - [ ] Context provided
 - [ ] Links to related concepts
-- [ ] BlogLog entry made
+- [ ] Research log updated
 
 ### Test 3: Vault Health Check
 Prompt: "Check vault health and identify any issues"
@@ -161,9 +160,9 @@ Prompt: "Check vault health and identify any issues"
 Prompt: "Summarize my research progress so far"
 
 **Verify:**
-- [ ] Reads BlogLog timeline
-- [ ] Counts wins, notes, blockers
-- [ ] Summarizes activity
+- [ ] Reads research log and backlog
+- [ ] Summarizes research sessions
+- [ ] Identifies key findings
 - [ ] Identifies focus areas
 - [ ] Suggests next steps
 
@@ -219,7 +218,7 @@ Search for a concept mentioned in notes
 - [ ] Search finds notes mentioning the concept
 - [ ] Can navigate to notes from search results
 
-## Phase 6: Git & BlogLog Workflow
+## Phase 6: Git & Progress Tracking Workflow
 
 ### Check Git History
 ```bash
@@ -232,15 +231,16 @@ git log --oneline
 - [ ] Commit messages are descriptive
 - [ ] Changes are properly staged
 
-### Check BlogLog Timeline
+### Check Research Progress
 ```bash
-bl timeline
+cat _meta/research-log.md
+cat _meta/research-backlog.md
 ```
 
 **Verify:**
-- [ ] Timeline shows research session activity
-- [ ] Wins, notes, blockers are categorized correctly
-- [ ] Timestamps are accurate
+- [ ] Research log shows session summaries
+- [ ] Backlog has prioritised items
+- [ ] Completed items moved appropriately
 
 ## Phase 7: Brother Validation
 
@@ -257,7 +257,7 @@ Before showing to your brother:
 3. Demonstrate one research request with Claude Code
 4. Show the notes created and how they link
 5. Show graph view of connections
-6. Show BlogLog timeline
+6. Show research log and backlog
 7. Ask: "Would this be useful for your work research?"
 
 ### Feedback Questions

@@ -6,37 +6,8 @@ This guide is specifically for Windows users setting up the Obsidian Research As
 
 Before starting, install:
 1. **Git for Windows** - https://git-scm.com/download/win
-2. **Node.js** - https://nodejs.org/ (for BlogLog)
-3. **Obsidian** - https://obsidian.md/
-4. **Claude Code** - https://claude.ai/code
-5. **BlogLog** - See installation steps below
-
-## Installing BlogLog on Windows
-
-BlogLog provides progress tracking with commands like `bl win`, `bl note`, `bl blocker`.
-
-**Note:** If BlogLog doesn't work on Windows, don't worry! Claude Code will automatically write to `.bloglog/timeline.json` directly, providing the same timeline tracking functionality.
-
-**To try installing BlogLog:**
-
-Open PowerShell or Command Prompt:
-
-```powershell
-# Clone BlogLog
-cd $env:USERPROFILE
-git clone https://github.com/IanSimon23/bloglog.git
-cd bloglog
-
-# Install dependencies
-npm install
-
-# Link CLI globally
-cd packages\cli
-npm link
-
-# Verify installation
-bl --version
-```
+2. **Obsidian** - https://obsidian.md/
+3. **Claude Code** - https://claude.ai/code
 
 ## Setup Research Assistant
 
@@ -83,7 +54,7 @@ Still in PowerShell, in the obsidian-research-assistant directory:
 - Creates folder structure in Documents\vaults\my-research
 - Installs templates
 - Initializes git repository
-- Initializes BlogLog
+- Creates progress tracking files
 - Creates initial files
 
 **Common issues:**
@@ -154,29 +125,6 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 1. Install Git for Windows from https://git-scm.com/download/win
 2. Restart PowerShell after installation
 
-### BlogLog Not Found
-
-**Error:** "bl is not recognized"
-
-**Option 1: Fix BlogLog**
-```powershell
-cd $env:USERPROFILE\bloglog\packages\cli
-npm link
-```
-
-Then restart PowerShell and try: `bl --version`
-
-**Option 2: Use Without BlogLog**
-Don't worry! Claude Code will automatically write timeline entries to `.bloglog/timeline.json` even without the `bl` command. You'll still get progress tracking.
-
-To view timeline manually:
-```powershell
-# View the timeline file
-Get-Content .bloglog\timeline.json | ConvertFrom-Json | ConvertTo-Json -Depth 10
-```
-
-Or ask Claude Code: "Show me my research timeline from the last week"
-
 ### Path with Spaces
 
 If your vault path has spaces, use quotes:
@@ -215,8 +163,11 @@ Then use prompts from docs/quick-start-prompts.md
 ### Checking Progress
 
 ```powershell
-# View BlogLog timeline
-bl timeline --since "1 week ago"
+# View research log
+Get-Content _meta\research-log.md
+
+# View research backlog
+Get-Content _meta\research-backlog.md
 
 # View git history
 git log --oneline
@@ -247,7 +198,6 @@ git push
 | Research Assistant | `C:\Users\YourName\projects\obsidian-research-assistant` |
 | Skill File | `C:\Users\YourName\.claude\skills\obsidian-research\SKILL.md` |
 | Your Vaults | `C:\Users\YourName\Documents\vaults\` |
-| BlogLog | `C:\Users\YourName\bloglog\` |
 
 ## PowerShell vs Command Prompt
 

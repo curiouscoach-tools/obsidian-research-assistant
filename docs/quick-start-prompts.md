@@ -195,7 +195,7 @@ I have 2 hours to research [topic]. Help me plan:
 ### Ending a Research Session
 ```
 Research session complete. Please:
-1. Log this session to BlogLog (what we covered, key findings)
+1. Update _meta/research-log.md with what we covered and key findings
 2. Commit changes to git with a descriptive message
 3. Suggest what I should research next time
 4. Identify any loose ends that need follow-up
@@ -276,7 +276,7 @@ Laura: I've read CLAUDE.md and understand this is academic research requiring
        fundamentals, prioritizing academic journals and systematic reviews.
        
        [Creates 5 concept notes, 3 source notes from peer-reviewed journals]
-       [Logs: bl note "Research session: TOD fundamentals - 5 concepts, 3 academic sources"]
+       [Updates _meta/research-log.md with session summary]
 
 You: Great! Now I'm seeing the term "density bonus" mentioned. What does 
      that mean and how does it relate to TOD?
@@ -317,7 +317,7 @@ Laura: [Creates question note in /questions/]
        Context: Sources disagree - some suggest 30+ units/acre, others 60+
        [Links to conflicting sources]
        [Notes: This needs resolution through literature review]
-       [Logs: bl note "Generated research question: TOD density levels"]
+       [Adds to _meta/research-backlog.md: "Resolve density level contradictions"]
 
 You: Help me find recent systematic reviews or meta-analyses on TOD effectiveness.
 
@@ -357,7 +357,7 @@ Laura: [Reviews notes]
 You: Good. Now I have my supervisor meeting tomorrow. Summarize my research progress
      over the last 2 weeks.
 
-Laura: [Reads .bloglog/timeline.json]
+Laura: [Reads _meta/research-log.md]
        
        Research Progress Summary (Last 2 Weeks):
        
@@ -473,7 +473,7 @@ Laura: [Researches from vendor docs, architecture blogs, case studies]
        [Creates concept notes on event streaming, pub/sub, exactly-once semantics]
        [Source notes from Confluent, Apache, AWS documentation]
        [Creates comparison matrix showing strengths/weaknesses]
-       [Logs: bl note "Research: Event streaming platforms - 8 concepts, 5 sources"]
+       [Updates _meta/research-log.md with session summary]
 ```
 
 **Session 2: Architecture Decisions**
@@ -493,7 +493,7 @@ Alex: [Reads Laura's research notes]
       [Creates ADR-001: Event Streaming Platform Selection]
       [Links to Laura's concept notes for technical details]
       [Identifies risks: Kafka operational complexity, team skill gaps]
-      [Logs: bl win "Decided on Kafka for event streaming platform"]
+      [Updates _meta/research-log.md: "Decision: Kafka for event streaming"]
 
 You: What are the biggest risks with this Kafka decision?
 
@@ -563,7 +563,6 @@ Laura: I'll process these papers in priority order. Let me start with
        [Extracts methodology: "Systematic review of 45 studies, 2010-2022"]
        [Notes key finding: "Mixed evidence on affordability - context dependent"]
        [Creates/updates 6 concept notes]
-       [Logs: bl note "Processed systematic review: [Author 2023] - 6 concepts"]
        
        Processing systematic review 2: [Author, 2021]...
        [Similar process]
@@ -581,8 +580,8 @@ Laura: I'll process these papers in priority order. Let me start with
        - Updated 8 existing concepts
        - Identified 3 contradictions requiring further investigation
        - Added 47 cross-references between notes
-       
-       [Logs: bl win "Completed literature review processing - 8 papers, 12 concepts"]
+
+       [Updates _meta/research-log.md with processing summary]
 
 You: Are there any major contradictions I need to resolve?
 
@@ -649,6 +648,6 @@ The assistant works best when you:
 2. **Build progressively** - foundations before advanced topics
 3. **Review and guide** - check the notes created and refine as needed
 4. **Use the structure** - leverage templates, links, and Maps of Content
-5. **Track progress** - use BlogLog to see your research journey
+5. **Track progress** - use the research log to see your journey
 
 The assistant handles structure and connections so you can focus on thinking and understanding.

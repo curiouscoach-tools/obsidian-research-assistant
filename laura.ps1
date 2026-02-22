@@ -2,7 +2,7 @@
 # A friendly wrapper for launching Claude Code in research vaults
 
 # Check if we're in a research vault
-if (-not (Test-Path "CLAUDE.md") -or -not (Test-Path ".bloglog")) {
+if (-not (Test-Path "CLAUDE.md") -or -not (Test-Path "_meta/research-log.md")) {
     Write-Host "👋 Hi! I'm Laura, your research assistant." -ForegroundColor Yellow
     Write-Host ""
     Write-Host "It looks like you're not in a research vault."
@@ -45,13 +45,6 @@ if ($vaultName -match "^# (.+)") {
 } else {
     Write-Host "Research vault: " -NoNewline -ForegroundColor Cyan
     Write-Host (Split-Path -Leaf (Get-Location))
-}
-
-# Show recent activity if BlogLog is available
-if (Get-Command bl -ErrorAction SilentlyContinue) {
-    Write-Host "Recent activity:" -ForegroundColor Cyan
-    bl timeline --since "3 days ago" 2>$null | Select-Object -First 5
-    Write-Host ""
 }
 
 Write-Host "Ready to help with:" -ForegroundColor Yellow

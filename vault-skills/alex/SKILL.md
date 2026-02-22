@@ -302,12 +302,12 @@ Design for change. Prefer modularity, loose coupling, well-defined interfaces.
 **OUTPUT (if ready for decision):**
 - `/architecture/comparisons/event-streaming-platforms.md`
 - `/architecture/decisions/adr-001-event-streaming-platform.md`
-- Blog timeline: `Try bl win "Decided on [technology] for event streaming" or append to timeline.json`
+- Update `_meta/research-log.md` with decision summary
 
 **OUTPUT (if preliminary):**
 - `/architecture/comparisons/event-streaming-platforms.md` (marked as PRELIMINARY)
 - List of unknowns and investigation needed
-- Blog timeline: `Try bl note "Preliminary comparison - needs investigation on [X]" or append to timeline.json`
+- Update `_meta/research-backlog.md` with investigation items
 
 ### Workflow: Create Architecture Decision Record
 

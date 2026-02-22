@@ -103,8 +103,8 @@ User: "Help me understand how transit-oriented development relates to housing af
 
 User: "I have a meeting with my supervisor - summarize my progress over the last 2 weeks"
 
-**Assistant generates report from BlogLog timeline:**
-- Reads `.bloglog/timeline.json`
+**Assistant generates report from research log:**
+- Reads `_meta/research-log.md`
 - Analyzes research activity patterns
 - Summarizes wins, progress, active blockers
 - Highlights key breakthroughs and next directions
@@ -145,9 +145,6 @@ User: "I have a meeting with my supervisor - summarize my progress over the last
 
 ```
 dissertation-research/
-├── .bloglog/         # Progress tracking timeline
-│   ├── metadata.json
-│   └── timeline.json
 ├── .obsidian/        # Obsidian configuration (gitignored)
 ├── sources/          # Notes about specific papers, books, articles
 │   ├── raw/         # Original PDFs (gitignored)
@@ -156,7 +153,8 @@ dissertation-research/
 ├── themes/          # Maps of Content - thematic overviews
 ├── questions/       # Open research questions
 ├── _meta/
-│   ├── research-log.md      # Human-readable research narrative
+│   ├── research-log.md      # Session-by-session research diary
+│   ├── research-backlog.md  # Prioritised research agenda
 │   └── domain-context.md    # Current understanding & gaps
 ├── _templates/      # Note templates
 ├── .gitignore
@@ -169,7 +167,6 @@ dissertation-research/
 - Git for Windows (includes Git Bash)
 - Claude Code
 - Obsidian
-- BlogLog (https://github.com/IanSimon23/bloglog) - for progress tracking
 
 ### Initial Vault Setup
 
@@ -178,15 +175,14 @@ Run: `setup-vault.sh [vault-name]`
 This creates:
 - Vault directory structure
 - Git repository with appropriate .gitignore
-- BlogLog initialization for progress tracking
 - Templates for different note types
-- Initial research log
+- Progress tracking files (research-log.md, research-backlog.md)
 - README with usage guide
 
 The setup script:
 1. Creates folder structure
 2. Initializes git
-3. Initializes BlogLog with first win entry
+3. Creates progress tracking files
 4. Creates templates
 5. Makes initial commit
 
@@ -204,41 +200,46 @@ git remote add origin https://github.com/username/research-vault.git
 git push -u origin main
 ```
 
-### Progress Tracking with BlogLog
+### Progress Tracking
 
-The assistant logs research activity throughout sessions:
+Research progress is tracked in markdown files within `_meta/`:
 
-**Wins** - Research breakthroughs
-```bash
-bl win "Connected TOD concepts to housing affordability framework"
-bl win "Found authoritative WHO framework on transit planning"
+**`_meta/research-log.md`** - Session diary (chronological)
+- What you explored
+- Key findings
+- Questions that emerged
+- Next steps
+
+**`_meta/research-backlog.md`** - Research agenda (prioritised)
+- High/Medium/Low priority items
+- Completed items for reference
+
+**Example research log entry:**
+```markdown
+### 2026-02-22 - Event Streaming Research
+
+**Explored:**
+- Kafka vs Pulsar architecture comparison
+- Event sourcing patterns
+
+**Key findings:**
+- Kafka better for high-throughput scenarios
+- Pulsar has built-in tiered storage
+
+**Questions:**
+- How does Schema Registry fit in?
+
+**Next:**
+- Deep dive on exactly-once semantics
 ```
-
-**Notes** - Regular research activity
-```bash
-bl note "Research session: Transit-oriented development foundations"
-bl note "Processed 3 papers on density policy"
-bl note "Created 7 concept notes, 2 source notes"
-```
-
-**Blockers** - Research obstacles
-```bash
-bl blocker "Need institutional access for Smith 2023 paper"
-bl blocker "Contradictory sources on optimal density - needs resolution"
-```
-
-**Fallback:** If BlogLog isn't installed, Claude Code writes directly to `.bloglog/timeline.json` with the same structure, so you still get full timeline tracking.
 
 **Viewing progress:**
-```bash
-# See recent timeline (if BlogLog installed)
-bl timeline --since "1 week ago"
-
-# OR ask Claude Code to generate progress report (works either way)
-# Assistant reads .bloglog/timeline.json and summarizes
+```
+"Summarize my progress this week"
+"What's on my research backlog?"
 ```
 
-**Questions** are tracked as notes in `/questions/*.md` rather than BlogLog entries, since they need full context and linking to concepts.
+**Questions** are tracked as notes in `/questions/*.md` for full context and linking to concepts.
 
 ## Quality Standards
 

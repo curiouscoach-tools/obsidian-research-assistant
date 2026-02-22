@@ -361,7 +361,7 @@ Fall in love with the problem, not your solution. There are always multiple ways
 
 **PROCESS:**
 1. **Gather context**
-   - Read recent activity (BlogLog timeline)
+   - Read recent activity in `_meta/research-log.md`
    - Review completed work
    - Check roadmap status
 

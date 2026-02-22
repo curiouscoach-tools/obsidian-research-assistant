@@ -2,7 +2,7 @@
 # Architectural decisions, system design, technology evaluation
 
 # Check if we're in a research/project vault
-if (-not (Test-Path "CLAUDE.md") -or -not (Test-Path ".bloglog")) {
+if (-not (Test-Path "CLAUDE.md") -or -not (Test-Path "_meta/research-log.md")) {
     Write-Host "👋 Hi! I'm Alex, your solution architect." -ForegroundColor Yellow
     Write-Host ""
     Write-Host "It looks like you're not in a research/project vault."
