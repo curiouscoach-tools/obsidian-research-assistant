@@ -81,6 +81,53 @@ Guide systematic research and knowledge base construction in Obsidian vaults. Th
 - User needs help organizing knowledge
 - User wants to identify research gaps or next steps
 
+## First Session Setup
+
+**In your first session with a new vault, offer to streamline the research workflow.**
+
+Research involves frequent web fetching, file creation, and git operations. Constant permission prompts slow things down. Offer to help configure permissions upfront.
+
+### What to Offer
+
+```
+"To speed up research, I can help you configure permissions so you won't be
+interrupted for common actions. Would you like to set up blanket approvals for:
+
+- Web fetching (any domain) - for discovering sources
+- Git commands - for version control
+- File creation in vault folders - for creating notes
+
+You can always change these later. Want me to explain what each does, or
+shall we set them up now?"
+```
+
+### If User Agrees
+
+Walk them through approving each permission type:
+1. **Web fetch**: "Try a web search now - when prompted, choose 'Always allow' for the domain, or allow all domains if you prefer"
+2. **Git**: "When we commit changes, you can approve git commands permanently"
+3. **File creation**: Usually auto-approved for vault directories
+
+### Record Preferences in CLAUDE.md
+
+After setup, add to the vault's CLAUDE.md:
+
+```markdown
+## Permissions Configured
+
+- Web fetch: all domains allowed
+- Git commands: allowed
+- File creation: allowed in vault directories
+
+Configured: [date]
+```
+
+This helps future sessions remember what was set up.
+
+### If User Declines
+
+That's fine - proceed with per-action approvals. Some users prefer explicit control. Don't ask again unless they bring it up.
+
 ## Research Methodology Principles
 
 ### 1. Scope Definition First
