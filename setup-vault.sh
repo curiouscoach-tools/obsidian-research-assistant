@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Obsidian Vault Setup Script
-# Usage: ./setup-vault.sh <vault-path> [vault-name] [type] [personas]
+# Usage: ./setup-vault.sh <vault-path> <type> [vault-name]
 
 set -e  # Exit on error
 
@@ -15,75 +15,78 @@ NC='\033[0m' # No Color
 # Get script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Parse arguments
+# Show usage
+show_usage() {
+    echo "Usage: ./setup-vault.sh <vault-path> <type> [vault-name]"
+    echo ""
+    echo "Examples:"
+    echo "  ./setup-vault.sh ~/vaults/dissertation academic 'PhD Research'"
+    echo "  ./setup-vault.sh ~/vaults/work-notes knowledge 'Work Notes'"
+    echo "  ./setup-vault.sh ~/vaults/daily journal 'Work Journal'"
+    echo ""
+    echo "Types (required):"
+    echo "  academic  - Formal research with strict verification (dissertations, papers)"
+    echo "  knowledge - Professional research with lighter overhead (work, learning, PKM)"
+    echo "  journal   - Time-based reflection and journaling"
+    echo ""
+    echo "Included skill by type:"
+    echo "  academic:  laura-academic + skills-manager"
+    echo "  knowledge: laura-professional + skills-manager"
+    echo "  journal:   casey + skills-manager"
+    echo ""
+    echo "Use /skills add <name> in your vault to add more skills later."
+}
+
+# Check vault path
 if [ -z "$1" ]; then
     echo -e "${RED}Error: Vault path required${NC}"
     echo ""
-    echo "Usage: ./setup-vault.sh <vault-path> [vault-name] [type] [personas] [context]"
+    show_usage
+    exit 1
+fi
+
+# Check type
+if [ -z "$2" ]; then
+    echo -e "${RED}Error: Vault type required${NC}"
     echo ""
-    echo "Examples:"
-    echo "  ./setup-vault.sh ~/vaults/my-research"
-    echo "  ./setup-vault.sh ~/vaults/my-research 'My Research' research"
-    echo "  ./setup-vault.sh ~/vaults/dissertation 'PhD Research' research laura academic"
-    echo "  ./setup-vault.sh ~/vaults/work-notes 'Work Notes' research laura professional"
-    echo "  ./setup-vault.sh ~/vaults/work-journal 'Work Journal' reflection"
-    echo "  ./setup-vault.sh ~/vaults/odie 'ODIE Platform' programme"
+    echo "You must specify a type: academic, knowledge, or journal"
     echo ""
-    echo "Types:"
-    echo "  research   - Research vault (default) - sources, concepts, themes"
-    echo "  reflection - Reflection/journal vault - daily, weekly, monthly journals"
-    echo "  programme  - Programme vault - architecture, product, technical"
-    echo ""
-    echo "Personas (default based on type, or specify comma-separated):"
-    echo "  laura - Research assistant (academic or professional variant)"
-    echo "  alex  - Solution architect"
-    echo "  riley - Product owner"
-    echo "  casey - Reflection buddy"
-    echo ""
-    echo "Context (for laura persona):"
-    echo "  academic     - Dissertation/thesis/papers - strict verification"
-    echo "  professional - Work research - lighter overhead (default)"
-    echo ""
-    echo "Default personas by type:"
-    echo "  research:   laura, alex, riley"
-    echo "  reflection: casey"
-    echo "  programme:  laura, alex, riley"
+    show_usage
     exit 1
 fi
 
 VAULT_PATH="$1"
-VAULT_NAME="${2:-$(basename "$VAULT_PATH")}"
-VAULT_TYPE="${3:-research}"
-PERSONAS_ARG="${4:-}"
-CONTEXT="${5:-professional}"  # academic or professional (for laura)
+VAULT_TYPE="$2"
+VAULT_NAME="${3:-$(basename "$VAULT_PATH")}"
 CURRENT_DATE=$(date +%Y-%m-%d)
 
-# Set default personas based on vault type
-if [ -z "$PERSONAS_ARG" ]; then
-    case "$VAULT_TYPE" in
-        reflection)
-            PERSONAS="casey"
-            ;;
-        *)
-            PERSONAS="laura alex riley"
-            ;;
-    esac
-else
-    # Convert comma-separated to space-separated
-    PERSONAS=$(echo "$PERSONAS_ARG" | tr ',' ' ')
-fi
+# Validate type and set default skill
+case "$VAULT_TYPE" in
+    academic)
+        DEFAULT_SKILL="laura"
+        SKILL_VARIANT="laura-academic"
+        ;;
+    knowledge)
+        DEFAULT_SKILL="laura"
+        SKILL_VARIANT="laura-professional"
+        ;;
+    journal)
+        DEFAULT_SKILL="casey"
+        SKILL_VARIANT="casey"
+        ;;
+    *)
+        echo -e "${RED}Error: Invalid type '$VAULT_TYPE'${NC}"
+        echo ""
+        echo "Valid types: academic, knowledge, journal"
+        echo ""
+        show_usage
+        exit 1
+        ;;
+esac
 
 echo -e "${GREEN}Creating $VAULT_TYPE vault: ${VAULT_NAME}${NC}"
 echo "Location: $VAULT_PATH"
-echo -n "Personas: "
-for p in $PERSONAS; do
-    if [ "$p" = "laura" ]; then
-        echo -n "laura ($CONTEXT) "
-    else
-        echo -n "$p "
-    fi
-done
-echo ""
+echo "Skills: $SKILL_VARIANT + skills-manager"
 echo ""
 
 # Check prerequisites
@@ -98,54 +101,41 @@ fi
 # Create vault directory structure based on type
 echo "Creating vault structure..."
 case "$VAULT_TYPE" in
-    reflection)
-        echo "Creating reflection vault structure..."
-        mkdir -p "$VAULT_PATH"/{journal/{daily,weekly,monthly,quarterly},themes,_meta,_templates}
-        ;;
-    programme)
-        echo "Creating programme vault structure..."
-        mkdir -p "$VAULT_PATH"/{architecture/{decisions,comparisons,designs,diagrams,risks},product/{user-stories,value-hypotheses,roadmap},requirements/{functional,non-functional,stakeholders},technical/{spikes,implementation,risks},process/{sprint-plans,retrospectives,blockers},research/{sources/raw,concepts,themes},discussions,_meta,_templates}
-        ;;
-    *)
-        echo "Creating research vault structure..."
+    academic|knowledge)
         mkdir -p "$VAULT_PATH"/{sources/raw,concepts,themes,questions,_meta,_templates}
+        ;;
+    journal)
+        mkdir -p "$VAULT_PATH"/{journal/{daily,weekly,monthly,quarterly},themes,_meta,_templates}
         ;;
 esac
 
 # Copy templates based on vault type
 echo "Installing templates..."
-if [ "$VAULT_TYPE" = "reflection" ]; then
-    # Only copy reflection templates
+if [ "$VAULT_TYPE" = "journal" ]; then
     cp "$SCRIPT_DIR/templates/daily-reflection.md" "$VAULT_PATH/_templates/"
     cp "$SCRIPT_DIR/templates/weekly-review.md" "$VAULT_PATH/_templates/"
     cp "$SCRIPT_DIR/templates/monthly-review.md" "$VAULT_PATH/_templates/"
     cp "$SCRIPT_DIR/templates/quarterly-review.md" "$VAULT_PATH/_templates/"
 else
-    # Copy all templates (research templates + reflection if casey included)
-    cp -r "$SCRIPT_DIR/templates/"* "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/source-note.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/concept-note.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/question-note.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/map-of-content.md" "$VAULT_PATH/_templates/"
 fi
 
-# Install selected personas
-echo "Installing personas ($PERSONAS)..."
+# Install skills
+echo "Installing skills..."
 mkdir -p "$VAULT_PATH/.claude/skills"
-for persona in $PERSONAS; do
-    if [ "$persona" = "laura" ]; then
-        # Handle laura variants based on context
-        LAURA_VARIANT="laura-$CONTEXT"
-        if [ -d "$SCRIPT_DIR/vault-skills/$LAURA_VARIANT" ]; then
-            echo "  - laura ($CONTEXT)"
-            cp -r "$SCRIPT_DIR/vault-skills/$LAURA_VARIANT" "$VAULT_PATH/.claude/skills/laura"
-        else
-            echo -e "${YELLOW}  - laura (variant '$CONTEXT' not found, using default)${NC}"
-            cp -r "$SCRIPT_DIR/vault-skills/laura" "$VAULT_PATH/.claude/skills/"
-        fi
-    elif [ -d "$SCRIPT_DIR/vault-skills/$persona" ]; then
-        echo "  - $persona"
-        cp -r "$SCRIPT_DIR/vault-skills/$persona" "$VAULT_PATH/.claude/skills/"
-    else
-        echo -e "${YELLOW}  - $persona (not found, skipping)${NC}"
-    fi
-done
+
+# Always install the skills manager
+echo "  - skills (manager)"
+mkdir -p "$VAULT_PATH/.claude/skills/skills"
+cp "$SCRIPT_DIR/skills/skills-manager.md" "$VAULT_PATH/.claude/skills/skills/SKILL.md"
+
+# Install default skill for this vault type
+echo "  - $SKILL_VARIANT"
+mkdir -p "$VAULT_PATH/.claude/skills/$DEFAULT_SKILL"
+cp "$SCRIPT_DIR/skills/$SKILL_VARIANT.md" "$VAULT_PATH/.claude/skills/$DEFAULT_SKILL/SKILL.md"
 
 # Create .gitignore
 echo "Creating .gitignore..."
@@ -153,7 +143,7 @@ cp "$SCRIPT_DIR/config/gitignore.template" "$VAULT_PATH/.gitignore"
 
 # Create README based on vault type
 echo "Creating README..."
-if [ "$VAULT_TYPE" = "reflection" ]; then
+if [ "$VAULT_TYPE" = "journal" ]; then
     cat > "$VAULT_PATH/README.md" << EOF
 # $VAULT_NAME
 
@@ -204,7 +194,7 @@ fi
 
 # Create vault-specific CLAUDE.md based on type
 echo "Creating CLAUDE.md..."
-if [ "$VAULT_TYPE" = "reflection" ]; then
+if [ "$VAULT_TYPE" = "journal" ]; then
     cat > "$VAULT_PATH/CLAUDE.md" << EOF
 # $VAULT_NAME - Reflection Context
 
@@ -251,14 +241,22 @@ Casey will then summarise, update tracking files, and commit changes.
 
 ## Notes
 [Any personal preferences, things Casey should know about your context]
+
+## Skill Management
+skill-source: $SCRIPT_DIR
 EOF
 else
     sed -e "s/{{vault_name}}/$VAULT_NAME/g" -e "s/{{date}}/$CURRENT_DATE/g" \
         "$SCRIPT_DIR/config/vault-claude.template" > "$VAULT_PATH/CLAUDE.md"
+
+    # Add skill source path
+    echo "" >> "$VAULT_PATH/CLAUDE.md"
+    echo "## Skill Management" >> "$VAULT_PATH/CLAUDE.md"
+    echo "skill-source: $SCRIPT_DIR" >> "$VAULT_PATH/CLAUDE.md"
 fi
 
 # Create meta files based on vault type
-if [ "$VAULT_TYPE" = "reflection" ]; then
+if [ "$VAULT_TYPE" = "journal" ]; then
     # Create reflection log
     echo "Creating reflection log..."
     cat > "$VAULT_PATH/_meta/reflection-log.md" << EOF
@@ -435,14 +433,11 @@ fi
 echo "Creating initial commit..."
 git add .
 
-# Build persona list for commit message
-PERSONA_LIST=$(echo $PERSONAS | tr ' ' ', ')
-
 git commit -m "Initial vault setup for $VAULT_NAME
 
 - Created $VAULT_TYPE vault structure
 - Installed templates
-- Installed personas: $PERSONA_LIST
+- Installed skills: $SKILL_VARIANT, skills-manager
 - Ready to use"
 
 echo ""
@@ -450,26 +445,14 @@ echo -e "${GREEN}✓ Vault created successfully!${NC}"
 echo ""
 echo "Location: $VAULT_PATH"
 echo "Type: $VAULT_TYPE"
-echo "Personas: $PERSONAS"
+echo "Skills: $SKILL_VARIANT + skills-manager"
 echo ""
 echo "Next steps:"
 echo "1. Open vault in Obsidian: File → Open folder as vault → $VAULT_PATH"
 echo "2. Edit CLAUDE.md to customize your setup"
 echo "3. Run 'claude' in the vault directory"
-
-# Show persona commands based on what was installed
-echo -n "4. Type "
-first=true
-for persona in $PERSONAS; do
-    if [ "$first" = true ]; then
-        echo -n "'/$persona'"
-        first=false
-    else
-        echo -n " or '/$persona'"
-    fi
-done
-echo " to get started"
-
+echo "4. Type '/$DEFAULT_SKILL' to get started"
+echo "5. Use '/skills' to list or add more skills"
 echo ""
 echo "Optional:"
 echo "- Connect to GitHub for backup:"

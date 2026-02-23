@@ -1,23 +1,16 @@
 # Obsidian Vault Setup Script (Windows)
-# Usage: .\setup-vault.ps1 -VaultPath <path> [-VaultName <name>] [-VaultType <type>] [-Personas <list>]
+# Usage: .\setup-vault.ps1 -VaultPath <path> -VaultType <type> [-VaultName <name>]
 
 param(
     [Parameter(Mandatory=$true)]
     [string]$VaultPath,
 
-    [Parameter(Mandatory=$false)]
-    [string]$VaultName,
+    [Parameter(Mandatory=$true)]
+    [ValidateSet("academic", "knowledge", "journal")]
+    [string]$VaultType,
 
     [Parameter(Mandatory=$false)]
-    [ValidateSet("research", "reflection", "programme")]
-    [string]$VaultType = "research",
-
-    [Parameter(Mandatory=$false)]
-    [string]$Personas,
-
-    [Parameter(Mandatory=$false)]
-    [ValidateSet("academic", "professional")]
-    [string]$Context = "professional"
+    [string]$VaultName
 )
 
 # Set strict mode
@@ -27,29 +20,32 @@ $ErrorActionPreference = "Stop"
 # Get script directory
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-# Set vault name
+# Set vault name from path if not provided
 if (-not $VaultName) {
     $VaultName = Split-Path -Leaf $VaultPath
 }
 
-# Set default personas based on vault type
-if (-not $Personas) {
-    switch ($VaultType) {
-        "reflection" { $PersonaList = @("casey") }
-        default { $PersonaList = @("laura", "alex", "riley") }
+# Set default skill based on vault type
+switch ($VaultType) {
+    "academic" {
+        $DefaultSkill = "laura"
+        $SkillVariant = "laura-academic"
     }
-} else {
-    $PersonaList = $Personas -split ","
+    "knowledge" {
+        $DefaultSkill = "laura"
+        $SkillVariant = "laura-professional"
+    }
+    "journal" {
+        $DefaultSkill = "casey"
+        $SkillVariant = "casey"
+    }
 }
 
 $CurrentDate = Get-Date -Format "yyyy-MM-dd"
 
 Write-Host "Creating $VaultType vault: $VaultName" -ForegroundColor Green
 Write-Host "Location: $VaultPath"
-$displayPersonas = $PersonaList | ForEach-Object {
-    if ($_ -eq "laura") { "laura ($Context)" } else { $_ }
-}
-Write-Host "Personas: $($displayPersonas -join ', ')"
+Write-Host "Skills: $SkillVariant + skills-manager"
 Write-Host ""
 
 # Check prerequisites
@@ -65,7 +61,7 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
 # Create vault directory structure based on type
 Write-Host "Creating vault structure..."
 switch ($VaultType) {
-    "reflection" {
+    "journal" {
         $dirs = @(
             "$VaultPath\journal\daily",
             "$VaultPath\journal\weekly",
@@ -76,34 +72,8 @@ switch ($VaultType) {
             "$VaultPath\_templates"
         )
     }
-    "programme" {
-        $dirs = @(
-            "$VaultPath\architecture\decisions",
-            "$VaultPath\architecture\comparisons",
-            "$VaultPath\architecture\designs",
-            "$VaultPath\architecture\diagrams",
-            "$VaultPath\architecture\risks",
-            "$VaultPath\product\user-stories",
-            "$VaultPath\product\value-hypotheses",
-            "$VaultPath\product\roadmap",
-            "$VaultPath\requirements\functional",
-            "$VaultPath\requirements\non-functional",
-            "$VaultPath\requirements\stakeholders",
-            "$VaultPath\technical\spikes",
-            "$VaultPath\technical\implementation",
-            "$VaultPath\technical\risks",
-            "$VaultPath\process\sprint-plans",
-            "$VaultPath\process\retrospectives",
-            "$VaultPath\process\blockers",
-            "$VaultPath\research\sources\raw",
-            "$VaultPath\research\concepts",
-            "$VaultPath\research\themes",
-            "$VaultPath\discussions",
-            "$VaultPath\_meta",
-            "$VaultPath\_templates"
-        )
-    }
     default {
+        # academic and knowledge have the same structure
         $dirs = @(
             "$VaultPath\sources\raw",
             "$VaultPath\concepts",
@@ -121,49 +91,38 @@ foreach ($dir in $dirs) {
 
 # Copy templates based on vault type
 Write-Host "Installing templates..."
-if ($VaultType -eq "reflection") {
-    # Only copy reflection templates
+if ($VaultType -eq "journal") {
     Copy-Item -Path "$ScriptDir\templates\daily-reflection.md" -Destination "$VaultPath\_templates\" -Force
     Copy-Item -Path "$ScriptDir\templates\weekly-review.md" -Destination "$VaultPath\_templates\" -Force
     Copy-Item -Path "$ScriptDir\templates\monthly-review.md" -Destination "$VaultPath\_templates\" -Force
     Copy-Item -Path "$ScriptDir\templates\quarterly-review.md" -Destination "$VaultPath\_templates\" -Force
 } else {
-    Copy-Item -Path "$ScriptDir\templates\*" -Destination "$VaultPath\_templates\" -Recurse -Force
+    Copy-Item -Path "$ScriptDir\templates\source-note.md" -Destination "$VaultPath\_templates\" -Force
+    Copy-Item -Path "$ScriptDir\templates\concept-note.md" -Destination "$VaultPath\_templates\" -Force
+    Copy-Item -Path "$ScriptDir\templates\question-note.md" -Destination "$VaultPath\_templates\" -Force
+    Copy-Item -Path "$ScriptDir\templates\map-of-content.md" -Destination "$VaultPath\_templates\" -Force
 }
 
-# Install selected personas
-Write-Host "Installing personas ($($PersonaList -join ', '))..."
+# Install skills
+Write-Host "Installing skills..."
 New-Item -ItemType Directory -Force -Path "$VaultPath\.claude\skills" | Out-Null
-foreach ($persona in $PersonaList) {
-    if ($persona -eq "laura") {
-        # Handle laura variants based on context
-        $lauraVariant = "laura-$Context"
-        $variantPath = "$ScriptDir\vault-skills\$lauraVariant"
-        if (Test-Path $variantPath) {
-            Write-Host "  - laura ($Context)"
-            Copy-Item -Path $variantPath -Destination "$VaultPath\.claude\skills\laura" -Recurse -Force
-        } else {
-            Write-Host "  - laura (variant '$Context' not found, using default)" -ForegroundColor Yellow
-            $defaultPath = "$ScriptDir\vault-skills\laura"
-            Copy-Item -Path $defaultPath -Destination "$VaultPath\.claude\skills\" -Recurse -Force
-        }
-    } else {
-        $personaPath = "$ScriptDir\vault-skills\$persona"
-        if (Test-Path $personaPath) {
-            Write-Host "  - $persona"
-            Copy-Item -Path $personaPath -Destination "$VaultPath\.claude\skills\" -Recurse -Force
-        } else {
-            Write-Host "  - $persona (not found, skipping)" -ForegroundColor Yellow
-        }
-    }
-}
+
+# Always install the skills manager
+Write-Host "  - skills (manager)"
+New-Item -ItemType Directory -Force -Path "$VaultPath\.claude\skills\skills" | Out-Null
+Copy-Item -Path "$ScriptDir\skills\skills-manager.md" -Destination "$VaultPath\.claude\skills\skills\SKILL.md" -Force
+
+# Install default skill for this vault type
+Write-Host "  - $SkillVariant"
+New-Item -ItemType Directory -Force -Path "$VaultPath\.claude\skills\$DefaultSkill" | Out-Null
+Copy-Item -Path "$ScriptDir\skills\$SkillVariant.md" -Destination "$VaultPath\.claude\skills\$DefaultSkill\SKILL.md" -Force
 
 # Create .gitignore
 Write-Host "Creating .gitignore..."
 Copy-Item -Path "$ScriptDir\config\gitignore.template" -Destination "$VaultPath\.gitignore" -Force
 
 # Create README and CLAUDE.md based on vault type
-if ($VaultType -eq "reflection") {
+if ($VaultType -eq "journal") {
     # Reflection README
     Write-Host "Creating README..."
     $readmeContent = @"
@@ -260,6 +219,9 @@ Casey will then summarise, update tracking files, and commit changes.
 
 ## Notes
 [Any personal preferences, things Casey should know about your context]
+
+## Skill Management
+skill-source: $ScriptDir
 "@
     Set-Content -Path "$VaultPath\CLAUDE.md" -Value $claudeContent -Encoding UTF8
 
@@ -343,6 +305,8 @@ Casey's observations and session summaries.
     $claudeContent = Get-Content -Path "$ScriptDir\config\vault-claude.template" -Raw
     $claudeContent = $claudeContent -replace '{{vault_name}}', $VaultName
     $claudeContent = $claudeContent -replace '{{date}}', $CurrentDate
+    # Add skill source path
+    $claudeContent += "`n## Skill Management`nskill-source: $ScriptDir`n"
     Set-Content -Path "$VaultPath\CLAUDE.md" -Value $claudeContent -Encoding UTF8
 
     # Research meta files
@@ -456,13 +420,12 @@ if (-not $gitUserEmail) {
 # Initial git commit
 Write-Host "Creating initial commit..."
 git add .
-$personaString = $PersonaList -join ", "
 $commitMessage = @"
 Initial vault setup for $VaultName
 
 - Created $VaultType vault structure
 - Installed templates
-- Installed personas: $personaString
+- Installed skills: $SkillVariant, skills-manager
 - Ready to use
 "@
 git commit -m $commitMessage
@@ -474,14 +437,14 @@ Write-Host "Vault created successfully!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Location: $VaultPath"
 Write-Host "Type: $VaultType"
-Write-Host "Personas: $personaString"
+Write-Host "Skills: $SkillVariant + skills-manager"
 Write-Host ""
 Write-Host "Next steps:"
 Write-Host "1. Open vault in Obsidian: File -> Open folder as vault -> $VaultPath"
 Write-Host "2. Edit CLAUDE.md to customize your setup"
 Write-Host "3. Run 'claude' in the vault directory"
-$personaCommands = ($PersonaList | ForEach-Object { "/$_" }) -join " or "
-Write-Host "4. Type $personaCommands to get started"
+Write-Host "4. Type '/$DefaultSkill' to get started"
+Write-Host "5. Use '/skills' to list or add more skills"
 Write-Host ""
 Write-Host "Optional:"
 Write-Host "- Connect to GitHub for backup:"

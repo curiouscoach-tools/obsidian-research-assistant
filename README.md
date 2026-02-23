@@ -59,34 +59,32 @@ cd obsidian-research-assistant
 
 **Linux/macOS/WSL:**
 ```bash
-# Professional research (default)
-./setup-vault.sh ~/vaults/my-research "My Research Project"
+./setup-vault.sh <vault-path> <type> [vault-name]
 
-# Academic research (dissertation/thesis) - strict verification
-./setup-vault.sh ~/vaults/dissertation "PhD Research" research laura academic
-
-# Reflection vault for journaling
-./setup-vault.sh ~/vaults/journal "Work Journal" reflection
+# Examples:
+./setup-vault.sh ~/vaults/dissertation academic "PhD Research"
+./setup-vault.sh ~/vaults/work-notes knowledge "Work Notes"
+./setup-vault.sh ~/vaults/daily journal "Work Journal"
 ```
 
 **Windows (PowerShell):**
 ```powershell
-# Professional research (default)
-.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\my-research" -VaultName "My Research Project"
+.\setup-vault.ps1 -VaultPath <path> -VaultType <type> [-VaultName <name>]
 
-# Academic research - strict verification
-.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\dissertation" -VaultName "PhD Research" -Context academic
-
-# Reflection vault for journaling
-.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\journal" -VaultName "Work Journal" -VaultType reflection
+# Examples:
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\dissertation" -VaultType academic -VaultName "PhD Research"
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\work-notes" -VaultType knowledge -VaultName "Work Notes"
+.\setup-vault.ps1 -VaultPath "$env:USERPROFILE\vaults\daily" -VaultType journal -VaultName "Work Journal"
 ```
 
-The script will:
-- Create the vault structure (research, reflection, or programme)
-- Install templates
-- Install personas (Laura academic/professional, Alex, Riley, Casey)
-- Initialize git
-- Create initial files including research log and backlog
+**Vault types (required):**
+| Type | For | Included Skill |
+|------|-----|----------------|
+| `academic` | Dissertations, papers, formal research | laura-academic |
+| `knowledge` | Work research, learning, PKM | laura-professional |
+| `journal` | Reflection, journaling, growth tracking | casey |
+
+Use `/skills add alex` in your vault to add other skills.
 
 ### 4. Open in Obsidian
 
@@ -99,14 +97,17 @@ cd ~/vaults/my-research
 claude
 ```
 
-Then type `/laura` to activate Laura, and prompt: `"Research the fundamentals of [your topic]"`
+Then type `/laura` (or `/casey` for journal vaults) and prompt: `"Research the fundamentals of [your topic]"`
 
-**Other personas:**
-- `/alex` - Solution architect for technology decisions and ADRs
-- `/riley` - Product owner for user stories and prioritisation
-- `/casey` - Reflection buddy for journaling and growth tracking
+**Add more skills with `/skills`:**
+```
+/skills                           # List installed and available
+/skills add alex                  # Add solution architect
+/skills add riley                 # Add product owner
+/skills switch laura academic     # Switch Laura variant
+```
 
-**Optional:** See [Installing Laura](docs/installing-laura.md) for a friendly launcher script with welcome messages.
+Once installed, use `/alex` or `/riley` to activate them.
 
 ## Key Features
 
@@ -140,21 +141,16 @@ This repository contains the **tooling to create research vaults**:
 
 ```
 obsidian-research-assistant/
-├── laura                    # Friendly launcher (Linux/macOS/WSL)
-├── laura.ps1                # Friendly launcher (Windows)
-├── alex                     # Solution architect launcher (Linux/macOS/WSL)
-├── alex.ps1                 # Solution architect launcher (Windows)
-├── riley                    # Product owner launcher (Linux/macOS/WSL)
-├── riley.ps1                # Product owner launcher (Windows)
 ├── setup-vault.sh           # Creates vaults (Linux/macOS/WSL)
 ├── setup-vault.ps1          # Creates vaults (Windows PowerShell)
-├── vault-skills/            # Personas installed into each vault
-│   ├── laura/              # Original full research methodology
-│   ├── laura-academic/     # Strict verification for dissertations/theses
-│   ├── laura-professional/ # Lighter weight for work research
-│   ├── alex/               # Architecture expertise
-│   ├── riley/              # Product ownership
-│   └── casey/              # Reflection and journaling
+├── skills/                  # Skill files (flat .md)
+│   ├── registry.json        # Skill metadata
+│   ├── skills-manager.md    # The /skills command handler
+│   ├── laura-academic.md    # Strict verification for dissertations/theses
+│   ├── laura-professional.md # Lighter weight for work research
+│   ├── alex.md              # Architecture expertise
+│   ├── riley.md             # Product ownership
+│   └── casey.md             # Reflection and journaling
 ├── templates/               # Note templates for vaults
 │   ├── source-note.md
 │   ├── concept-note.md
@@ -175,12 +171,10 @@ When you run `setup-vault.sh`, it creates a **separate research vault**:
 ```
 my-research/                 # Independent git repository
 ├── .claude/
-│   └── skills/            # Personas (auto-discovered by Claude Code)
-│       ├── laura/
+│   └── skills/            # Skills (auto-discovered by Claude Code)
+│       ├── skills/        # The /skills manager (always installed)
 │       │   └── SKILL.md
-│       ├── alex/
-│       │   └── SKILL.md
-│       └── riley/
+│       └── laura/         # Included with vault (add others via /skills)
 │           └── SKILL.md
 ├── sources/
 │   ├── raw/               # Your PDFs (gitignored)
@@ -192,7 +186,7 @@ my-research/                 # Independent git repository
 │   ├── research-log.md
 │   └── domain-context.md
 ├── _templates/            # Copied from factory
-├── CLAUDE.md              # Project-specific context
+├── CLAUDE.md              # Project-specific context (includes skill-source path)
 └── README.md
 ```
 
@@ -333,38 +327,34 @@ Please read CLAUDE.md and help me start building systematic knowledge.
 
 See [Quick Start Prompts](docs/quick-start-prompts.md) for comprehensive prompt library with detailed examples.
 
-## Keeping Skills in Sync
+## Managing Skills
 
-When personas (Laura, Alex, Riley) evolve in this repo, existing vaults don't automatically update. Use the sync script to update your vaults:
+Skills (personas) are managed using the `/skills` command inside each vault:
 
-**Linux/macOS/WSL:**
-```bash
-./sync-skills.sh ~/vibe/vaults
+```
+/skills                           # List installed and available skills
+/skills add alex                  # Install alex skill
+/skills remove alex               # Remove alex skill
+/skills switch laura academic     # Switch Laura to academic variant
+/skills update                    # Update all skills from repo
+/skills update laura              # Update specific skill
 ```
 
-**Windows (PowerShell):**
-```powershell
-.\sync-skills.ps1 -VaultsDir "$env:USERPROFILE\vibe\vaults"
-```
+When skills evolve in this repo, use `/skills update` to refresh your vault's copies.
 
-The script will:
-- Find all vaults in the directory
-- Show diffs between repo and vault versions
-- Ask for confirmation before updating
-- Optionally backup old versions
+**Note:** The skill source path is stored in your vault's CLAUDE.md. If you move the repo, update the `skill-source:` line.
 
 ## Documentation
 
-- [Installing Laura](docs/installing-laura.md) - Set up the friendly launcher command
 - [Installation Guide](docs/installation.md) - Detailed setup instructions
 - [Windows Quick Start](docs/windows-quick-start.md) - Windows-specific setup guide
 - [Quick Start Prompts](docs/quick-start-prompts.md) - Copy-paste prompts with detailed worked examples
 - [About This Project](CLAUDE-about-this-repo.md) - Project vision and philosophy
-- [Laura Academic Skill](vault-skills/laura-academic/SKILL.md) - Research methodology with strict verification
-- [Laura Professional Skill](vault-skills/laura-professional/SKILL.md) - Research methodology for work
-- [Alex Skill](vault-skills/alex/SKILL.md) - Architecture expertise
-- [Riley Skill](vault-skills/riley/SKILL.md) - Product ownership
-- [Casey Skill](vault-skills/casey/SKILL.md) - Reflection and journaling
+- [Laura Academic Skill](skills/laura-academic.md) - Research methodology with strict verification
+- [Laura Professional Skill](skills/laura-professional.md) - Research methodology for work
+- [Alex Skill](skills/alex.md) - Architecture expertise
+- [Riley Skill](skills/riley.md) - Product ownership
+- [Casey Skill](skills/casey.md) - Reflection and journaling
 - [Demo Video Scripts](docs/) - Scripts for creating demo videos
 
 ## Real-World Use

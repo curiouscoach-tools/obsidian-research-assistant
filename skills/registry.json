@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "skills": {
+    "laura": {
+      "description": "Research assistant for knowledge base building",
+      "variants": {
+        "professional": {
+          "file": "laura-professional.md",
+          "description": "Work research with lighter verification overhead"
+        },
+        "academic": {
+          "file": "laura-academic.md",
+          "description": "Dissertations and theses with strict verification protocols"
+        }
+      },
+      "default_variant": "professional",
+      "folders": ["sources/raw", "concepts", "themes", "questions"],
+      "templates": ["source-note.md", "concept-note.md", "question-note.md", "map-of-content.md"]
+    },
+    "alex": {
+      "file": "alex.md",
+      "description": "Solution architect for system design and technical decisions",
+      "folders": ["architecture/decisions"],
+      "templates": []
+    },
+    "riley": {
+      "file": "riley.md",
+      "description": "Product owner for user-centred thinking and value articulation",
+      "folders": ["product/user-stories", "product/roadmap"],
+      "templates": []
+    },
+    "casey": {
+      "file": "casey.md",
+      "description": "Reflection buddy for journaling and growth tracking",
+      "folders": ["journal/daily", "journal/weekly", "journal/monthly", "journal/quarterly"],
+      "templates": ["daily-reflection.md", "weekly-review.md", "monthly-review.md", "quarterly-review.md"]
+    }
+  }
+}
