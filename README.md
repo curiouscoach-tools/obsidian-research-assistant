@@ -180,6 +180,7 @@ my-research/                 # Independent git repository
 │   ├── raw/               # Your PDFs (gitignored)
 │   └── *.md               # Structured source notes
 ├── concepts/              # Individual concept explanations
+├── context/               # Situational context (your specific situation)
 ├── themes/                # Maps of Content
 ├── questions/             # Open research questions
 ├── _meta/

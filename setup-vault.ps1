@@ -77,6 +77,7 @@ switch ($VaultType) {
         $dirs = @(
             "$VaultPath\sources\raw",
             "$VaultPath\concepts",
+            "$VaultPath\context",
             "$VaultPath\themes",
             "$VaultPath\questions",
             "$VaultPath\_meta",
@@ -99,6 +100,7 @@ if ($VaultType -eq "journal") {
 } else {
     Copy-Item -Path "$ScriptDir\templates\source-note.md" -Destination "$VaultPath\_templates\" -Force
     Copy-Item -Path "$ScriptDir\templates\concept-note.md" -Destination "$VaultPath\_templates\" -Force
+    Copy-Item -Path "$ScriptDir\templates\context-note.md" -Destination "$VaultPath\_templates\" -Force
     Copy-Item -Path "$ScriptDir\templates\question-note.md" -Destination "$VaultPath\_templates\" -Force
     Copy-Item -Path "$ScriptDir\templates\map-of-content.md" -Destination "$VaultPath\_templates\" -Force
 }

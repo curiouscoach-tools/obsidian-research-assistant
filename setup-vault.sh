@@ -102,7 +102,7 @@ fi
 echo "Creating vault structure..."
 case "$VAULT_TYPE" in
     academic|knowledge)
-        mkdir -p "$VAULT_PATH"/{sources/raw,concepts,themes,questions,_meta,_templates}
+        mkdir -p "$VAULT_PATH"/{sources/raw,concepts,context,themes,questions,_meta,_templates}
         ;;
     journal)
         mkdir -p "$VAULT_PATH"/{journal/{daily,weekly,monthly,quarterly},themes,_meta,_templates}
@@ -119,6 +119,7 @@ if [ "$VAULT_TYPE" = "journal" ]; then
 else
     cp "$SCRIPT_DIR/templates/source-note.md" "$VAULT_PATH/_templates/"
     cp "$SCRIPT_DIR/templates/concept-note.md" "$VAULT_PATH/_templates/"
+    cp "$SCRIPT_DIR/templates/context-note.md" "$VAULT_PATH/_templates/"
     cp "$SCRIPT_DIR/templates/question-note.md" "$VAULT_PATH/_templates/"
     cp "$SCRIPT_DIR/templates/map-of-content.md" "$VAULT_PATH/_templates/"
 fi
