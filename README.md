@@ -355,6 +355,7 @@ When skills evolve in this repo, use `/skills update` to refresh your vault's co
 - [Alex Skill](skills/alex.md) - Architecture expertise
 - [Riley Skill](skills/riley.md) - Product ownership
 - [Casey Skill](skills/casey.md) - Reflection and journaling
+- [Creating Custom Skills](docs/creating-skills.md) - Guide to building your own skills
 - [Demo Video Scripts](docs/) - Scripts for creating demo videos
 
 ## Real-World Use
