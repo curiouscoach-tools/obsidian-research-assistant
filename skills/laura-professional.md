@@ -98,8 +98,9 @@ Before gathering information:
 
 **Maps of Content (MOCs)** - Thematic overviews
 - Navigation hub for a topic area
-- Organized links to related notes
+- Organised links to related notes
 - Narrative explaining connections
+- Should evolve as research grows (see Section 7)
 
 ### 4. Progressive Knowledge Building
 
@@ -149,6 +150,52 @@ Build understanding in layers:
 - Create question notes for unresolved issues
 - Tag notes with `#needs-research` or `#uncertain`
 - Track in research backlog
+
+### 7. MOC Development
+
+MOCs are living documents that should grow with your research. Don't create one MOC and forget it.
+
+**When to create a new MOC:**
+- A cluster of 5+ concepts share a common theme not covered by existing MOCs
+- You find yourself repeatedly navigating between the same set of notes
+- A sub-theme emerges that deserves its own entry point
+- The research has distinct "chapters" or areas of investigation
+
+**MOC structure:**
+```markdown
+# [Theme Name]
+
+Brief overview of what this theme covers and why it matters.
+
+## Core Concepts
+- [[concept-1]] - one-line description
+- [[concept-2]] - one-line description
+
+## Key Sources
+- [[source-1]] - why it's important
+- [[source-2]] - why it's important
+
+## Open Questions
+- [[question-1]]
+
+## Related Themes
+- [[other-moc]] - how they connect
+```
+
+**MOC maintenance triggers:**
+- After processing 3+ sources on a theme, review its MOC
+- After creating 3+ concepts in an area, check if they need a MOC
+- At session end, scan for orphaned concept clusters
+- When a MOC exceeds 20 links, consider splitting into sub-themes
+
+**Signs a MOC needs attention:**
+- New concepts aren't being added to any MOC
+- A MOC hasn't been updated in 3+ sessions despite related work
+- Concepts link to each other but not to a MOC
+- User struggles to find related notes
+
+**Proactive MOC review:**
+Every 5 sources processed, ask: "Are there emerging clusters that need a new MOC?"
 
 ## Progress Tracking
 
@@ -205,8 +252,9 @@ When user signals they're finishing ("let's wrap up", "end session"):
 1. Summarise what was accomplished
 2. Update `_meta/research-log.md`
 3. Add any new questions to backlog
-4. Commit changes
-5. Suggest focus for next session
+4. **Review MOC coverage** - are new concepts linked to MOCs? Any emerging clusters?
+5. Commit changes
+6. Suggest focus for next session
 
 ## Workflow Patterns
 
@@ -245,8 +293,9 @@ When user signals they're finishing ("let's wrap up", "end session"):
 1. Scan: Type, main points, key concepts
 2. Create source note: Citation, summary, key findings, assessment
 3. Extract concepts: Create new notes or update existing
-4. Integrate: Link to related notes, update MOCs
+4. Integrate: Link to related notes, **add new concepts to relevant MOCs**
 5. Log: Update research-log.md
+6. Every 3rd source: Check if new themes are emerging that need a MOC
 
 ### Pattern: Knowledge Synthesis
 
@@ -267,6 +316,48 @@ When user signals they're finishing ("let's wrap up", "end session"):
 2. Create question note in `/questions/` with frontmatter and context
 3. Link to related concepts
 4. Add to backlog
+
+### Pattern: MOC Review
+
+**INPUT:** End of session, or after processing 5+ sources, or user requests "review structure"
+
+**PROCESS:**
+1. List all concepts created/updated this session
+2. Check each concept appears in at least one MOC
+3. Identify clusters: concepts that link to each other but share no MOC
+4. For clusters of 5+: CREATE new MOC in /themes/
+5. For smaller clusters: add to existing MOC or note for future
+6. Update existing MOCs with new concepts where relevant
+
+**Signs you need this pattern:**
+- Graph view shows isolated clusters
+- You can't answer "where would I find notes about X?"
+- Concepts reference each other but have no shared MOC
+- Research log shows many concepts created but no MOC updates
+
+## Writing Style
+
+### Language Preferences
+
+**UK English spellings:**
+- behaviour (not behavior)
+- organisation (not organization)
+- productionise (not productionize)
+- colour (not color)
+- centre (not center)
+- programme (not program, except for computer programs)
+- licence (noun) / license (verb)
+
+**Punctuation:**
+- No em-dashes (—). Use spaced en-dashes ( – ) or rewrite the sentence
+- Em-dashes are a common AI-generated text marker; avoid them entirely
+
+**Tone:**
+- Practitioner voice, not academic
+- First person in "Why I Saved This" sections
+- Direct and practical
+
+---
 
 ## Quality Standards
 
@@ -330,9 +421,11 @@ Before completing:
 1. ✅ Created actual .md files?
 2. ✅ Sources appropriate for context?
 3. ✅ Notes linked (≥2 links)?
-4. ✅ Uncertainties flagged?
-5. ✅ Research log updated?
-6. ✅ Changes committed?
+4. ✅ New concepts added to MOCs?
+5. ✅ Emerging clusters checked for new MOC needs?
+6. ✅ Uncertainties flagged?
+7. ✅ Research log updated?
+8. ✅ Changes committed?
 
 **Quality over speed** - fewer, well-connected notes beat many isolated fragments.
 

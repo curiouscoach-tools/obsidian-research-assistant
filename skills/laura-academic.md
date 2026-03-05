@@ -219,8 +219,9 @@ Before gathering information, establish clear boundaries:
 
 **Maps of Content (MOCs)** - Thematic overviews
 - Navigation hub for a topic area
-- Organized links to related notes
+- Organised links to related notes
 - Narrative explaining connections
+- Should evolve as research grows (see Section 7)
 
 ### 4. Progressive Knowledge Building
 
@@ -279,6 +280,52 @@ Research is never "complete" - make gaps visible:
 - Create question notes for unresolved issues
 - Tag notes with `#needs-research` or `#uncertain`
 - Maintain research log tracking what's explored vs what remains
+
+### 7. MOC Development
+
+MOCs are living documents that should grow with your research. Don't create one MOC and forget it.
+
+**When to create a new MOC:**
+- A cluster of 5+ concepts share a common theme not covered by existing MOCs
+- You find yourself repeatedly navigating between the same set of notes
+- A sub-theme emerges that deserves its own entry point
+- The research has distinct "chapters" or areas of investigation
+
+**MOC structure:**
+```markdown
+# [Theme Name]
+
+Brief overview of what this theme covers and why it matters.
+
+## Core Concepts
+- [[concept-1]] - one-line description
+- [[concept-2]] - one-line description
+
+## Key Sources
+- [[source-1]] - why it's important
+- [[source-2]] - why it's important
+
+## Open Questions
+- [[question-1]]
+
+## Related Themes
+- [[other-moc]] - how they connect
+```
+
+**MOC maintenance triggers:**
+- After processing 3+ sources on a theme, review its MOC
+- After creating 3+ concepts in an area, check if they need a MOC
+- At session end, scan for orphaned concept clusters
+- When a MOC exceeds 20 links, consider splitting into sub-themes
+
+**Signs a MOC needs attention:**
+- New concepts aren't being added to any MOC
+- A MOC hasn't been updated in 3+ sessions despite related work
+- Concepts link to each other but not to a MOC
+- User struggles to find related notes
+
+**Proactive MOC review:**
+Every 5 sources processed, ask: "Are there emerging clusters that need a new MOC?"
 
 ## Academic Protocol
 
@@ -477,9 +524,10 @@ When the user signals they're finishing ("let's wrap up", "end session"):
 1. Summarise what was accomplished
 2. Update `_meta/research-log.md` with session summary
 3. Add any new questions/tasks to `_meta/research-backlog.md`
-4. Commit changes to git
-5. State: "Reminder: All citations and quotes should be independently verified before use in your dissertation/thesis."
-6. Suggest focus for next session
+4. **Review MOC coverage** - are new concepts linked to MOCs? Any emerging clusters?
+5. Commit changes to git
+6. State: "Reminder: All citations and quotes should be independently verified before use in your dissertation/thesis."
+7. Suggest focus for next session
 
 ## Workflow Patterns
 
@@ -545,9 +593,10 @@ After completing, the user should see:
 4. Integration
    - Link source to related sources
    - Link concepts to each other
-   - Update relevant MOCs
+   - **Add new concepts to relevant MOCs**
    - Note any contradictions with existing knowledge
    - If contradictions found: Create question note and add to backlog
+   - Every 3rd source: Check if new themes are emerging that need a MOC
 
 5. Progress logging
    - Update `_meta/research-log.md`
@@ -645,6 +694,48 @@ While researching TOD policy frameworks, noticed that [[academic-framework-tod]]
 - [[how-to-measure-tod-success]]
 - [[community-engagement-in-planning]]
 ```
+
+### Pattern: MOC Review
+
+**INPUT:** End of session, or after processing 5+ sources, or user requests "review structure"
+
+**PROCESS:**
+1. List all concepts created/updated this session
+2. Check each concept appears in at least one MOC
+3. Identify clusters: concepts that link to each other but share no MOC
+4. For clusters of 5+: CREATE new MOC in /themes/
+5. For smaller clusters: add to existing MOC or note for future
+6. Update existing MOCs with new concepts where relevant
+
+**Signs you need this pattern:**
+- Graph view shows isolated clusters
+- You can't answer "where would I find notes about X?"
+- Concepts reference each other but have no shared MOC
+- Research log shows many concepts created but no MOC updates
+
+## Writing Style
+
+### Language Preferences
+
+**UK English spellings:**
+- behaviour (not behavior)
+- organisation (not organization)
+- productionise (not productionize)
+- colour (not color)
+- centre (not center)
+- programme (not program, except for computer programs)
+- licence (noun) / license (verb)
+
+**Punctuation:**
+- No em-dashes (—). Use spaced en-dashes ( – ) or rewrite the sentence
+- Em-dashes are a common AI-generated text marker; avoid them entirely
+
+**Tone:**
+- Clear academic voice
+- First person where appropriate for researcher perspective
+- Precise and evidenced
+
+---
 
 ## Quality Standards
 
@@ -789,10 +880,12 @@ Before completing a research task:
 2. ✅ Sources authoritative (peer-reviewed)?
 3. ✅ New notes follow templates?
 4. ✅ Notes linked (≥2 links)?
-5. ✅ Uncertainties flagged with tags?
-6. ✅ Research log updated?
-7. ✅ Changes committed?
-8. ✅ Verification reminder given (if session end)?
+5. ✅ New concepts added to MOCs?
+6. ✅ Emerging clusters checked for new MOC needs?
+7. ✅ Uncertainties flagged with tags?
+8. ✅ Research log updated?
+9. ✅ Changes committed?
+10. ✅ Verification reminder given (if session end)?
 
 **Quality over speed** - fewer verified notes beat many uncertain ones.
 
