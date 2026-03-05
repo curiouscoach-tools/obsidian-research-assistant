@@ -301,7 +301,7 @@ Each persona reads what the others have built and contributes their expertise to
 
 ### Obsidian Graph View Configuration
 
-For a cleaner graph view that focuses on your research content, apply this filter in Obsidian's graph settings:
+New vaults are automatically configured with a graph filter that focuses on your research content. The setup scripts create `.obsidian/graph.json` with this filter:
 
 ```
 -path:_meta -path:_templates -path:_Templates -path:_assets -path:raw -path:node_modules -path:public -path:quartz -path:dist -path:build -path:assets -path:attachments -file:CLAUDE -file:README
@@ -318,7 +318,9 @@ For a cleaner graph view that focuses on your research content, apply this filte
 
 **Note:** Dot-prefixed directories (`.git`, `.obsidian`, `.claude`) are excluded by default.
 
-**Publishing with Quartz:** If you want to publish your vault as a website, [Quartz](https://quartz.jzhao.xyz/) is a popular static site generator for Obsidian. The filter above already excludes its build directories (`quartz`, `public`, `node_modules`).
+**Publishing with Quartz:** If you want to publish your vault as a website, [Quartz](https://quartz.jzhao.xyz/) is a popular static site generator for Obsidian. The filter already excludes its build directories (`quartz`, `public`, `node_modules`).
+
+**Customising:** You can modify the filter in Obsidian's graph view settings. The filter is stored in `.obsidian/graph.json`.
 
 ### Quality Standards
 - Structured templates ensure consistency
