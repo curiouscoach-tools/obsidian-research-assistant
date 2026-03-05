@@ -124,6 +124,11 @@ else
     cp "$SCRIPT_DIR/templates/map-of-content.md" "$VAULT_PATH/_templates/"
 fi
 
+# Configure Obsidian settings
+echo "Configuring Obsidian..."
+mkdir -p "$VAULT_PATH/.obsidian"
+cp "$SCRIPT_DIR/config/graph.json.template" "$VAULT_PATH/.obsidian/graph.json"
+
 # Install skills
 echo "Installing skills..."
 mkdir -p "$VAULT_PATH/.claude/skills"

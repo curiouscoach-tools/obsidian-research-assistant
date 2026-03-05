@@ -105,6 +105,11 @@ if ($VaultType -eq "journal") {
     Copy-Item -Path "$ScriptDir\templates\map-of-content.md" -Destination "$VaultPath\_templates\" -Force
 }
 
+# Configure Obsidian settings
+Write-Host "Configuring Obsidian..."
+New-Item -ItemType Directory -Force -Path "$VaultPath\.obsidian" | Out-Null
+Copy-Item -Path "$ScriptDir\config\graph.json.template" -Destination "$VaultPath\.obsidian\graph.json" -Force
+
 # Install skills
 Write-Host "Installing skills..."
 New-Item -ItemType Directory -Force -Path "$VaultPath\.claude\skills" | Out-Null
