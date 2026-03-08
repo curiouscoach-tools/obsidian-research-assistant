@@ -34,6 +34,12 @@
       "description": "Reflection buddy for journaling and growth tracking",
       "folders": ["journal/daily", "journal/weekly", "journal/monthly", "journal/quarterly"],
       "templates": ["daily-reflection.md", "weekly-review.md", "monthly-review.md", "quarterly-review.md"]
+    },
+    "jen": {
+      "file": "jen.md",
+      "description": "Change and engagement specialist for culture change and communications",
+      "folders": ["change/stakeholders", "change/comms", "change/impacts", "change/engagement", "change/resistance"],
+      "templates": ["stakeholder-map.md", "comms-plan.md", "change-impact.md", "resistance-analysis.md"]
     }
   }
 }
