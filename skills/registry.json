@@ -20,14 +20,14 @@
     "alex": {
       "file": "alex.md",
       "description": "Solution architect for system design and technical decisions",
-      "folders": ["architecture/decisions"],
-      "templates": []
+      "folders": ["architecture/decisions", "architecture/comparisons", "architecture/designs", "architecture/risks"],
+      "templates": ["adr.md"]
     },
     "riley": {
       "file": "riley.md",
       "description": "Product owner for user-centred thinking and value articulation",
-      "folders": ["product/user-stories", "product/roadmap"],
-      "templates": []
+      "folders": ["product/user-stories", "product/roadmap", "product/value-hypotheses", "product/prioritisation"],
+      "templates": ["user-story.md", "value-hypothesis.md"]
     },
     "casey": {
       "file": "casey.md",
