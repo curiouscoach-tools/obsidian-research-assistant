@@ -40,6 +40,12 @@
       "description": "Change and engagement specialist for culture change and communications",
       "folders": ["change/stakeholders", "change/comms", "change/impacts", "change/engagement", "change/resistance"],
       "templates": ["stakeholder-map.md", "comms-plan.md", "change-impact.md", "resistance-analysis.md"]
+    },
+    "sam": {
+      "file": "rte.md",
+      "description": "Release Train Engineer for program-level agility and PI planning",
+      "folders": ["program/pi-objectives", "program/risks", "program/dependencies", "program/board", "program/retrospectives"],
+      "templates": ["pi-objectives.md", "roam-board.md", "dependency-map.md", "inspect-and-adapt.md"]
     }
   }
 }
