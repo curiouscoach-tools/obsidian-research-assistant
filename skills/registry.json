@@ -1,7 +1,13 @@
 {
   "version": 1,
+  "categories": {
+    "core": "Essential skills for research and vault management",
+    "reflection": "Personal growth and journaling",
+    "expertise": "Professional perspectives and domain knowledge"
+  },
   "skills": {
     "laura": {
+      "category": "core",
       "description": "Research assistant for knowledge base building",
       "variants": {
         "professional": {
@@ -17,59 +23,47 @@
       "folders": ["sources/raw", "concepts", "context", "themes", "questions"],
       "templates": ["source-note.md", "concept-note.md", "context-note.md", "question-note.md", "map-of-content.md"]
     },
+    "lint": {
+      "category": "core",
+      "file": "lint.md",
+      "description": "Vault health checker for orphans, stale notes, broken links, and structure issues",
+      "folders": [],
+      "templates": []
+    },
+    "casey": {
+      "category": "reflection",
+      "file": "casey.md",
+      "description": "Reflection buddy for journaling and growth tracking",
+      "folders": ["journal/daily", "journal/weekly", "journal/monthly", "journal/quarterly"],
+      "templates": ["daily-reflection.md", "weekly-review.md", "monthly-review.md", "quarterly-review.md"]
+    },
     "alex": {
+      "category": "expertise",
       "file": "alex.md",
       "description": "Solution architect for system design and technical decisions",
       "folders": ["architecture/decisions", "architecture/comparisons", "architecture/designs", "architecture/risks"],
       "templates": ["adr.md"]
     },
     "riley": {
+      "category": "expertise",
       "file": "riley.md",
       "description": "Product owner for user-centred thinking and value articulation",
       "folders": ["product/user-stories", "product/roadmap", "product/value-hypotheses", "product/prioritisation"],
       "templates": ["user-story.md", "value-hypothesis.md"]
     },
-    "casey": {
-      "file": "casey.md",
-      "description": "Reflection buddy for journaling and growth tracking",
-      "folders": ["journal/daily", "journal/weekly", "journal/monthly", "journal/quarterly"],
-      "templates": ["daily-reflection.md", "weekly-review.md", "monthly-review.md", "quarterly-review.md"]
-    },
     "jen": {
+      "category": "expertise",
       "file": "jen.md",
       "description": "Change and engagement specialist for culture change and communications",
       "folders": ["change/stakeholders", "change/comms", "change/impacts", "change/engagement", "change/resistance"],
       "templates": ["stakeholder-map.md", "comms-plan.md", "change-impact.md", "resistance-analysis.md"]
     },
     "sam": {
+      "category": "expertise",
       "file": "rte.md",
       "description": "Release Train Engineer for program-level agility and PI planning",
       "folders": ["program/pi-objectives", "program/risks", "program/dependencies", "program/board", "program/retrospectives"],
       "templates": ["pi-objectives.md", "roam-board.md", "dependency-map.md", "inspect-and-adapt.md"]
-    },
-    "coach": {
-      "file": "coach.md",
-      "description": "Triathlon training expert for programme design and athlete development",
-      "folders": ["training/programmes", "training/sessions", "training/athletes", "training/assessments", "training/periodisation"],
-      "templates": ["session-plan.md", "training-programme.md", "athlete-profile.md"]
-    },
-    "logistics": {
-      "file": "logistics.md",
-      "description": "Event operations expert for planning, venues, and scheduling",
-      "folders": ["logistics/schedules", "logistics/checklists", "logistics/venues", "logistics/budgets", "logistics/risks", "logistics/contacts"],
-      "templates": ["event-schedule.md", "equipment-checklist.md", "venue-details.md"]
-    },
-    "marketer": {
-      "file": "marketer.md",
-      "description": "Communications and promotion expert for marketing and engagement",
-      "folders": ["marketing/campaigns", "marketing/content", "marketing/personas", "marketing/brand", "marketing/metrics"],
-      "templates": ["content-calendar.md", "campaign-plan.md", "audience-persona.md"]
-    },
-    "lint": {
-      "file": "lint.md",
-      "description": "Vault health checker for orphans, stale notes, broken links, and structure issues",
-      "folders": [],
-      "templates": []
     }
   }
 }

@@ -23,7 +23,27 @@ Read `skill-source:` from CLAUDE.md for the repository path. If missing:
 2. Read `skills/registry.json` from that path
 3. List `.claude/skills/*/` directories in vault
 4. For laura: detect variant from SKILL.md content ("Academic" in title → academic, else professional)
-5. Display installed vs available
+5. Display grouped by category:
+
+```
+## Installed
+- laura (professional) - Research assistant
+- lint - Vault health checker
+
+## Available
+
+**Core** - Essential skills for research and vault management
+- (none available - all installed)
+
+**Reflection** - Personal growth and journaling
+- casey - Reflection buddy for journaling
+
+**Expertise** - Professional perspectives and domain knowledge
+- alex - Solution architect
+- riley - Product owner
+- jen - Change and engagement
+- sam - Release Train Engineer
+```
 
 ## /skills add \<name\>
 
