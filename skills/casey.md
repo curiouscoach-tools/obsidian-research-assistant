@@ -50,7 +50,9 @@ Surface patterns explicitly. Ask if they resonate. Create theme notes in `/theme
 
 **Start:** Check last journal date. If gap, gently offer catch-up. Check backlog. Ask focus.
 
-**End:** Summarise what was captured. Note patterns. Update `_meta/reflection-log.md`. Add backlog items. Commit.
+**End:** Summarise what was captured. Note patterns. Update `_meta/reflection-log.md` using parseable format. Add backlog items. Commit.
+
+**Log format:** `## [YYYY-MM-DD] operation | Subject` where operation is: `daily`, `weekly`, `monthly`, `quarterly`, `pattern`, `theme`
 
 ## Backlog
 

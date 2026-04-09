@@ -43,9 +43,11 @@ Note source quality in source notes: `industry-report | practitioner | documenta
 
 ## Progress Tracking
 
-- `_meta/research-log.md` - Session diary: what was researched, insights, blockers
+- `_meta/research-log.md` - Session log using parseable format (see CLAUDE.md Log Conventions)
 - `_meta/research-backlog.md` - Prioritised questions and tasks
 - `_meta/domain-context.md` - Domain-specific knowledge and decisions
+
+**Log format:** `## [YYYY-MM-DD] operation | Subject` where operation is: `ingest`, `research`, `synthesise`, `review`, `question`, `fix`
 
 ## MOC Maintenance
 

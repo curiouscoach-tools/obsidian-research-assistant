@@ -39,6 +39,43 @@
 
 Track progress in `_meta/research-log.md` and `_meta/research-backlog.md`.
 
+## Log Conventions
+
+All logs use parseable format for machine analysis and `/lint` compatibility.
+
+### Format
+```
+## [YYYY-MM-DD] operation | Subject
+Brief description of what was done.
+- Key point 1
+- Key point 2
+```
+
+### Operations
+| Prefix | Meaning |
+|--------|---------|
+| `ingest` | Processed a source (PDF, article, paper) |
+| `research` | Explored a topic, created concept notes |
+| `synthesise` | Created connections, MOC, or theme |
+| `review` | Reviewed/updated existing notes |
+| `question` | Added research questions |
+| `fix` | Corrected errors, filled gaps, resolved #verify tags |
+
+### Example
+```
+## [2026-04-09] ingest | Smith 2024 - Urban Mobility Patterns
+Processed PDF from sources/raw/.
+- Key finding: modal shift correlates with density thresholds
+- Created [[modal-shift]], updated [[urban-density]]
+- Added to [[sustainable-transport]] MOC
+
+## [2026-04-09] research | Congestion pricing mechanisms
+Explored pricing approaches for demand management.
+- Created 4 concept notes: [[congestion-pricing]], [[road-pricing]], [[cordon-pricing]], [[distance-pricing]]
+- Identified gap: need sources on equity impacts
+- Added question: [[how-does-congestion-pricing-affect-low-income-commuters]]
+```
+
 ## Working with Laura
 
 **Starting a session:** Laura will check your research backlog and suggest priorities.

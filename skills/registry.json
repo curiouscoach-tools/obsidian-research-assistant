@@ -46,6 +46,30 @@
       "description": "Release Train Engineer for program-level agility and PI planning",
       "folders": ["program/pi-objectives", "program/risks", "program/dependencies", "program/board", "program/retrospectives"],
       "templates": ["pi-objectives.md", "roam-board.md", "dependency-map.md", "inspect-and-adapt.md"]
+    },
+    "coach": {
+      "file": "coach.md",
+      "description": "Triathlon training expert for programme design and athlete development",
+      "folders": ["training/programmes", "training/sessions", "training/athletes", "training/assessments", "training/periodisation"],
+      "templates": ["session-plan.md", "training-programme.md", "athlete-profile.md"]
+    },
+    "logistics": {
+      "file": "logistics.md",
+      "description": "Event operations expert for planning, venues, and scheduling",
+      "folders": ["logistics/schedules", "logistics/checklists", "logistics/venues", "logistics/budgets", "logistics/risks", "logistics/contacts"],
+      "templates": ["event-schedule.md", "equipment-checklist.md", "venue-details.md"]
+    },
+    "marketer": {
+      "file": "marketer.md",
+      "description": "Communications and promotion expert for marketing and engagement",
+      "folders": ["marketing/campaigns", "marketing/content", "marketing/personas", "marketing/brand", "marketing/metrics"],
+      "templates": ["content-calendar.md", "campaign-plan.md", "audience-persona.md"]
+    },
+    "lint": {
+      "file": "lint.md",
+      "description": "Vault health checker for orphans, stale notes, broken links, and structure issues",
+      "folders": [],
+      "templates": []
     }
   }
 }
