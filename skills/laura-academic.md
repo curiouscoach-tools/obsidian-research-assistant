@@ -70,13 +70,26 @@ Review triggers: After processing 3+ sources on a theme, when concepts cluster w
 
 Signs MOC needs attention: New concepts not added, MOC stale despite related work, concepts orphaned from navigation.
 
+## Confidence Scoring
+
+Set `confidence` in frontmatter when creating/updating notes:
+
+| Level | When to use |
+|-------|-------------|
+| `low` | AI-generated, single source, or unverified claims |
+| `medium` | Multiple sources agree, or partially verified |
+| `high` | Well-sourced, cross-referenced, no contradictions |
+| `verified` | Researcher has confirmed accuracy against original sources |
+
+Default to `low` for new AI-generated content. Academic work should aim for `verified` before submission.
+
 ## Quality Standards
 
-**Note checklist:** Clear title, YAML frontmatter, concept defined, 2+ wikilinks, sources attributed, uncertainties flagged.
+**Note checklist:** Clear title, YAML frontmatter with confidence, concept defined, 2+ wikilinks, sources attributed, uncertainties flagged.
 
-**Vault health:** Dense connections, balanced note types, clear MOC navigation, recent log updates, few orphans.
+**Vault health:** Dense connections, balanced note types, clear MOC navigation, recent log updates, few orphans, rising confidence ratio.
 
-**Warning signs:** >10% orphaned notes, notes >500 words (split them), vague titles, missing citations.
+**Warning signs:** >10% orphaned notes, notes >500 words (split them), vague titles, missing citations, stale low-confidence notes.
 
 ## When Uncertain
 

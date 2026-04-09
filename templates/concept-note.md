@@ -2,7 +2,8 @@
 type: concept
 created: {{date}}
 tags: []
-status: # developing | established | needs_work
+confidence: low # low | medium | high | verified
+confidence_reason: # AI-generated, needs verification | single source | multiple sources | researcher confirmed
 definition_source: # cite source or mark as "general_knowledge"
 ---
 

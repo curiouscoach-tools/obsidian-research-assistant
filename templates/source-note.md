@@ -5,8 +5,10 @@ authors:
 year:
 title:
 source_type: # academic_paper | book | report | article | policy_doc
+source_quality: # peer-reviewed | industry-report | practitioner | documentation | general-web
 url:
 tags: []
+confidence: low # low | medium | high | verified
 verification_status: # unverified | ai-processed | researcher-verified | stub
 quotes_verified: false
 citation_verified: false

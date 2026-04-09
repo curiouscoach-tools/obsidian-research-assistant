@@ -55,13 +55,26 @@ Create new MOC when: 5+ concepts share a theme without one, or you repeatedly na
 
 Review triggers: After processing 3+ sources on a theme, when concepts cluster without shared MOC, at session end.
 
+## Confidence Scoring
+
+Set `confidence` in frontmatter when creating/updating notes:
+
+| Level | When to use |
+|-------|-------------|
+| `low` | AI-generated, single source, or unverified claims |
+| `medium` | Multiple sources agree, or partially verified |
+| `high` | Well-sourced, cross-referenced, no contradictions |
+| `verified` | User has confirmed accuracy |
+
+Default to `low` for new AI-generated content. Upgrade when adding sources or user confirms.
+
 ## Quality Standards
 
-**Note checklist:** Clear title, YAML frontmatter, 2+ wikilinks, sources attributed, uncertainties flagged.
+**Note checklist:** Clear title, YAML frontmatter with confidence, 2+ wikilinks, sources attributed, uncertainties flagged.
 
-**Vault health:** Dense connections, balanced note types, clear MOC navigation, recent log updates.
+**Vault health:** Dense connections, balanced note types, clear MOC navigation, recent log updates, rising confidence ratio.
 
-**Warning signs:** Many orphaned notes, notes >500 words (split them), vague titles, no MOCs.
+**Warning signs:** Many orphaned notes, notes >500 words (split them), vague titles, no MOCs, stale low-confidence notes.
 
 ## Git Commits
 

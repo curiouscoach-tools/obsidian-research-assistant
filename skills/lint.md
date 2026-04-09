@@ -20,6 +20,7 @@ Audit vault structure, connections, and content quality. Surfaces issues without
 | `/lint orphans` | Notes with <2 wikilinks |
 | `/lint stale` | Notes with verification tags or not updated in 30+ days |
 | `/lint verify` | Notes tagged #verify, #needs-citation, #needs-research, #uncertain |
+| `/lint confidence` | Confidence distribution and low-confidence notes needing attention |
 | `/lint structure` | Missing frontmatter, oversized notes, empty folders |
 | `/lint connections` | Broken links, missing backlinks, cluster analysis |
 | `/lint quick` | Summary stats only, no file writes |
@@ -45,10 +46,21 @@ Generated: {{datetime}}
 | Total notes | X | |
 | Orphaned (<2 links) | X | {{ok/warning/alert}} |
 | Pending verification | X | {{ok/warning/alert}} |
+| Low confidence | X | {{ok/warning/alert}} |
 | Stale (>30 days) | X | {{ok/warning/alert}} |
 | Oversized (>500 lines) | X | {{ok/warning/alert}} |
 | Missing frontmatter | X | {{ok/warning/alert}} |
 | Broken links | X | {{ok/warning/alert}} |
+
+## Confidence Distribution
+
+| Level | Concepts | Sources | Total |
+|-------|----------|---------|-------|
+| verified | X | X | X |
+| high | X | X | X |
+| medium | X | X | X |
+| low | X | X | X |
+| missing | X | X | X |
 
 ## Orphaned Notes
 
@@ -67,6 +79,17 @@ Notes with verification tags that need attention:
 |------|-----|---------|
 | `concepts/claim.md` | #verify | 2026-01-15 |
 | `sources/paper.md` | #needs-citation | 2026-02-01 |
+
+## Low Confidence Notes
+
+Notes with `confidence: low` that may need attention:
+
+| Note | Age | Reason |
+|------|-----|--------|
+| `concepts/claim.md` | 30 days | AI-generated, needs verification |
+| `sources/paper.md` | 14 days | single source |
+
+**Priority:** Low-confidence notes older than 14 days should be verified or upgraded.
 
 ## Stale Notes
 
@@ -118,6 +141,17 @@ Groups of notes that link to each other but not the wider vault:
 Scan for: `#verify`, `#needs-citation`, `#needs-research`, `#uncertain`, `#unverified`, `#ai-generated`
 - Status: 0 = ok, 1-10 = warning, 11+ = alert
 
+### Confidence Levels
+Parse `confidence:` from YAML frontmatter. Valid values: `low`, `medium`, `high`, `verified`
+- **low**: AI-generated or single source, needs verification
+- **medium**: Multiple sources or partially verified
+- **high**: Well-sourced, cross-referenced
+- **verified**: Researcher confirmed accuracy
+- **missing**: No confidence field (treat as low)
+
+Priority: low-confidence notes older than 14 days
+- Status: 0-5 low-confidence = ok, 6-15 = warning, 16+ = alert
+
 ### Stale Notes
 - Not modified in 30+ days
 - Exclude: `_meta/`, `_templates/`, templates, config files
@@ -158,12 +192,16 @@ Append to `_meta/lint-history.md` (create if missing):
 ## {{date}}
 - Orphaned: X ({{+/-Y}} from last)
 - Verification: X
+- Low confidence: X
 - Stale: X
 - Health score: X/100
+- Confidence ratio: X% verified/high
 ```
 
-Health score = 100 - (orphaned×2) - (verification×3) - (broken×5) - (oversized×1)
+Health score = 100 - (orphaned×2) - (verification×3) - (low_confidence×1) - (broken×5) - (oversized×1)
 Capped at 0 minimum.
+
+Confidence ratio = (verified + high) / total notes with frontmatter × 100
 
 ## Limitations
 
