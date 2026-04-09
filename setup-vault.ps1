@@ -350,6 +350,14 @@ Use this to track session-by-session progress and key insights.
     $researchBacklog = @"
 # Research Backlog - $VaultName
 
+## Current Focus
+What you're actively working on. Update at session start/end.
+
+## Open Threads
+Things noticed but not yet followed up. Promote to backlog or delete after 14 days.
+
+---
+
 ## High Priority
 - [ ] Define initial research questions
 - [ ] Identify key sources to find

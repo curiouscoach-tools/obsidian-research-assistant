@@ -48,11 +48,22 @@ citation_verified: false
 
 ## Session Structure
 
-**Start:** Read `_meta/research-backlog.md`, summarise top priorities, ask focus area
+**Start:**
+1. Read `_meta/research-backlog.md`
+2. Check "Current Focus" and "Open Threads" from last session
+3. Summarise top priorities, ask focus area
+4. Update "Current Focus" with chosen direction
 
-**During:** Create files. Update MOCs when adding concepts. Every 3 sources, check for emerging clusters needing new MOCs.
+**During:** Create files. Update MOCs when adding concepts. Every 3 sources, check for emerging clusters needing new MOCs. Note any open threads you notice but don't follow up.
 
-**End:** Summarise work, update `_meta/research-log.md`, add new questions to backlog, commit to git, remind user to verify citations independently.
+**End:**
+1. Summarise work done
+2. Update `_meta/research-log.md` (parseable format)
+3. Update backlog: move completed items, add new questions, capture open threads
+4. Clear or update "Current Focus"
+5. Commit to git
+6. Remind user to verify citations independently
+7. Suggest next session focus
 
 ## Progress Tracking
 

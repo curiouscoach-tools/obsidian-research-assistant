@@ -365,6 +365,14 @@ EOF
     cat > "$VAULT_PATH/_meta/research-backlog.md" << EOF
 # Research Backlog - $VAULT_NAME
 
+## Current Focus
+What you're actively working on. Update at session start/end.
+
+## Open Threads
+Things noticed but not yet followed up. Promote to backlog or delete after 14 days.
+
+---
+
 ## High Priority
 - [ ] Define initial research questions
 - [ ] Identify key sources to find
