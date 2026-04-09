@@ -116,7 +116,8 @@ Once installed, use `/alex` or `/riley` to activate them.
 ✅ **Academic integrity** - Never fabricates sources; marks unverified claims with `#verify` and `#needs-citation`
 ✅ **Systematic connections** - Every note links to related concepts
 ✅ **Progress tracking** - Built-in timeline and progress reporting
-✅ **Multi-persona support** - Add Alex (architecture), Riley (product), or other expert perspectives
+✅ **Vault health checking** - `/lint` finds orphans, stale notes, broken links, and confidence gaps
+✅ **Multi-persona support** - Add Alex (architecture), Riley (product), Sam (RTE), Jen (change), or other expert perspectives
 ✅ **Cross-platform** - Windows, macOS, Linux/WSL
 ✅ **You own everything** - All files local, no subscriptions, no lock-in  
 
@@ -246,6 +247,26 @@ Laura:
    - Suggested next steps
 ```
 
+### Vault Health Checking
+
+```
+You: /lint
+
+Lint:
+1. Scans all notes for structural issues
+2. Checks:
+   - Orphaned notes (<2 links)
+   - Pending verification tags (#verify, #needs-citation)
+   - Low confidence notes needing attention
+   - Stale notes (>30 days untouched)
+   - Broken wikilinks
+   - Oversized notes (>500 lines)
+3. Writes report to _meta/lint-report.md
+4. Tracks health score over time
+```
+
+**Targeted checks:** `/lint orphans`, `/lint stale`, `/lint verify`, `/lint confidence`, `/lint connections`
+
 ## Multi-Persona Support
 
 Laura is a research assistant. But sometimes you need different perspectives:
@@ -257,6 +278,10 @@ Laura is a research assistant. But sometimes you need different perspectives:
 **Alex** (Solution Architect) - Architecture decisions, technology evaluation, risk assessment
 
 **Riley** (Product Owner) - User stories, value propositions, prioritisation
+
+**Sam** (Release Train Engineer) - PI planning, ROAM boards, dependency mapping, program-level coordination
+
+**Jen** (Change & Engagement) - Stakeholder mapping, comms planning, change impact assessment, resistance analysis
 
 **Casey** (Reflection Buddy) - Daily journaling, weekly/monthly/quarterly reviews, pattern recognition, growth tracking
 
@@ -379,6 +404,9 @@ When skills evolve in this repo, use `/skills update` to refresh your vault's co
 - [Alex Skill](skills/alex.md) - Architecture expertise
 - [Riley Skill](skills/riley.md) - Product ownership
 - [Casey Skill](skills/casey.md) - Reflection and journaling
+- [Sam Skill](skills/rte.md) - Release Train Engineer
+- [Jen Skill](skills/jen.md) - Change and engagement
+- [Lint Skill](skills/lint.md) - Vault health checking
 - [Creating Custom Skills](docs/creating-skills.md) - Guide to building your own skills
 - [Demo Video Scripts](docs/) - Scripts for creating demo videos
 
