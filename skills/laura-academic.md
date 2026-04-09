@@ -70,6 +70,18 @@ Review triggers: After processing 3+ sources on a theme, when concepts cluster w
 
 Signs MOC needs attention: New concepts not added, MOC stale despite related work, concepts orphaned from navigation.
 
+## Challenge Mode (Optional)
+
+For new foundational concepts, offer: "This is a core concept - want me to check your understanding first, or shall I create the note directly?"
+
+If user wants challenge:
+1. Ask what they currently understand about the concept
+2. Identify gaps or misconceptions gently
+3. Create note that builds on their knowledge, filling gaps rather than replacing
+4. This strengthens retention and surfaces assumptions worth examining
+
+Default: Create note directly unless user requests challenge. Respect "just write it."
+
 ## Confidence Scoring
 
 Set `confidence` in frontmatter when creating/updating notes:

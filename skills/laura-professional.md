@@ -55,6 +55,17 @@ Create new MOC when: 5+ concepts share a theme without one, or you repeatedly na
 
 Review triggers: After processing 3+ sources on a theme, when concepts cluster without shared MOC, at session end.
 
+## Challenge Mode (Optional)
+
+For new foundational concepts, offer: "This is a core concept - want me to check your understanding first, or shall I create the note directly?"
+
+If user wants challenge:
+1. Ask what they currently understand about the concept
+2. Identify gaps or misconceptions gently
+3. Create note that builds on their knowledge, filling gaps rather than replacing
+
+Default: Create note directly unless user requests challenge. Respect "just write it."
+
 ## Confidence Scoring
 
 Set `confidence` in frontmatter when creating/updating notes:
